@@ -1,0 +1,213 @@
+inherited frmListagemCliente: TfrmListagemCliente
+  Caption = 'Listagem de Cliente'
+  ClientWidth = 813
+  OnClose = FormClose
+  OnShow = FormShow
+  ExplicitWidth = 829
+  ExplicitHeight = 436
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 813
+    ExplicitWidth = 813
+    inherited Speedbutton1: TSpeedButton
+      OnClick = SpeedButton1Click
+    end
+    inherited Speedbutton2: TSpeedButton
+      OnClick = Speedbutton2Click
+    end
+    inherited Speedbutton3: TSpeedButton
+      OnClick = Speedbutton3Click
+    end
+  end
+  inherited Panel2: TPanel
+    Width = 813
+    ExplicitWidth = 813
+    inherited Label1: TLabel
+      Width = 102
+      Caption = 'Pesquisar Cliente:'
+      ExplicitWidth = 102
+    end
+    inherited edtPesquisar: TEdit
+      Left = 118
+      OnChange = edtPesquisarChange
+      ExplicitLeft = 118
+    end
+    inherited edtTotaldeReg: TEdit
+      Top = 8
+      ExplicitTop = 8
+    end
+  end
+  inherited DBGrid1: TDBGrid
+    Top = 56
+    Width = 813
+    DataSource = dsListagem
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'IDCLI'
+        Title.Caption = 'C'#243'digo'
+        Width = 81
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOMECLI'
+        Title.Caption = 'Nome/Nome Fantasia'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'APELIDO'
+        Title.Caption = 'Apelido/Raz'#227'o Social'
+        Width = 267
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TIPOPESSOA'
+        Title.Caption = 'Pessoa'
+        Width = 46
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CPFCNPJ'
+        Title.Caption = 'CPF/CNPJ'
+        Width = 138
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'RG'
+        Title.Caption = 'RG/Inscri'#231#227'o Estadual'
+        Width = 131
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATANASC'
+        Title.Caption = 'Data Nasc'
+        Width = 107
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ESTADOCIVIL'
+        Title.Caption = 'Estado Civil'
+        Width = 74
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'GENERO'
+        Title.Caption = 'G'#234'nero'
+        Width = 52
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ENDERECO'
+        Title.Caption = 'Endere'#231'o'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BAIRRO'
+        Title.Caption = 'Bairro'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CEP'
+        Width = 75
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME_CID'
+        Title.Caption = 'Cidade'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'UF_CID'
+        Title.Caption = 'UF'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TELEFONE'
+        Title.Caption = 'Telefone'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CELULAR'
+        Title.Caption = 'Celular'
+        Width = 87
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'EMAIL'
+        Title.Caption = 'Email'
+        Width = 169
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MIDIASOCIAL'
+        Title.Caption = 'M'#237'dia Social/Site'
+        Width = 269
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_CID'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_CID_1'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'OBSERVACOES'
+        Title.Caption = 'Observa'#231#245'es'
+        Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SITUACAO'
+        Title.Caption = 'Situa'#231#227'o'
+        Width = 66
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATACADASTRO'
+        Title.Caption = 'Data Cadastro'
+        Width = 99
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATACADASTRO_1'
+        Visible = False
+      end>
+  end
+  inherited dsListagem: TDataSource
+    DataSet = dm.cdsCliente
+    OnDataChange = dsListagemDataChange
+    Left = 728
+    Top = 96
+  end
+end

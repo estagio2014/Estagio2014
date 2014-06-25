@@ -1,0 +1,110 @@
+unit untCadProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untCadPrincipal, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Data.DB;
+
+type
+  TfrmCadProduto = class(TfrmCadPrincipal)
+    Label2: TLabel;
+    GroupBox3: TGroupBox;
+    GroupBox2: TGroupBox;
+    Label11: TLabel;
+    Label10: TLabel;
+    Label15: TLabel;
+    Label17: TLabel;
+    edtPrecoCusto: TEdit;
+    edtEstoqueAtual: TEdit;
+    edtPrecoVenda: TEdit;
+    edtDesconto: TEdit;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    edtIdProd: TEdit;
+    edtDesc: TEdit;
+    edtComp: TEdit;
+    cboCat: TComboBox;
+    cboUnidade: TComboBox;
+    edtCodBarra: TMaskEdit;
+    dblMarca: TDBLookupComboBox;
+    mmObs: TMemo;
+    Label14: TLabel;
+    Label13: TLabel;
+    edtDataCadPro: TMaskEdit;
+    Label12: TLabel;
+    rdbDisponivel: TRadioButton;
+    rdbIndisponivel: TRadioButton;
+    dsMarca: TDataSource;
+    procedure FormShow(Sender: TObject);
+    procedure btnConfirmClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadProduto: TfrmCadProduto;
+
+implementation
+
+{$R *.dfm}
+
+uses untListagemProduto, untDm;
+
+procedure TfrmCadProduto.btnConfirmClick(Sender: TObject);
+begin
+  inherited;
+    if frmListagemProduto.op = 1 then
+    begin
+    dm.sdsComandoSql.CommandText:='INSERT into produto values (seqProduto.nextval, :codBarra, :descricao, :complemento, :idMarca, :categoria, :unidade,  :valorCusto, :valorVenda, :estoqueAtual, :desconto, :obs, :dataCadastro, :situacao)';
+    with dm.sdsComandoSql do
+    begin
+      ParamByName('codBarra').Text := edtCodBarra.Text;
+      ParamByName('descricao').Text := edtDesc.Text;
+      ParamByName('complemento').Text := edtComp.Text;
+      ParamByName('idMarca').AsInteger := dblMarca.KeyValue;
+      ParamByName('categoria').Text := cboCat.Text;
+      ParamByName('unidade').Text := copy(cboUnidade.Text,0,1);
+      ParamByName('valorCusto').Text := edtPrecoCusto.Text;
+      ParamByName('valorVenda').Text := edtPrecoVenda.Text;
+      ParamByName('estoqueAtual').Text := edtEstoqueAtual.Text;
+      ParamByName('desconto').Text := edtDesconto.Text;
+      ParamByName('obs').Text := mmObs.Text;
+      ParamByName('dataCadastro').Text := edtDataCadPro.Text;
+      if rdbDisponivel.Checked = true then
+      begin
+        dm.sdsComandoSql.ParamByName('situacao').AsString:='D';
+      end
+      else
+      begin
+        rdbIndisponivel.Checked := true;
+        dm.sdsComandoSql.ParamByName('situacao').AsString:='I';
+      end;
+    end;
+    dm.sdsComandoSql.ExecSQL();
+    MessageDlg('Produto cadastrado com Sucesso!', mtInformation,[mbOk],0);
+    dm.cdsProduto.Close;
+    dm.cdsProduto.Open;
+    Close;
+   end;
+end;
+
+procedure TfrmCadProduto.FormShow(Sender: TObject);
+begin
+  inherited;
+edtDataCadPro.Text:=DateToStr(date);
+edtIdProd.Clear;
+rdbDisponivel.Checked:=true;
+edtCodBarra.SetFocus;
+end;
+
+end.

@@ -1,0 +1,88 @@
+unit untDm;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DBXOracle, Data.FMTBcd,
+  Datasnap.DBClient, Datasnap.Provider, Data.DB, Data.SqlExpr;
+
+type
+  Tdm = class(TDataModule)
+    banco: TSQLConnection;
+    sdsCidade: TSQLDataSet;
+    sdsCliente: TSQLDataSet;
+    sdsFornecedor: TSQLDataSet;
+    sdsProduto: TSQLDataSet;
+    sdsComandoSql: TSQLDataSet;
+    dspCidade: TDataSetProvider;
+    cdsCidade: TClientDataSet;
+    dspCliente: TDataSetProvider;
+    cdsCliente: TClientDataSet;
+    dspFornecedor: TDataSetProvider;
+    cdsFornecedor: TClientDataSet;
+    dspProduto: TDataSetProvider;
+    cdsProduto: TClientDataSet;
+    cdsCidadeID_CID: TFMTBCDField;
+    cdsCidadeNOME_CID: TWideStringField;
+    cdsCidadeUF_CID: TWideStringField;
+    cdsCidadeDATACADASTRO: TSQLTimeStampField;
+    cdsFornecedorIDFOR: TFMTBCDField;
+    cdsFornecedorNOMEFANT: TWideStringField;
+    cdsFornecedorRAZAOSOCIAL: TWideStringField;
+    cdsFornecedorCNPJ: TWideStringField;
+    cdsFornecedorINSCEST: TWideStringField;
+    cdsFornecedorDATAFUND: TSQLTimeStampField;
+    cdsFornecedorENDERECO: TWideStringField;
+    cdsFornecedorBAIRRO: TWideStringField;
+    cdsFornecedorCEP: TWideStringField;
+    cdsFornecedorREPRES: TWideStringField;
+    cdsFornecedorTELEFONE: TWideStringField;
+    cdsFornecedorCELULAR: TWideStringField;
+    cdsFornecedorEMAIL: TWideStringField;
+    cdsFornecedorOBSERVACOES: TWideStringField;
+    cdsFornecedorDATACADASTRO: TSQLTimeStampField;
+    cdsFornecedorID_CID: TFMTBCDField;
+    cdsFornecedorID_CID_1: TFMTBCDField;
+    cdsFornecedorNOME_CID: TWideStringField;
+    cdsFornecedorUF_CID: TWideStringField;
+    cdsFornecedorDATACADASTRO_1: TSQLTimeStampField;
+    cdsClienteIDCLI: TFMTBCDField;
+    cdsClienteNOMECLI: TWideStringField;
+    cdsClienteAPELIDO: TWideStringField;
+    cdsClienteTIPOPESSOA: TWideStringField;
+    cdsClienteCPFCNPJ: TWideStringField;
+    cdsClienteRG: TWideStringField;
+    cdsClienteDATANASC: TSQLTimeStampField;
+    cdsClienteESTADOCIVIL: TWideStringField;
+    cdsClienteGENERO: TWideStringField;
+    cdsClienteENDERECO: TWideStringField;
+    cdsClienteBAIRRO: TWideStringField;
+    cdsClienteCEP: TWideStringField;
+    cdsClienteTELEFONE: TWideStringField;
+    cdsClienteCELULAR: TWideStringField;
+    cdsClienteEMAIL: TWideStringField;
+    cdsClienteMIDIASOCIAL: TWideStringField;
+    cdsClienteOBSERVACOES: TWideStringField;
+    cdsClienteDATACADASTRO: TSQLTimeStampField;
+    cdsClienteSITUACAO: TWideStringField;
+    cdsClienteID_CID: TFMTBCDField;
+    cdsClienteID_CID_1: TFMTBCDField;
+    cdsClienteNOME_CID: TWideStringField;
+    cdsClienteUF_CID: TWideStringField;
+    cdsClienteDATACADASTRO_1: TSQLTimeStampField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dm: Tdm;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

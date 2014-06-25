@@ -1,0 +1,75 @@
+unit untListagemProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untListagemPrincipal, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Data.DB;
+
+type
+  TfrmListagemProduto = class(TfrmListagem)
+    procedure Speedbutton1Click(Sender: TObject);
+    procedure dsListagemDataChange(Sender: TObject; Field: TField);
+    procedure edtPesquisarChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    op:Byte;
+  end;
+
+var
+  frmListagemProduto: TfrmListagemProduto;
+
+implementation
+
+{$R *.dfm}
+
+uses untCadProduto, untDm;
+
+procedure TfrmListagemProduto.dsListagemDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  edtTotaldeReg.Text := IntToStr(dm.cdsProduto.RecordCount);
+  Speedbutton3.Enabled:=true;
+  Speedbutton2.Enabled:=true;
+  if (dm.cdsProduto.RecordCount = 0) then
+  begin
+    Speedbutton3.Enabled:=false;
+    Speedbutton2.Enabled:=false;
+  end;
+end;
+
+procedure TfrmListagemProduto.edtPesquisarChange(Sender: TObject);
+begin
+  inherited;
+  dm.cdsProduto.Locate('descricao',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+end;
+
+procedure TfrmListagemProduto.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  dm.cdsProduto.Close;
+  dm.cdsMarca.Close;
+end;
+
+procedure TfrmListagemProduto.FormShow(Sender: TObject);
+begin
+  inherited;
+  dm.cdsProduto.Open;
+  dm.cdsMarca.Open;
+end;
+
+procedure TfrmListagemProduto.Speedbutton1Click(Sender: TObject);
+begin
+  inherited;
+  op := 1;
+  frmCadProduto.ShowModal;
+  frmCadProduto.Caption:='Incluir Produto';
+end;
+
+end.

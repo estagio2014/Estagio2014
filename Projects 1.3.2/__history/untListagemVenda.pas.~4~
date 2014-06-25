@@ -1,0 +1,45 @@
+unit untListagemVenda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untListagemPrincipal, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmListagemVenda = class(TfrmListagem)
+    procedure Speedbutton1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    op:Byte;
+    { Public declarations }
+  end;
+
+var
+  frmListagemVenda: TfrmListagemVenda;
+
+implementation
+
+{$R *.dfm}
+
+uses untVenda, untDm;
+
+procedure TfrmListagemVenda.FormShow(Sender: TObject);
+begin
+  inherited;
+  dm.cdsProduto.Open;
+  dm.cdsCliente.Open;
+end;
+
+procedure TfrmListagemVenda.Speedbutton1Click(Sender: TObject);
+begin
+  inherited;
+   op := 1;
+   frmVenda.Caption:='Incluir Venda';
+   frmVenda.showModal;
+end;
+
+end.
