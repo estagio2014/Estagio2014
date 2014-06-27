@@ -48,9 +48,8 @@ begin
     dm.cdsMarca.Open;
     close;
   end;
-<<<<<<< HEAD
 
-=======
+
   if frmListagemMarca.op = 2 then
   begin
     dm.sdsComandoSql.CommandText :='update marca set descricao = :p2 where id = :id';
@@ -61,7 +60,7 @@ begin
     dm.cdsMarca.Open;
     close;
   end;
->>>>>>> origin/master
+
 end;
 
 procedure TfrmCadMarca.FormShow(Sender: TObject);
