@@ -4,7 +4,7 @@ inherited frmCadMarca: TfrmCadMarca
   ClientWidth = 403
   OnShow = FormShow
   ExplicitWidth = 419
-  ExplicitHeight = 146
+  ExplicitHeight = 151
   PixelsPerInch = 96
   TextHeight = 13
   inherited btnConfirm: TSpeedButton

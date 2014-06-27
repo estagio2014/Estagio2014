@@ -1,0 +1,8 @@
+Alterar Banco, Tabelas:
+
+* Produto:
+- Id varchar para number.
+- Categoria tamanho 11.
+
+hsasuahss
+
