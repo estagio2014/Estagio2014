@@ -48,6 +48,7 @@ begin
     dm.cdsMarca.Open;
     close;
   end;
+
 end;
 
 procedure TfrmCadMarca.FormShow(Sender: TObject);

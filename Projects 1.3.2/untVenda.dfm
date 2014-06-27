@@ -39,7 +39,7 @@ inherited frmVenda: TfrmVenda
     Height = 81
     TabOrder = 0
     object Label3: TLabel
-      Left = 205
+      Left = 27
       Top = 48
       Width = 37
       Height = 13
@@ -75,7 +75,7 @@ inherited frmVenda: TfrmVenda
       Caption = 'Vendedor:'
     end
     object Label12: TLabel
-      Left = 28
+      Left = 398
       Top = 48
       Width = 56
       Height = 13
@@ -101,7 +101,7 @@ inherited frmVenda: TfrmVenda
       ParentFont = False
     end
     object dblCliente: TDBLookupComboBox
-      Left = 248
+      Left = 70
       Top = 45
       Width = 303
       Height = 21
@@ -109,6 +109,7 @@ inherited frmVenda: TfrmVenda
       ListField = 'NOMECLI'
       ListSource = dsCliente
       TabOrder = 2
+      OnClick = dblClienteClick
     end
     object edtVendedor: TEdit
       Left = 248
@@ -118,7 +119,7 @@ inherited frmVenda: TfrmVenda
       TabOrder = 0
     end
     object edtCpf: TMaskEdit
-      Left = 94
+      Left = 464
       Top = 45
       Width = 91
       Height = 21
@@ -126,13 +127,13 @@ inherited frmVenda: TfrmVenda
       MaxLength = 14
       TabOrder = 1
       Text = '   .   .   -  '
+      OnChange = edtCpfChange
     end
     object edtIdVenda: TEdit
       Left = 95
       Top = 11
       Width = 87
       Height = 24
-      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

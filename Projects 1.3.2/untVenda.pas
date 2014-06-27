@@ -54,6 +54,8 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure dblProdutoClick(Sender: TObject);
+    procedure dblClienteClick(Sender: TObject);
+    procedure edtCpfChange(Sender: TObject);
   private
      procedure calculaTotal;
     { Private declarations }
@@ -73,12 +75,12 @@ uses untListagemCliente, untListagemProduto, untDm;
 procedure TfrmVenda.btnAdicionarClick(Sender: TObject);
 begin
   inherited;
-  dm.sdsComandoSql.CommandText:='insert into item_venda values(:id_Venda, :idProduto, :qtdade, :preco, :subTotal)';
-  dm.sdsComandoSql.ParamByName('id_venda').text := edtIdVenda.Text;
+  dm.sdsComandoSql.CommandText:='insert into item_venda values(seqVenda.nextval, :idProduto, :qtdade, :preco, :subTotal)';
+  //dm.sdsComandoSql.ParamByName('id_venda').text := edtIdVenda.Text;
   dm.sdsComandoSql.ParamByName('idProduto').AsInteger := dblProduto.KeyValue;
   dm.sdsComandoSql.ParamByName('qtdade').Text := edtQtdade.Text;
   dm.sdsComandoSql.ParamByName('preco').Text := edtPreco.Text;
-  dm.sdsComandoSql.ParamByName('subTotal').AsFloat := StrToFloat(edtQtdade.Text) * StrToFloat(edtPreco.Text);
+  dm.sdsComandoSql.ParamByName('subTotal').AsInteger := StrToInt(edtQtdade.Text) * StrToInt(edtPreco.Text);
   dm.sdsComandoSql.ExecSQL();
   dm.cdsItemVenda.Close;
   dm.cdsItemVenda.Open;
@@ -104,12 +106,24 @@ end;
 edtTotal.Text := floattoStr(totalGeral);
 end;
 
+procedure TfrmVenda.dblClienteClick(Sender: TObject);
+begin
+  inherited;
+  edtCpf.Text := dm.cdsCliente.FieldByName('cpfCnpj').Text;
+end;
+
 procedure TfrmVenda.dblProdutoClick(Sender: TObject);
 begin
   inherited;
   edtCodBarra.Text := dm.cdsProduto.FieldByName('codBarra').Text;
   edtEstoque.Text := dm.cdsProduto.FieldByName('estoqueAtual').Text;
   edtPreco.Text := dm.cdsProduto.FieldByName('precovenda').Text;
+end;
+
+procedure TfrmVenda.edtCpfChange(Sender: TObject);
+begin
+  inherited;
+ // dblCliente.ListField:= dm.sdsComandoSql.CommandText:='select nomeCli from cliente where cpfCnpj ='+(edtCpf.Text);
 end;
 
 procedure TfrmVenda.FormShow(Sender: TObject);
