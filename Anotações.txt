@@ -4,4 +4,5 @@ Alterar Banco, Tabelas:
 - Id varchar para number.
 - Categoria tamanho 11.
 
+hsasuahss
 
