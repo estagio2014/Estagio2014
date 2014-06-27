@@ -83,13 +83,14 @@ inherited frmListagemCidade: TfrmListagemCidade
         FieldName = 'NOME_CID'
         Title.Alignment = taCenter
         Title.Caption = 'Cidade'
+        Width = 366
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'UF'
         Title.Alignment = taCenter
-        Width = 54
+        Width = 44
         Visible = True
       end
       item
@@ -97,6 +98,7 @@ inherited frmListagemCidade: TfrmListagemCidade
         FieldName = 'DATACADASTRO'
         Title.Alignment = taCenter
         Title.Caption = 'Data de Cadastro'
+        Width = 150
         Visible = True
       end>
   end

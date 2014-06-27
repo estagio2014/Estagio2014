@@ -90,7 +90,10 @@ end;
 procedure TfrmVenda.btnLocalizarCliClick(Sender: TObject);
 begin
   inherited;
+  frmListagemCliente.op := 3;
   frmListagemCliente.ShowModal;
+  dm.cdsCliente.Open;
+  dm.cdsCidade.Open;
 end;
 
 procedure TfrmVenda.calculaTotal;

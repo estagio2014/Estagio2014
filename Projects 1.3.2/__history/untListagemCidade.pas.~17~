@@ -29,14 +29,21 @@ implementation
 
 {$R *.dfm}
 
-uses untDm, untCadCidade;
+uses untDm, untCadCidade, untCadCliente;
 
 procedure TfrmListagemCidade.dsListagemDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;
- DBGrid1.SelectedRows.CurrentRowSelected:=true;
+ //DBGrid1.SelectedRows.CurrentRowSelected:=true;
 edtTotaldeReg.Text := IntToStr(dm.cdsCidade.RecordCount);
+Speedbutton3.Enabled:=true;
+Speedbutton2.Enabled:=true;
+if (dm.cdsCidade.RecordCount = 0) then
+begin
+  Speedbutton3.Enabled:=false;
+  Speedbutton2.Enabled:=false;
+end else;
 end;
 
 procedure TfrmListagemCidade.edtPesquisarChange(Sender: TObject);
@@ -49,7 +56,13 @@ procedure TfrmListagemCidade.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
-dm.cdsCidade.Close;
+  if frmListagemCidade.op = 3 then
+  begin
+    dm.cdsCidade.Open;
+  end
+  else begin
+  dm.cdsCidade.Close;
+  end;
 end;
 
 procedure TfrmListagemCidade.FormShow(Sender: TObject);
@@ -69,14 +82,18 @@ end;
 procedure TfrmListagemCidade.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
-if (MessageDlg('Deseja Excluir esta Cidade?', mtConfirmation,[mbYes,mbNo],0)=mrYes) then
-begin
- dm.sdsComandoSql.CommandText:='delete from cidade where id_cid =:id';
- dm.sdsComandoSql.ParamByName('id').Text:=dm.cdsCidade.FieldByName('id_cid').Text;
- dm.sdsComandoSql.ExecSQL();
- dm.cdsCidade.Close;
- dm.cdsCidade.Open;
-end;
+  try
+    if (MessageDlg('Deseja Excluir esta Cidade?', mtConfirmation,[mbYes,mbNo],0)=mrYes) then
+    begin
+      dm.sdsComandoSql.CommandText:='delete from cidade where id_cid =:id';
+      dm.sdsComandoSql.ParamByName('id').Text:=dm.cdsCidade.FieldByName('id_cid').Text;
+      dm.sdsComandoSql.ExecSQL();
+      dm.cdsCidade.Close;
+      dm.cdsCidade.Open;
+    end;
+  Except
+     Application.MessageBox('Erro ao Excluir! Esta Cidade está sendo utilizada em outro CADASTRO.','Alerta',0);
+  end;
 end;
 
 procedure TfrmListagemCidade.SpeedButton3Click(Sender: TObject);

@@ -64,9 +64,16 @@ procedure TfrmListagemCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
+  if frmListagemCliente.op = 3 then
+  begin
+    dm.cdsCidade.Open;
+    dm.cdsCliente.Open;
+  end
+  else begin
   dm.cdsCliente.Close;
   dm.cdsCidade.Close;
-end;
+  end;
+ end;
 
 procedure TfrmListagemCliente.FormShow(Sender: TObject);
 begin

@@ -68,7 +68,7 @@ end;
 procedure TfrmListagemCidade.FormShow(Sender: TObject);
 begin
   inherited;
-dm.cdsCidade.Open;
+  dm.cdsCidade.Open;
 end;
 
 procedure TfrmListagemCidade.SpeedButton1Click(Sender: TObject);
