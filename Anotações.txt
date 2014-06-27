@@ -1,1 +1,7 @@
-Teste 25-06-2014
+Alterar Banco, Tabelas:
+
+* Produto:
+- Id varchar para number.
+- Categoria tamanho 11.
+- 
+

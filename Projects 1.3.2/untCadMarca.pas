@@ -48,6 +48,16 @@ begin
     dm.cdsMarca.Open;
     close;
   end;
+  if frmListagemMarca.op = 2 then
+  begin
+    dm.sdsComandoSql.CommandText :='update marca set descricao = :p2 where id = :id';
+    dm.sdsComandoSql.ParamByName('id').Text := edtId.Text;
+    dm.sdsComandoSql.ParamByName('p2').Text := edtDesc.Text;
+    dm.sdsComandoSql.ExecSQL();
+    dm.cdsMarca.Close;
+    dm.cdsMarca.Open;
+    close;
+  end;
 end;
 
 procedure TfrmCadMarca.FormShow(Sender: TObject);
