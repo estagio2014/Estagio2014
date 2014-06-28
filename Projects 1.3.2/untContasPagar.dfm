@@ -233,8 +233,8 @@ inherited frmContasPagar: TfrmContasPagar
       Height = 21
       TabOrder = 11
       Items.Strings = (
-        'Em Aberto'
-        'Estornado'
+        'Ativo'
+        'Inativo'
         'Liquidado')
     end
     object Memo1: TMemo

@@ -3,8 +3,9 @@ inherited frmListagemVenda: TfrmListagemVenda
   ClientWidth = 816
   OnClose = FormClose
   OnShow = FormShow
+  ExplicitLeft = -89
   ExplicitWidth = 832
-  ExplicitHeight = 436
+  ExplicitHeight = 441
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -44,7 +45,7 @@ inherited frmListagemVenda: TfrmListagemVenda
       ExplicitTop = 11
       ExplicitWidth = 95
     end
-    object btnRelatorio: TSpeedButton [5]
+    object SpeedButton5: TSpeedButton [5]
       Left = 632
       Top = 11
       Width = 87
@@ -187,8 +188,75 @@ inherited frmListagemVenda: TfrmListagemVenda
   end
   inherited DBGrid1: TDBGrid
     Width = 816
+    DataSource = dsListagem
+    Columns = <
+      item
+        Alignment = taLeftJustify
+        Expanded = False
+        FieldName = 'ID_VENDA'
+        Title.Alignment = taCenter
+        Title.Caption = 'C'#243'digo'
+        Width = 79
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'IDCLI'
+        Title.Alignment = taCenter
+        Title.Caption = 'Cliente'
+        Width = 183
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VENDEDOR'
+        Title.Alignment = taCenter
+        Title.Caption = 'Vendedor'
+        Width = 152
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DESCONTO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Desconto'
+        Width = 97
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VALORTOTAL'
+        Title.Alignment = taCenter
+        Title.Caption = 'Valor Total'
+        Width = 93
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA_VENDA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Data Venda'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'FORMA_PAG'
+        Title.Alignment = taCenter
+        Title.Caption = 'Forma de Pagamento'
+        Width = 143
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TIPO_PAG'
+        Title.Alignment = taCenter
+        Title.Caption = 'Tipo de Pagamento'
+        Width = 107
+        Visible = True
+      end>
   end
   inherited dsListagem: TDataSource
+    DataSet = dm.cdsVenda
     OnDataChange = dsListagemDataChange
   end
 end

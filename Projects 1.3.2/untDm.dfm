@@ -496,6 +496,43 @@ object dm: Tdm
     ProviderName = 'dspVenda'
     Left = 272
     Top = 443
+    object cdsVendaID_VENDA: TFMTBCDField
+      FieldName = 'ID_VENDA'
+      Required = True
+      Precision = 32
+    end
+    object cdsVendaIDCLI: TFMTBCDField
+      FieldName = 'IDCLI'
+      Required = True
+      Precision = 32
+    end
+    object cdsVendaVENDEDOR: TWideStringField
+      FieldName = 'VENDEDOR'
+      Required = True
+      Size = 30
+    end
+    object cdsVendaDESCONTO: TFMTBCDField
+      FieldName = 'DESCONTO'
+      Precision = 10
+      Size = 2
+    end
+    object cdsVendaVALORTOTAL: TFMTBCDField
+      FieldName = 'VALORTOTAL'
+      Precision = 10
+      Size = 2
+    end
+    object cdsVendaDATA_VENDA: TSQLTimeStampField
+      FieldName = 'DATA_VENDA'
+    end
+    object cdsVendaFORMA_PAG: TWideStringField
+      FieldName = 'FORMA_PAG'
+    end
+    object cdsVendaTIPO_PAG: TWideStringField
+      FieldName = 'TIPO_PAG'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsUsuario: TClientDataSet
     Aggregates = <>

@@ -3,9 +3,8 @@ inherited frmListagemCliente: TfrmListagemCliente
   ClientWidth = 813
   OnClose = FormClose
   OnShow = FormShow
-  ExplicitLeft = -23
   ExplicitWidth = 829
-  ExplicitHeight = 436
+  ExplicitHeight = 441
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -47,7 +46,7 @@ inherited frmListagemCliente: TfrmListagemCliente
       ExplicitTop = 11
       ExplicitWidth = 102
     end
-    object btnRelatorio: TSpeedButton [5]
+    object SpeedButton5: TSpeedButton [5]
       Left = 619
       Top = 11
       Width = 84
@@ -166,7 +165,7 @@ inherited frmListagemCliente: TfrmListagemCliente
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphRight
       NumGlyphs = 2
-      OnClick = btnRelatorioClick
+      OnClick = SpeedButton5Click
     end
     inherited edtPesquisar: TEdit
       Left = 20

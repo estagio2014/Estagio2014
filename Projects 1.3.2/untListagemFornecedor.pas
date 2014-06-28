@@ -48,12 +48,10 @@ begin
   edtTotaldeReg.Text := IntToStr(dm.cdsFornecedor.RecordCount);
   Speedbutton3.Enabled:=true;
   Speedbutton2.Enabled:=true;
-  btnRelatorio.Enabled:=true;
   if (dm.cdsFornecedor.RecordCount = 0) then
   begin
     Speedbutton3.Enabled:=false;
     Speedbutton2.Enabled:=false;
-    btnRelatorio.Enabled:=false;
   end else;
 end;
 

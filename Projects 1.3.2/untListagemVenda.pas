@@ -9,7 +9,7 @@ uses
 
 type
   TfrmListagemVenda = class(TfrmListagem)
-    btnRelatorio: TSpeedButton;
+    SpeedButton5: TSpeedButton;
     procedure Speedbutton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure dsListagemDataChange(Sender: TObject; Field: TField);
@@ -37,12 +37,10 @@ begin
   {edtTotaldeReg.Text := IntToStr(dm.cdsVenda.RecordCount);
   Speedbutton3.Enabled:=true;
   Speedbutton2.Enabled:=true;
-  btnRelatorio.Enabled:=true;
   if (dm.cdsVenda.RecordCount = 0) then
   begin
     Speedbutton3.Enabled:=false;
     Speedbutton2.Enabled:=false;
-    btnRelatorio.Enabled:=false;
   end;  }
 end;
 

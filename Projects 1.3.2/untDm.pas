@@ -112,6 +112,14 @@ type
     cdsUsuarioSENHA: TWideStringField;
     cdsUsuarioNIVELACESS: TWideStringField;
     cdsUsuarioDATACADASTRO: TSQLTimeStampField;
+    cdsVendaID_VENDA: TFMTBCDField;
+    cdsVendaIDCLI: TFMTBCDField;
+    cdsVendaVENDEDOR: TWideStringField;
+    cdsVendaDESCONTO: TFMTBCDField;
+    cdsVendaVALORTOTAL: TFMTBCDField;
+    cdsVendaDATA_VENDA: TSQLTimeStampField;
+    cdsVendaFORMA_PAG: TWideStringField;
+    cdsVendaTIPO_PAG: TWideStringField;
   private
     { Private declarations }
   public

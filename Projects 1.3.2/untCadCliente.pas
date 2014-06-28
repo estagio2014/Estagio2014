@@ -71,7 +71,6 @@ type
     procedure dblCidadeClick(Sender: TObject);
     procedure edtDataNascExit(Sender: TObject);
     procedure edtEmailExit(Sender: TObject);
-    procedure edtRgChange(Sender: TObject);
   private
     { Private declarations }
     function Cpf(CPF_Text: string): boolean;
@@ -425,17 +424,6 @@ end;
 end;
 end;
 
-
-procedure TfrmCadCliente.edtRgChange(Sender: TObject);
-begin
-  inherited;
-  if Length(edtRg.Text)>15 then
-  begin
-    MessageDlg('Atenção! O campo RG/Insc. Estadual ultrapassa 15 digitos!',mtWarning, [mbOk],0);
-    edtRg.SetFocus;
-    exit;
-  end;
-end;
 
 procedure TfrmCadCliente.FormShow(Sender: TObject);
 begin

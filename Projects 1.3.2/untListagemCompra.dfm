@@ -1,7 +1,5 @@
 inherited frmListagemCompra: TfrmListagemCompra
   Caption = 'Listagem de Compra'
-  ExplicitWidth = 808
-  ExplicitHeight = 436
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -51,7 +49,7 @@ inherited frmListagemCompra: TfrmListagemCompra
       ExplicitTop = 12
       ExplicitWidth = 105
     end
-    object btnRelatorio: TSpeedButton [5]
+    object SpeedButton5: TSpeedButton [5]
       Left = 609
       Top = 11
       Width = 84
@@ -179,8 +177,5 @@ inherited frmListagemCompra: TfrmListagemCompra
       ExplicitTop = 10
       ExplicitWidth = 239
     end
-  end
-  inherited dsListagem: TDataSource
-    OnDataChange = dsListagemDataChange
   end
 end
