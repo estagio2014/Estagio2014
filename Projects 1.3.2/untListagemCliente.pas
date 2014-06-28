@@ -11,6 +11,7 @@ type
   TfrmListagemCliente = class(TfrmListagem)
     rdbNome: TRadioButton;
     rdbCPFCNPJ: TRadioButton;
+    SpeedButton5: TSpeedButton;
     procedure SpeedButton1Click(Sender: TObject);
     procedure Speedbutton2Click(Sender: TObject);
     procedure Speedbutton3Click(Sender: TObject);

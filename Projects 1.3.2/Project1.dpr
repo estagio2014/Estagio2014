@@ -28,7 +28,8 @@ uses
   untContasReceber in 'untContasReceber.pas' {frmContasReceber},
   untCondPagamento in 'untCondPagamento.pas' {frmCondPagamento},
   untListagemContas in 'untListagemContas.pas' {frmListagemContas},
-  untListagemContasPagar in 'untListagemContasPagar.pas' {frmListagemContaPagar};
+  untListagemContasPagar in 'untListagemContasPagar.pas' {frmListagemContaPagar},
+  untRelatorios in 'untRelatorios.pas' {frmRelatorios};
 
 {$R *.res}
 
@@ -61,5 +62,6 @@ begin
   Application.CreateForm(TfrmCondPagamento, frmCondPagamento);
   Application.CreateForm(TfrmListagemContas, frmListagemContas);
   Application.CreateForm(TfrmListagemContaPagar, frmListagemContaPagar);
+  Application.CreateForm(TfrmRelatorios, frmRelatorios);
   Application.Run;
 end.

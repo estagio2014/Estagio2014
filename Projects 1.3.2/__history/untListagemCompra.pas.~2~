@@ -9,7 +9,6 @@ uses
 
 type
   TfrmListagemCompra = class(TfrmListagem)
-    SpeedButton5: TSpeedButton;
     procedure Speedbutton1Click(Sender: TObject);
   private
     { Private declarations }

@@ -11,7 +11,6 @@ type
   TfrmListagemFornecedor = class(TfrmListagem)
     rdbRazao: TRadioButton;
     rdbCnpj: TRadioButton;
-    btnRelatorio: TSpeedButton;
     procedure Speedbutton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

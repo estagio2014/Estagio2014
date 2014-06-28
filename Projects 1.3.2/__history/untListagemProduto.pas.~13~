@@ -11,7 +11,6 @@ type
   TfrmListagemProduto = class(TfrmListagem)
     rdbCodBarra: TRadioButton;
     rdbDescricao: TRadioButton;
-    btnRelatorio: TSpeedButton;
     procedure Speedbutton1Click(Sender: TObject);
     procedure dsListagemDataChange(Sender: TObject; Field: TField);
     procedure edtPesquisarChange(Sender: TObject);

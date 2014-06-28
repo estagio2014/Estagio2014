@@ -20,7 +20,15 @@ uses
   untListagemUsuario in 'untListagemUsuario.pas' {frmListagemUsuario},
   untCadMarca in 'untCadMarca.pas' {frmCadMarca},
   untListagemMarca in 'untListagemMarca.pas' {frmListagemMarca},
-  untVenda in 'untVenda.pas' {frmVenda};
+  untVenda in 'untVenda.pas' {frmVenda},
+  untListagemVenda in 'untListagemVenda.pas' {frmListagemVenda},
+  untCompra in 'untCompra.pas' {frmCompra},
+  untListagemCompra in 'untListagemCompra.pas' {frmListagemCompra},
+  untContasPagar in 'untContasPagar.pas' {frmContasPagar},
+  untContasReceber in 'untContasReceber.pas' {frmContasReceber},
+  untCondPagamento in 'untCondPagamento.pas' {frmCondPagamento},
+  untListagemContas in 'untListagemContas.pas' {frmListagemContas},
+  untListagemContasPagar in 'untListagemContasPagar.pas' {frmListagemContaPagar};
 
 {$R *.res}
 
@@ -45,5 +53,13 @@ begin
   Application.CreateForm(TfrmCadMarca, frmCadMarca);
   Application.CreateForm(TfrmListagemMarca, frmListagemMarca);
   Application.CreateForm(TfrmVenda, frmVenda);
+  Application.CreateForm(TfrmListagemVenda, frmListagemVenda);
+  Application.CreateForm(TfrmCompra, frmCompra);
+  Application.CreateForm(TfrmListagemCompra, frmListagemCompra);
+  Application.CreateForm(TfrmContasPagar, frmContasPagar);
+  Application.CreateForm(TfrmContasReceber, frmContasReceber);
+  Application.CreateForm(TfrmCondPagamento, frmCondPagamento);
+  Application.CreateForm(TfrmListagemContas, frmListagemContas);
+  Application.CreateForm(TfrmListagemContaPagar, frmListagemContaPagar);
   Application.Run;
 end.
