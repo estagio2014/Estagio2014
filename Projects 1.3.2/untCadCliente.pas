@@ -527,7 +527,8 @@ begin
   cboSexo.Visible:=true;
   Label8.Visible:=true; // Estado Civil
   cboEstadoCivil.Visible:=true;
-  Label22.Caption:='Apelido';
+  Label22.Caption:='Apelido:';
+  Label22.Font.Style:=[];
   edtDataNasc.Left:=75;
                             //posições das Labels
   Label1.Left:= 54;
@@ -567,14 +568,14 @@ begin
   Label8.Visible:=false; // Estado Civil
   cboEstadoCivil.Visible:=false;
   Label22.Caption:='Razão social:*';
-  Label22.Font.Style(0);
+  Label22.Font.Style:=[fsBold];
   edtDataNasc.Left:=98;
   Label1.Left:= 75;
-  Label2.Left:=7;
+  Label2.Left:=5;
   Label4.left:=61;
   Label5.Left:= 4;// Data Nasc
 
-  Label22.Left:= 25;
+  Label22.Left:= 19;
 
 
   Label16.Caption:='Site:';
