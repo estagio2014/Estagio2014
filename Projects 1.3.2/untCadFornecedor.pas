@@ -63,6 +63,7 @@ type
     procedure edtEmailForExit(Sender: TObject);
     procedure edtCnpjExit(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure edtInscricaoEstChange(Sender: TObject);
   private
     { Private declarations }
     function ValidaCNPJ(numCNPJ: string): boolean;
@@ -286,12 +287,22 @@ begin
     end;
 end;
 
+procedure TfrmCadFornecedor.edtInscricaoEstChange(Sender: TObject);
+begin
+  inherited;
+  if Length(edtInscricaoEst.text)>15 then
+  begin
+      MessageDlg('Atenção! Insc. Estadual digitado ultrapassa 20 digitos!', mtInformation,[mbOk],0);
+      edtInscricaoEst.SetFocus;
+      exit;
+  end;
+end;
+
 procedure TfrmCadFornecedor.edtNomeContatoKeyPress(Sender: TObject;
   var Key: Char);
 begin
   inherited;
-if (key in ['0'..'9', ',', '.', ';', ':', '[', ']', '{', '}', '+', '-', '*', '*', '/', 'ª', 'º', '!', '@', '#', '$',
-'%', '¨', '(', ')', '§', '_', '?', '\', '¹', '²', '³', '£', '¢', '¬']) then
+if (key in ['0'..'9', ',', '.', ';', ':', '[', ']', '{', '}', '+', '-', '*', '*', '/', 'ª', 'º', '!', '@', '#', '$','%', '¨', '(', ')', '§', '_', '?', '\', '¹', '²', '³', '£', '¢', '¬']) then
 begin
     key := #0;
     messageDlg('O Caracter informado é inválido', mtInformation,[mbOk],0);

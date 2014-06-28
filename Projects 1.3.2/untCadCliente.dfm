@@ -186,18 +186,30 @@ inherited frmCadCliente: TfrmCadCliente
     Height = 105
     TabOrder = 2
     object Label13: TLabel
-      Left = 15
+      Left = 7
       Top = 16
-      Width = 46
+      Width = 59
       Height = 13
-      Caption = 'Telefone:'
+      Caption = 'Telefone:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label14: TLabel
-      Left = 165
+      Left = 154
       Top = 16
-      Width = 37
+      Width = 49
       Height = 13
-      Caption = 'Celular:'
+      Caption = 'Celular:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label15: TLabel
       Left = 33
@@ -440,6 +452,12 @@ inherited frmCadCliente: TfrmCadCliente
       Width = 39
       Height = 13
       Caption = 'Apelido:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object edtIdCli: TEdit
       Left = 76

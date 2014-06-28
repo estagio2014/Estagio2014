@@ -184,7 +184,7 @@ begin
               dblCidade.SetFocus;
               exit;
               end;
-            if edtTelefone.Text = '(  )    -    ' then
+            if edtTelefone.Text = '(  )    -    'then
             begin
               MessageDlg('Campo TELEFONE Obrigatório!', mtError,[mbOk],0);
               edtTelefone.SetFocus;
@@ -567,6 +567,7 @@ begin
   Label8.Visible:=false; // Estado Civil
   cboEstadoCivil.Visible:=false;
   Label22.Caption:='Razão social:*';
+  Label22.Font.Style(0);
   edtDataNasc.Left:=98;
   Label1.Left:= 75;
   Label2.Left:=7;

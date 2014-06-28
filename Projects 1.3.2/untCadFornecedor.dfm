@@ -158,6 +158,7 @@ inherited frmCadFornecedor: TfrmCadFornecedor
       Height = 21
       NumbersOnly = True
       TabOrder = 4
+      OnChange = edtInscricaoEstChange
     end
     object edtRazao: TEdit
       Left = 103
