@@ -12,8 +12,6 @@ type
     frxDBDatasetCliente: TfrxDBDataset;
     frxReportFornecedor: TfrxReport;
     frxDBDatasetFornecedor: TfrxDBDataset;
-    frxReportProduto: TfrxReport;
-    frxDBDatasetProduto: TfrxDBDataset;
   private
     { Private declarations }
   public

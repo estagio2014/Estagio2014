@@ -19,7 +19,6 @@ type
     procedure Speedbutton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btnRelatorioClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,13 +32,7 @@ implementation
 
 {$R *.dfm}
 
-uses untCadProduto, untDm, untRelatorios;
-
-procedure TfrmListagemProduto.btnRelatorioClick(Sender: TObject);
-begin
-  inherited;
-frmRelatorios.frxReportProduto.ShowReport();
-end;
+uses untCadProduto, untDm;
 
 procedure TfrmListagemProduto.dsListagemDataChange(Sender: TObject;
   Field: TField);
