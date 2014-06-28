@@ -9,8 +9,9 @@ uses
 
 type
   TfrmListagemCompra = class(TfrmListagem)
-    SpeedButton5: TSpeedButton;
+    btnRelatorio: TSpeedButton;
     procedure Speedbutton1Click(Sender: TObject);
+    procedure dsListagemDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
   public
@@ -26,6 +27,22 @@ implementation
 {$R *.dfm}
 
 uses untCompra;
+
+procedure TfrmListagemCompra.dsListagemDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+ { edtTotaldeReg.Text := IntToStr(dm.cdsCompra.RecordCount);
+  Speedbutton3.Enabled:=true;
+  Speedbutton2.Enabled:=true;
+  btnRelatorio.Enabled:= true;
+  if (dm.cdsCompra.RecordCount = 0) then
+  begin
+    Speedbutton3.Enabled:=false;
+    Speedbutton2.Enabled:=false;
+    btnRelatorio.Enabled:=false;
+  end else;}
+end;
 
 procedure TfrmListagemCompra.Speedbutton1Click(Sender: TObject);
 begin

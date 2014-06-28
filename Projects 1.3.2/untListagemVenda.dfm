@@ -9,6 +9,7 @@ inherited frmListagemVenda: TfrmListagemVenda
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 816
+    ExplicitWidth = 816
     inherited Speedbutton1: TSpeedButton
       Left = 386
       Width = 81
@@ -43,7 +44,7 @@ inherited frmListagemVenda: TfrmListagemVenda
       ExplicitTop = 11
       ExplicitWidth = 95
     end
-    object SpeedButton5: TSpeedButton [5]
+    object btnRelatorio: TSpeedButton [5]
       Left = 632
       Top = 11
       Width = 87
@@ -174,6 +175,7 @@ inherited frmListagemVenda: TfrmListagemVenda
   end
   inherited Panel2: TPanel
     Width = 816
+    ExplicitWidth = 816
     inherited Quantidade: TLabel
       Left = 642
       ExplicitLeft = 642

@@ -135,8 +135,8 @@ inherited frmCadCliente: TfrmCadCliente
       OnClick = SpeedButton1Click
     end
     object edtEndereco: TEdit
-      Left = 82
-      Top = 12
+      Left = 86
+      Top = 13
       Width = 344
       Height = 21
       TabOrder = 0
@@ -447,7 +447,7 @@ inherited frmCadCliente: TfrmCadCliente
       Width = 84
       Height = 21
       Enabled = False
-      TabOrder = 8
+      TabOrder = 9
     end
     object edtNomeCli: TEdit
       Left = 75
@@ -463,6 +463,7 @@ inherited frmCadCliente: TfrmCadCliente
       Width = 102
       Height = 21
       TabOrder = 4
+      OnChange = edtRgChange
     end
     object edtCpf: TMaskEdit
       Left = 75
@@ -481,7 +482,7 @@ inherited frmCadCliente: TfrmCadCliente
       Width = 50
       Height = 21
       Style = csDropDownList
-      TabOrder = 6
+      TabOrder = 7
       Items.Strings = (
         'M'
         'F')
@@ -492,7 +493,7 @@ inherited frmCadCliente: TfrmCadCliente
       Width = 88
       Height = 21
       Style = csDropDownList
-      TabOrder = 5
+      TabOrder = 6
       Items.Strings = (
         'Solteiro(a)'
         'Casado(a)'
@@ -514,7 +515,7 @@ inherited frmCadCliente: TfrmCadCliente
       Width = 58
       Height = 17
       Caption = 'Jur'#237'dica'
-      TabOrder = 7
+      TabOrder = 8
       OnClick = rdbPessoaJuridicaClick
     end
     object edtApelido: TEdit
@@ -532,7 +533,7 @@ inherited frmCadCliente: TfrmCadCliente
       Height = 21
       EditMask = '99/99/9999;1;_'
       MaxLength = 10
-      TabOrder = 9
+      TabOrder = 5
       Text = '  /  /    '
       OnExit = edtDataNascExit
     end

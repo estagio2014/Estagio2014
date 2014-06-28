@@ -105,9 +105,6 @@ begin
       edtPrecoVenda.SetFocus;
       exit;
     end;
-    if MessageDlg('Deseja Alterar o ESTOQUE ATUAL?', mtInformation,[mbYes,mbNo],0)= mrYes then
-    begin
-
     if frmListagemProduto.op = 1 then
     begin
     dm.sdsComandoSql.CommandText:='INSERT into produto values (seqProduto.nextval, :id, :codBarra, :descricao, :complemento, :categoria, :unidade,  :precoCusto, :precoVenda, :estoqueAtual, :obs, :situacao, :dataCadastro)';
@@ -156,7 +153,14 @@ begin
         ParamByName('unidade').Text := cboUnidade.Text;
         ParamByName('precoCusto').Text := edtPrecoCusto.Text;
         ParamByName('precoVenda').Text := edtPrecoVenda.Text;
-        ParamByName('estoqueAtual').Text := edtEstoqueAtual.Text;
+        if edtEstoqueAtual.text = dm.cdsProduto.FieldByName('estoqueAtual').Text then
+        begin
+	 	      ParamByName('estoqueAtual').Text := edtEstoqueAtual.Text;
+        end
+        else if MessageDlg('Deseja Alterar o ESTOQUE ATUAL?', mtInformation,[mbYes,mbNo],0)= mrYes then
+	      begin
+	 	      ParamByName('estoqueAtual').Text := edtEstoqueAtual.Text;
+	      end;
         ParamByName('obs').Text := mmObs.Text;
         ParamByName('dataCadastro').Text := edtDataCadPro.Text;
         if rdbDisponivel.Checked = true then
@@ -174,7 +178,6 @@ begin
       dm.cdsProduto.Close;
       dm.cdsProduto.Open;
       Close;
-   end;
    end;
 end;
 

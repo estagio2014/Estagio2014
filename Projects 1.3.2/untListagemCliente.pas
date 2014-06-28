@@ -11,7 +11,7 @@ type
   TfrmListagemCliente = class(TfrmListagem)
     rdbNome: TRadioButton;
     rdbCPFCNPJ: TRadioButton;
-    SpeedButton5: TSpeedButton;
+    btnRelatorio: TSpeedButton;
     procedure SpeedButton1Click(Sender: TObject);
     procedure Speedbutton2Click(Sender: TObject);
     procedure Speedbutton3Click(Sender: TObject);
@@ -19,7 +19,7 @@ type
     procedure edtPesquisarChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure SpeedButton5Click(Sender: TObject);
+    procedure btnRelatorioClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,10 +42,12 @@ begin
   edtTotaldeReg.Text := IntToStr(dm.cdsCliente.RecordCount);
   Speedbutton3.Enabled:=true;
   Speedbutton2.Enabled:=true;
+  btnRelatorio.Enabled:= true;
   if (dm.cdsCliente.RecordCount = 0) then
   begin
     Speedbutton3.Enabled:=false;
     Speedbutton2.Enabled:=false;
+    btnRelatorio.Enabled:=false;
   end else;
   end;
 procedure TfrmListagemCliente.edtPesquisarChange(Sender: TObject);
@@ -118,10 +120,10 @@ begin
   frmCadCliente.ShowModal;
 end;
 
-procedure TfrmListagemCliente.SpeedButton5Click(Sender: TObject);
+procedure TfrmListagemCliente.btnRelatorioClick(Sender: TObject);
 begin
   inherited;
-frmRelatorios.frxReportCliente.ShowReport();
+  frmRelatorios.frxReportCliente.ShowReport();
 end;
 
 end.
