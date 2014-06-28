@@ -9,11 +9,17 @@ uses
 
 type
   TfrmListagemProduto = class(TfrmListagem)
+    rdbCodBarra: TRadioButton;
+    rdbDescricao: TRadioButton;
+    btnRelatorio: TSpeedButton;
     procedure Speedbutton1Click(Sender: TObject);
     procedure dsListagemDataChange(Sender: TObject; Field: TField);
     procedure edtPesquisarChange(Sender: TObject);
+    procedure Speedbutton3Click(Sender: TObject);
+    procedure Speedbutton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnRelatorioClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,7 +33,13 @@ implementation
 
 {$R *.dfm}
 
-uses untCadProduto, untDm;
+uses untCadProduto, untDm, untRelatorios;
+
+procedure TfrmListagemProduto.btnRelatorioClick(Sender: TObject);
+begin
+  inherited;
+frmRelatorios.frxReportProduto.ShowReport();
+end;
 
 procedure TfrmListagemProduto.dsListagemDataChange(Sender: TObject;
   Field: TField);
@@ -47,6 +59,14 @@ procedure TfrmListagemProduto.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
   dm.cdsProduto.Locate('descricao',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+  if rdbCodBarra.Checked = true then
+  begin
+    dm.cdsProduto.Locate('codBarra',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+  end;
+  if rdbDescricao.Checked = true then
+  begin
+    dm.cdsProduto.Locate('descricao',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+  end;
 end;
 
 procedure TfrmListagemProduto.FormClose(Sender: TObject;
@@ -60,6 +80,7 @@ end;
 procedure TfrmListagemProduto.FormShow(Sender: TObject);
 begin
   inherited;
+  rdbCodBarra.Checked := true;
   dm.cdsProduto.Open;
   dm.cdsMarca.Open;
 end;
@@ -70,6 +91,31 @@ begin
   op := 1;
   frmCadProduto.ShowModal;
   frmCadProduto.Caption:='Incluir Produto';
+end;
+
+procedure TfrmListagemProduto.Speedbutton2Click(Sender: TObject);
+begin
+  inherited;
+  try
+    if(messageDlg('Deseja Exluir este Produto?', mtInformation,[mbYes,mbNo],0)=mrYes) then
+    begin
+      dm.sdscomandoSql.commandText := 'Delete from produto where idProduto = :id';
+      dm.sdscomandoSql.ParamByName('id').Text := dm.cdsProduto.FieldByName('idProduto').text;
+      dm.sdsComandoSql.ExecSQL();
+      dm.cdsProduto.Close;
+      dm.cdsProduto.Open;
+    end;
+  Except
+    Application.MessageBox('Erro ao Excluir! Este Produto está sendo utilizado em outro CADASTRO.','Alerta',0);
+  end;
+end;
+
+procedure TfrmListagemProduto.Speedbutton3Click(Sender: TObject);
+begin
+  inherited;
+  op := 2;
+  frmCadProduto.ShowModal;
+  frmCadProduto.Caption:='Alterar Produto';
 end;
 
 end.

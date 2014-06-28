@@ -3,9 +3,8 @@ inherited frmListagemVenda: TfrmListagemVenda
   ClientWidth = 816
   OnClose = FormClose
   OnShow = FormShow
-  ExplicitLeft = -89
   ExplicitWidth = 832
-  ExplicitHeight = 441
+  ExplicitHeight = 436
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -45,7 +44,7 @@ inherited frmListagemVenda: TfrmListagemVenda
       ExplicitTop = 11
       ExplicitWidth = 95
     end
-    object SpeedButton5: TSpeedButton [5]
+    object btnRelatorio: TSpeedButton [5]
       Left = 632
       Top = 11
       Width = 87

@@ -58,8 +58,8 @@ type
     Label7: TLabel;
     Label20: TLabel;
     edtDataCadastro: TMaskEdit;
-    edtDataNasc: TDateTimePicker;
     edtUf: TEdit;
+    edtDataNasc: TMaskEdit;
     procedure btnConfirmClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -92,9 +92,8 @@ uses untListagemCliente, untDm, untListagemCidade;
 procedure TfrmCadCliente.btnConfirmClick(Sender: TObject);
 begin
   inherited;
-      if frmListagemCliente.op=1 then
-      begin
-        if rdbPessoaFisica.Checked = true then
+  try
+    if rdbPessoaFisica.Checked = true then
           begin
             if Trim(edtNomeCli.Text)= '' then
               begin
@@ -108,22 +107,16 @@ begin
               edtCpf.SetFocus;
               exit;
             end;
-            if dm.cdsCliente.Locate('cpfCnpj', edtCpf.Text,[]) then
-	          begin
-              MessageDlg('CPF já cadastrado, favor informar outro.', mtError,[mbOk],0);
-              edtCpf.SetFocus;
+            if Trim(edtRg.Text)= '' then
+            begin
+              MessageDlg('Campo RG Obrigatório!', mtError,[mbOk],0);
+              edtRg.SetFocus;
               exit;
             end;
-            if Trim(edtRg.Text)= '' then
-              begin
-                MessageDlg('Campo RG Obrigatório!', mtError,[mbOk],0);
-                edtRg.SetFocus;
-                exit;
-              end;
-            if dm.cdsCliente.Locate('rg', edtRg.Text,[]) then
-	          begin
-              MessageDlg('RG já cadastrado, favor informar outro.', mtError,[mbOk],0);
-              edtRg.SetFocus;
+            if edtDataNasc.Text = '  /  /    ' then
+            begin
+              MessageDlg('Campo DataNasc Obrigatório!', mtError,[mbOk],0);
+              edtDataNasc.SetFocus;
               exit;
             end;
             if Trim(cboEstadoCivil.Text)= '' then
@@ -153,15 +146,9 @@ begin
             edtApelido.SetFocus;
             exit;
           end;
-          if edtCpf.Text = '   .   .   -  ' then
+          if edtCpf.Text = '  .   .   /    -  ' then
           begin
             MessageDlg('Campo CNPJ Obrigatório!', mtError,[mbOk],0);
-            edtCpf.SetFocus;
-            exit;
-          end;
-          if dm.cdsCliente.Locate('cpfCnpj', edtCpf.Text,[]) then
-          begin
-            MessageDlg('CNPJ já cadastrado, favor informar outro.', mtError,[mbOk],0);
             edtCpf.SetFocus;
             exit;
           end;
@@ -171,14 +158,7 @@ begin
             edtRg.SetFocus;
             exit;
           end;
-          if dm.cdsCliente.Locate('rg', edtRg.Text,[]) then
-          begin
-            MessageDlg('INSC ESTADUAL já cadastrado, favor informar outro.', mtError,[mbOk],0);
-            edtRg.SetFocus;
-            exit;
-          end;
         end; // end do rdbPessoa Jurídica
-
           if Trim(edtEndereco.Text)= '' then
               begin
               MessageDlg('Campo ENDEREÇO Obrigatório!', mtError,[mbOk],0);
@@ -216,9 +196,12 @@ begin
               exit;
             end;
 
-        dm.sdsComandoSql.CommandText := 'INSERT into cliente values(seqCliente.nextval, :nomeCli, :apelido, :tipoPessoa, :cpfCnpj, :rg, :dataNasc, :estadoCivil, :genero, :endereco, :bairro, :cep, :tel, :cel, :email, :midSocial, :obs, :dataCad, :situacao, :id_cid)';
+      if frmListagemCliente.op=1 then
+      begin
+        dm.sdsComandoSql.CommandText := 'INSERT into cliente values(seqCliente.nextval,:id_cid, :nomeCli, :apelido, :tipoPessoa, :cpfCnpj, :rg, :dataNasc, :estadoCivil, :genero, :endereco, :bairro, :cep, :tel, :cel, :email, :midSocial, :obs, :dataCad, :situacao)';
         with dm.sdsComandoSql do
         begin
+          ParamByName('id_cid').AsInteger := dblCidade.KeyValue;
           ParamByName('nomeCli').Text := edtNomeCli.Text;
           ParamByName('Apelido').Text := edtApelido.Text;
           if rdbPessoaFisica.Checked = true then
@@ -231,7 +214,7 @@ begin
           end;
           ParamByName('cpfCnpj').Text := edtCpf.Text;
           ParamByName('rg').Text := edtRg.Text;
-          ParamByName('dataNasc').Text := DateToStr(edtDataNasc.DateTime);
+          ParamByName('dataNasc').Text := edtDataNasc.Text;
           ParamByName('estadoCivil').Text := cboEstadoCivil.Text;
           ParamByName('genero').Text := copy(cboSexo.Text,0,1);
           ParamByName('endereco').Text := edtEndereco.Text;
@@ -251,7 +234,7 @@ begin
           begin
             dm.sdsComandoSql.ParamByName('situacao').AsString:='I';
           end;
-          ParamByName('id_cid').AsInteger := dblCidade.KeyValue;
+
         end;
         dm.sdsComandoSql.ExecSQL();
         MessageDlg('Cliente cadastrado com Sucesso!', mtInformation,[mbOk],0);
@@ -259,127 +242,16 @@ begin
         dm.cdsCliente.Open;
         Close;
       end;
+    Except
+      Application.MessageBox('O Cpf cadastrado já existe!','Alerta',0);
+  end;
       if frmListagemCliente.op = 2 then
       begin
-        if rdbPessoaFisica.Checked = true then
-        begin
-          if Trim(edtNomeCli.Text)= '' then
-          begin
-            MessageDlg('Campo Nome Obrigatório!', mtError,[mbOk],0);
-            edtNomeCli.SetFocus;
-            exit;
-          end;
-          if edtCpf.Text = '   .   .   -  ' Then
-          begin
-            MessageDlg('Campo CPF Obrigatório!', mtError,[mbOk],0);
-            edtCpf.SetFocus;
-            exit;
-          end;
-          if (dm.cdsCliente.Locate('cpfCnpj', edtCpf.Text,[]) and (dm.cdsCliente.FieldByName('idCli').Text = edtIdCli.Text)) then
-          begin
-            MessageDlg('CPF já cadastrado, favor informar outro.', mtError,[mbOk],0);
-            edtCpf.SetFocus;
-            exit;
-          end;
-          if Trim(edtRg.Text)= '' then
-          begin
-            MessageDlg('Campo RG Obrigatório!', mtError,[mbOk],0);
-            edtRg.SetFocus;
-            exit;
-          end;
-      {    if dm.cdsCliente.Locate('rg', edtRg.Text,[]) then
-          begin
-            MessageDlg('RG já cadastrado, favor informar outro.', mtError,[mbOk],0);
-            edtRg.SetFocus;
-            exit;
-          end;      }
-          if Trim(cboEstadoCivil.Text)= '' then
-          begin
-            MessageDlg('Campo ESTADO CIVIL Obrigatório!', mtError,[mbOk],0);
-            cboEstadoCivil.SetFocus;
-            exit;
-          end;
-          if Trim(cboSexo.Text)= '' then
-          begin
-            MessageDlg('Campo Gênero Obrigatório!', mtError,[mbOk],0);
-            cboSexo.SetFocus;
-            exit;
-          end;
-        end //end do rdbPessoa Fisica
-        else if rdbPessoaJuridica.Checked = true then
-        begin
-          if Trim(edtNomeCli.Text) = '' then
-          begin
-            MessageDlg('Campo NOME FANTASIA Obrigatório!', mtError,[mbOk],0);
-            edtNomeCli.SetFocus;
-            exit;
-          end;
-          if Trim(edtApelido.Text) = '' then
-          begin
-            MessageDlg('Campo RAZÃO SOCIAL Obrigatório!', mtError,[mbOk],0);
-            edtApelido.SetFocus;
-            exit;
-          end;
-          if edtCpf.Text = '   .   .   -  ' then
-          begin
-            MessageDlg('Campo CNPJ Obrigatório!', mtError,[mbOk],0);
-            edtCpf.SetFocus;
-            exit;
-          end;
-          if dm.cdsCliente.Locate('cpfCnpj', edtCpf.Text,[]) then
-          begin
-            MessageDlg('CNPJ já cadastrado, favor informar outro.', mtError,[mbOk],0);
-            edtCpf.SetFocus;
-            exit;
-          end;
-          if Trim(edtRg.Text) = '' then
-          begin
-            MessageDlg('Campo INSC ESTADUAL Obrigatório!', mtError,[mbOk],0);
-            edtRg.SetFocus;
-            exit;
-          end;
-          if dm.cdsCliente.Locate('rg', edtRg.Text,[]) then
-          begin
-            MessageDlg('INSC ESTADUAL já cadastrado, favor informar outro.', mtError,[mbOk],0);
-            edtRg.SetFocus;
-            exit;
-          end;
-        end; // end do rdbPessoa Jurídica
-
-        if Trim(edtEndereco.Text)= '' then
-        begin
-          MessageDlg('Campo ENDEREÇO Obrigatório!', mtError,[mbOk],0);
-          edtEndereco.SetFocus;
-          exit;
-        end;
-        if Trim(edtBairro.Text) = '' then
-        begin
-          MessageDlg('Campo BAIRRO Obrigatório!', mtError,[mbOk],0);
-          edtBairro.SetFocus;
-          exit;
-        end;
-        if Trim(dblCidade.Text)= '' then
-        begin
-          MessageDlg('Campo CIDADE Obrigatório!', mtError,[mbOk],0);
-          dblCidade.SetFocus;
-          exit;
-        end;
-        if edtTelefone.Text = '(  )    -    ' then
-        begin
-          MessageDlg('Campo TELEFONE Obrigatório!', mtError,[mbOk],0);
-          edtTelefone.SetFocus;
-          exit;
-        end;
-        if edtCelular.Text = '(  )    -    ' then
-        begin
-          MessageDlg('Campo CELULAR Obrigatório!', mtError,[mbOk],0);
-          edtCelular.SetFocus;
-          exit;
-        end;
-        dm.sdsComandoSql.CommandText := 'UPDATE cliente set nomeCli = :nomeCli, Apelido = :Apelido, tipoPessoa = :tipoPessoa, cpfCnpj = :cpfCnpj, rg = :rg, dataNasc = :dataNasc, estadoCivil = :estadoCivil, genero = :genero, endereco = :endereco, bairro = :bairro, cep = :cep,'+
-        'telefone = :tel, celular = :cel, email = :email, midiaSocial = :midSocial, observacoes = :obs, dataCadastro = :dataCad, situacao = :situacao, id_cid = :id_cid where idCli = :idCli';
+        dm.sdsComandoSql.CommandText := 'UPDATE cliente set id_cid = :id_cid,nomeCli = :nomeCli, Apelido = :Apelido, tipoPessoa = :tipoPessoa, cpfCnpj = :cpfCnpj, rg = :rg, dataNasc = :dataNasc, estadoCivil = :estadoCivil, genero = :genero, endereco = :endereco, bairro = :bairro, cep = :cep,'+
+        'telefone = :tel, celular = :cel, email = :email, midiaSocial = :midSocial, observacao = :obs, dataCadastro = :dataCad, situacao = :situacao where idCli = :idCli';
           with dm.sdsComandoSql do
           begin
+            ParamByName('id_cid').AsInteger := dblCidade.KeyValue;
             ParamByName('idCli').Text := edtIdCli.Text;
             ParamByName('nomeCli').Text := edtNomeCli.Text;
             ParamByName('Apelido').Text := edtApelido.Text;
@@ -393,7 +265,7 @@ begin
             end;
             ParamByName('cpfCnpj').Text := edtCpf.Text;
             ParamByName('rg').Text := edtRg.Text;
-            ParamByName('dataNasc').Text := DateToStr(edtDataNasc.DateTime);
+            ParamByName('dataNasc').Text := edtDataNasc.Text;
             ParamByName('estadoCivil').Text := cboEstadoCivil.Text;
             ParamByName('genero').Text := copy(cboSexo.Text,0,1);
             ParamByName('endereco').Text := edtEndereco.Text;
@@ -413,7 +285,6 @@ begin
             begin
               dm.sdsComandoSql.ParamByName('situacao').AsString:='I';
             end;
-            ParamByName('id_cid').AsInteger := dblCidade.KeyValue;
           end;
         dm.sdsComandoSql.ExecSQL();
         MessageDlg('Alteração realizada com Sucesso!', mtInformation,[mbOk],0);
@@ -440,8 +311,6 @@ begin
       then begin cpf := false;
       exit;
       end;
-
-
    n1:=StrToInt(CPF_Text[1]);
    n2:=StrToInt(CPF_Text[2]);
    n3:=StrToInt(CPF_Text[3]);
@@ -469,7 +338,7 @@ end;
 procedure TfrmCadCliente.dblCidadeClick(Sender: TObject);
 begin
   inherited;
-edtUf.Text := dm.cdsCidade.FieldByName('uf_cid').Text;
+  edtUf.Text := dm.cdsCidade.FieldByName('uf').Text;
 end;
 
 procedure TfrmCadCliente.edtApelidoKeyPress(Sender: TObject; var Key: Char);
@@ -519,7 +388,7 @@ end;
 procedure TfrmCadCliente.edtDataNascExit(Sender: TObject);
 begin
   inherited;
-  if (edtDataNasc.Date)>(date) then
+  if (StrToDate(edtDataNasc.Text)>(date)) then
   begin
     MessageDlg('Data Nasc/Data Fundação Informada não pode ser maior do que a data atual!', mtInformation,[mbOk],0);
     edtDataNasc.SetFocus;
@@ -559,37 +428,37 @@ end;
 procedure TfrmCadCliente.FormShow(Sender: TObject);
 begin
   inherited;
-if frmListagemCliente.op=1 then
-begin
-  edtDataCadastro.Text:= DateToStr(date);
-  edtDataNasc.Date := date;
-  edtIdCli.Clear;
-  edtNomeCli.Clear;
-  edtApelido.Clear;
-  edtCpf.Clear;
-  edtRg.Clear;
-  cboEstadoCivil.ItemIndex:= -1;
-  cboSexo.ItemIndex:= -1;
-  edtEndereco.Clear;
-  edtBairro.Clear;
-  edtCep.Clear;
-  dblCidade.KeyValue:= -1;
-  edtUf.Clear;
-  edtTelefone.Clear;
-  edtCelular.Clear;
-  edtEmail.Clear;
-  edtMidiaSocial.Clear;
-  mmObs.Clear;
-  edtNomeCli.SetFocus;
-  rdbPessoaFisica.Checked:=true;
-  rdbAtivo.Checked:=true;
-end;
+  if frmListagemCliente.op=1 then
+  begin
+    edtDataCadastro.Text:= DateToStr(date);
+    edtDataNasc.text := DateToStr(date);
+    edtIdCli.Clear;
+    edtNomeCli.Clear;
+    edtApelido.Clear;
+    edtCpf.Clear;
+    edtRg.Clear;
+    cboEstadoCivil.ItemIndex:= -1;
+    cboSexo.ItemIndex:= -1;
+    edtEndereco.Clear;
+    edtBairro.Clear;
+    edtCep.Clear;
+    dblCidade.KeyValue:= -1;
+    edtUf.Clear;
+    edtTelefone.Clear;
+    edtCelular.Clear;
+    edtEmail.Clear;
+    edtMidiaSocial.Clear;
+    mmObs.Clear;
+    edtNomeCli.SetFocus;
+    rdbPessoaFisica.Checked:=true;
+    rdbAtivo.Checked:=true;
+  end;
     if frmListagemCliente.op=2 then
       begin
-      edtIdCli.Text := dm.cdsCliente.FieldByName('idCli').Text;
-       edtNomeCli.Text := dm.cdsCliente.FieldByName('nomeCli').Text;
-       edtApelido.Text := dm.cdsCliente.FieldByName('apelido').Text;
-       if (dm.cdsCliente.FieldByName('tipoPessoa').Text = 'F') then
+        edtIdCli.Text := dm.cdsCliente.FieldByName('idCli').Text;
+        edtNomeCli.Text := dm.cdsCliente.FieldByName('nomeCli').Text;
+        edtApelido.Text := dm.cdsCliente.FieldByName('apelido').Text;
+        if (dm.cdsCliente.FieldByName('tipoPessoa').Text = 'F') then
           begin
             rdbPessoaFisica.Checked := True;
           end
@@ -599,20 +468,19 @@ end;
           end;
       edtCpf.Text := dm.cdsCliente.FieldByName('cpfCnpj').Text;
       edtRg.Text := dm.cdsCliente.FieldByName('rg').Text;
-      edtDataNasc.Date := StrToDateDef(dm.cdsCliente.FieldByName('dataNasc').Text,Date);
+      edtDataNasc.Text := dm.cdsCliente.FieldByName('dataNasc').Text;
       cboEstadoCivil.ItemIndex := (cboEstadoCivil.Items.IndexOf(dm.cdsCliente.FieldByName('estadoCivil').Text));
       cboSexo.ItemIndex := (cboSexo.Items.IndexOf(dm.cdsCliente.FieldByName('genero').Text));
-//      cboSexo.Text:=dm.cdsCliente.FieldByName('genero').Text;
       edtEndereco.Text := dm.cdsCliente.FieldByName('endereco').Text;
       edtBairro.Text := dm.cdsCliente.FieldByName('bairro').Text;
       edtCep.Text := dm.cdsCliente.FieldByName('cep').Text;
       dblCidade.KeyValue := dm.cdsCliente.FieldByName('id_cid').AsInteger;
-      edtUf.Text := dm.cdsCidade.FieldByName('uf_cid').Text;
+      edtUf.Text := dm.cdsCidade.FieldByName('uf').Text;
       edtTelefone.Text := dm.cdsCliente.FieldByName('telefone').Text;
       edtCelular.Text := dm.cdsCliente.FieldByName('celular').Text;
       edtEmail.Text := dm.cdsCliente.FieldByName('email').Text;
       edtMidiaSocial.Text := dm.cdsCliente.FieldByName('midiaSocial').Text;
-      mmObs.Text := dm.cdsCliente.FieldByName('observacoes').Text;
+      mmObs.Text := dm.cdsCliente.FieldByName('observacao').Text;
       edtDataCadastro.Text := dm.cdsCliente.FieldByName('dataCadastro').Text;
       if (dm.cdsCliente.FieldByName('situacao').Text = 'A') then
         begin

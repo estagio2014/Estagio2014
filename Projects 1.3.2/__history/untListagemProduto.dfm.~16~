@@ -1,55 +1,60 @@
-inherited frmListagemCliente: TfrmListagemCliente
-  Caption = 'Listagem de Cliente'
-  ClientWidth = 813
+inherited frmListagemProduto: TfrmListagemProduto
+  Caption = 'Listagem de Produto'
+  ClientWidth = 827
   OnClose = FormClose
   OnShow = FormShow
-  ExplicitWidth = 829
-  ExplicitHeight = 436
+  ExplicitWidth = 843
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 813
-    ExplicitWidth = 813
+    Width = 827
+    ExplicitWidth = 827
     inherited Speedbutton1: TSpeedButton
-      Left = 374
-      Width = 80
-      OnClick = SpeedButton1Click
-      ExplicitLeft = 374
-      ExplicitWidth = 80
+      Left = 395
+      Top = 10
+      Width = 83
+      OnClick = Speedbutton1Click
+      ExplicitLeft = 395
+      ExplicitTop = 10
+      ExplicitWidth = 83
     end
     inherited Speedbutton2: TSpeedButton
-      Left = 454
-      Width = 82
+      Left = 478
+      Top = 10
+      Width = 83
       OnClick = Speedbutton2Click
-      ExplicitLeft = 454
-      ExplicitWidth = 82
+      ExplicitLeft = 478
+      ExplicitTop = 10
+      ExplicitWidth = 83
     end
     inherited Speedbutton3: TSpeedButton
-      Left = 537
-      Width = 82
+      Left = 561
+      Top = 10
+      Width = 83
       OnClick = Speedbutton3Click
-      ExplicitLeft = 537
-      ExplicitWidth = 82
+      ExplicitLeft = 561
+      ExplicitTop = 10
+      ExplicitWidth = 83
     end
     inherited Speedbutton4: TSpeedButton
-      Left = 714
-      Width = 80
-      ExplicitLeft = 714
-      ExplicitWidth = 80
+      Left = 735
+      Top = 10
+      Width = 84
+      ExplicitLeft = 735
+      ExplicitTop = 10
+      ExplicitWidth = 84
     end
     inherited Label1: TLabel
-      Left = 19
-      Top = 11
-      Width = 102
-      Caption = 'Pesquisar Cliente:'
-      ExplicitLeft = 19
-      ExplicitTop = 11
-      ExplicitWidth = 102
+      Top = 12
+      Width = 105
+      Caption = 'Pesquisar Produto:'
+      ExplicitTop = 12
+      ExplicitWidth = 105
     end
     object btnRelatorio: TSpeedButton [5]
-      Left = 619
-      Top = 11
-      Width = 84
+      Left = 644
+      Top = 10
+      Width = 83
       Height = 41
       Caption = 'Relat'#243'rio'
       Glyph.Data = {
@@ -168,203 +173,129 @@ inherited frmListagemCliente: TfrmListagemCliente
       OnClick = btnRelatorioClick
     end
     inherited edtPesquisar: TEdit
-      Left = 20
+      Left = 11
       Top = 34
-      Width = 333
+      Width = 366
       OnChange = edtPesquisarChange
-      ExplicitLeft = 20
+      ExplicitLeft = 11
       ExplicitTop = 34
-      ExplicitWidth = 333
+      ExplicitWidth = 366
     end
-    object rdbNome: TRadioButton
-      Left = 128
-      Top = 11
-      Width = 50
+    object rdbCodBarra: TRadioButton
+      Left = 121
+      Top = 10
+      Width = 90
       Height = 17
-      Caption = 'Nome'
+      Caption = 'C'#243'd de Barra'
       TabOrder = 1
     end
-    object rdbCPFCNPJ: TRadioButton
-      Left = 179
-      Top = 11
-      Width = 72
+    object rdbDescricao: TRadioButton
+      Left = 208
+      Top = 10
+      Width = 70
       Height = 17
-      Caption = 'CPF/CNPJ'
+      Caption = 'Descri'#231#227'o'
       TabOrder = 2
     end
   end
   inherited Panel2: TPanel
-    Width = 813
-    ExplicitWidth = 813
+    Width = 827
+    ExplicitWidth = 827
     inherited Quantidade: TLabel
-      Left = 607
-      Width = 103
-      Caption = 'Total de Registros:'
-      ExplicitLeft = 607
-      ExplicitWidth = 103
+      Left = 651
+      ExplicitLeft = 651
     end
     inherited edtTotaldeReg: TEdit
-      Top = 7
-      ExplicitTop = 7
+      Left = 754
+      ExplicitLeft = 754
     end
   end
   inherited DBGrid1: TDBGrid
-    Width = 813
+    Width = 827
     DataSource = dsListagem
     Columns = <
       item
         Expanded = False
-        FieldName = 'IDCLI'
+        FieldName = 'IDPRODUTO'
+        Title.Alignment = taCenter
         Title.Caption = 'C'#243'digo'
-        Width = 81
         Visible = True
       end
       item
+        Alignment = taLeftJustify
         Expanded = False
-        FieldName = 'NOMECLI'
+        FieldName = 'CODBARRA'
         Title.Alignment = taCenter
-        Title.Caption = 'Nome/Nome Fantasia'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'APELIDO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Apelido/Raz'#227'o Social'
-        Width = 267
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'TIPOPESSOA'
-        Title.Alignment = taCenter
-        Title.Caption = 'Pessoa'
-        Width = 46
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'CPFCNPJ'
-        Title.Alignment = taCenter
-        Title.Caption = 'CPF/CNPJ'
-        Width = 138
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'RG'
-        Title.Alignment = taCenter
-        Title.Caption = 'RG/Inscri'#231#227'o Estadual'
-        Width = 131
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DATANASC'
-        Title.Alignment = taCenter
-        Title.Caption = 'Data Nascimento'
-        Width = 107
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ESTADOCIVIL'
-        Title.Alignment = taCenter
-        Title.Caption = 'Estado Civil'
-        Width = 74
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'GENERO'
-        Title.Alignment = taCenter
-        Title.Caption = 'G'#234'nero'
-        Width = 52
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ENDERECO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Endere'#231'o'
+        Title.Caption = 'C'#243'digo de Barra'
         Width = 64
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'BAIRRO'
+        FieldName = 'DESCRICAO'
         Title.Alignment = taCenter
-        Title.Caption = 'Bairro'
+        Title.Caption = 'Descri'#231#227'o'
         Width = 64
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'CEP'
+        FieldName = 'COMPLEMENTO'
         Title.Alignment = taCenter
-        Width = 75
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOME_CID'
-        Title.Alignment = taCenter
-        Title.Caption = 'Cidade'
+        Title.Caption = 'Especifica'#231#245'es'
         Width = 64
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'UF'
+        FieldName = 'DESCRICAO_1'
         Title.Alignment = taCenter
+        Title.Caption = 'Marca'
         Width = 64
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'TELEFONE'
+        FieldName = 'CATEGORIA'
         Title.Alignment = taCenter
-        Title.Caption = 'Telefone'
-        Width = 100
+        Title.Caption = 'Categoria'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'CELULAR'
+        FieldName = 'UNIDADE'
         Title.Alignment = taCenter
-        Title.Caption = 'Celular'
-        Width = 87
+        Title.Caption = 'Unidade'
+        Width = 64
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'EMAIL'
+        FieldName = 'PRECOCUSTO'
         Title.Alignment = taCenter
-        Title.Caption = 'Email'
-        Width = 169
+        Title.Caption = 'Pre'#231'o Custo'
+        Width = 64
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'MIDIASOCIAL'
+        FieldName = 'PRECOVENDA'
         Title.Alignment = taCenter
-        Title.Caption = 'M'#237'dia Social/Site'
-        Width = 269
+        Title.Caption = 'Pre'#231'o Venda'
+        Width = 64
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ID_CID'
-        Visible = False
+        FieldName = 'ESTOQUEATUAL'
+        Title.Alignment = taCenter
+        Title.Caption = 'Estoque'
+        Width = 64
+        Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ID_CID_1'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'OBSERVACAO'
+        FieldName = 'OBSERVACOES'
         Title.Alignment = taCenter
         Title.Caption = 'Observa'#231#245'es'
         Width = 64
@@ -375,27 +306,22 @@ inherited frmListagemCliente: TfrmListagemCliente
         FieldName = 'SITUACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Situa'#231#227'o'
-        Width = 66
+        Width = 64
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'DATACADASTRO'
         Title.Alignment = taCenter
-        Title.Caption = 'Data Cadastro'
-        Width = 99
+        Title.Caption = 'Data de Cadastro'
+        Width = 64
         Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DATACADASTRO_1'
-        Visible = False
       end>
   end
   inherited dsListagem: TDataSource
-    DataSet = dm.cdsCliente
+    DataSet = dm.cdsProduto
     OnDataChange = dsListagemDataChange
-    Left = 728
-    Top = 96
+    Left = 704
+    Top = 128
   end
 end
