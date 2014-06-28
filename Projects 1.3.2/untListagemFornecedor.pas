@@ -19,6 +19,7 @@ type
     procedure dsListagemDataChange(Sender: TObject; Field: TField);
     procedure edtPesquisarChange(Sender: TObject);
     procedure Speedbutton2Click(Sender: TObject);
+    procedure btnRelatorioClick(Sender: TObject);
   private
 
   public
@@ -32,7 +33,13 @@ implementation
 
 {$R *.dfm}
 
-uses untCadFornecedor, untDm;
+uses untCadFornecedor, untDm, untRelatorios;
+
+procedure TfrmListagemFornecedor.btnRelatorioClick(Sender: TObject);
+begin
+  inherited;
+frmRelatorios.frxReportFornecedor.ShowReport();
+end;
 
 procedure TfrmListagemFornecedor.dsListagemDataChange(Sender: TObject;
   Field: TField);

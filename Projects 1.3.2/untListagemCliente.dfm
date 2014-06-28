@@ -4,6 +4,7 @@ inherited frmListagemCliente: TfrmListagemCliente
   OnClose = FormClose
   OnShow = FormShow
   ExplicitWidth = 829
+  ExplicitHeight = 441
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -164,6 +165,7 @@ inherited frmListagemCliente: TfrmListagemCliente
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphRight
       NumGlyphs = 2
+      OnClick = SpeedButton5Click
     end
     inherited edtPesquisar: TEdit
       Left = 20
@@ -285,6 +287,7 @@ inherited frmListagemCliente: TfrmListagemCliente
         FieldName = 'ENDERECO'
         Title.Alignment = taCenter
         Title.Caption = 'Endere'#231'o'
+        Width = 64
         Visible = True
       end
       item
@@ -292,6 +295,7 @@ inherited frmListagemCliente: TfrmListagemCliente
         FieldName = 'BAIRRO'
         Title.Alignment = taCenter
         Title.Caption = 'Bairro'
+        Width = 64
         Visible = True
       end
       item
@@ -306,12 +310,14 @@ inherited frmListagemCliente: TfrmListagemCliente
         FieldName = 'NOME_CID'
         Title.Alignment = taCenter
         Title.Caption = 'Cidade'
+        Width = 64
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'UF'
         Title.Alignment = taCenter
+        Width = 64
         Visible = True
       end
       item
@@ -361,6 +367,7 @@ inherited frmListagemCliente: TfrmListagemCliente
         FieldName = 'OBSERVACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Observa'#231#245'es'
+        Width = 64
         Visible = True
       end
       item

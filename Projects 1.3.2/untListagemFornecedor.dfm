@@ -4,6 +4,7 @@ inherited frmListagemFornecedor: TfrmListagemFornecedor
   OnClose = FormClose
   OnShow = FormShow
   ExplicitWidth = 843
+  ExplicitHeight = 441
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -166,6 +167,7 @@ inherited frmListagemFornecedor: TfrmListagemFornecedor
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphRight
       NumGlyphs = 2
+      OnClick = btnRelatorioClick
     end
     inherited edtPesquisar: TEdit
       Left = 9

@@ -19,6 +19,7 @@ type
     procedure edtPesquisarChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure SpeedButton5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,7 +33,7 @@ implementation
 
 {$R *.dfm}
 
-uses untCadCliente, untDm;
+uses untCadCliente, untDm, untRelatorios;
 
 procedure TfrmListagemCliente.dsListagemDataChange(Sender: TObject;
   Field: TField);
@@ -115,6 +116,12 @@ begin
   op:= 2;
   frmCadCliente.Caption:='Alterar Cliente';
   frmCadCliente.ShowModal;
+end;
+
+procedure TfrmListagemCliente.SpeedButton5Click(Sender: TObject);
+begin
+  inherited;
+frmRelatorios.frxReportCliente.ShowReport();
 end;
 
 end.
