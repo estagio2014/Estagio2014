@@ -124,40 +124,58 @@ inherited frmCadProduto: TfrmCadProduto
     object Label11: TLabel
       Left = 16
       Top = 9
-      Width = 62
+      Width = 77
       Height = 13
-      Caption = 'Pre'#231'o Custo:'
+      Caption = 'Pre'#231'o Custo:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label10: TLabel
       Left = 231
-      Top = 9
-      Width = 71
+      Top = 10
+      Width = 88
       Height = 13
-      Caption = 'Estoque Atual:'
+      Caption = 'Estoque Atual:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label15: TLabel
-      Left = 14
+      Left = 16
       Top = 40
-      Width = 64
+      Width = 80
       Height = 13
-      Caption = 'Pre'#231'o Venda:'
+      Caption = 'Pre'#231'o Venda:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object edtPrecoCusto: TEdit
-      Left = 86
+      Left = 96
       Top = 6
       Width = 112
       Height = 21
       TabOrder = 0
     end
     object edtEstoqueAtual: TEdit
-      Left = 308
+      Left = 322
       Top = 7
       Width = 76
       Height = 21
       TabOrder = 2
     end
     object edtPrecoVenda: TEdit
-      Left = 86
+      Left = 96
       Top = 37
       Width = 112
       Height = 21
@@ -171,15 +189,15 @@ inherited frmCadProduto: TfrmCadProduto
     Height = 211
     TabOrder = 0
     object Label1: TLabel
-      Left = 56
+      Left = 70
       Top = 16
       Width = 15
       Height = 13
       Caption = 'ID:'
     end
     object Label3: TLabel
-      Left = 4
-      Top = 40
+      Left = 19
+      Top = 44
       Width = 67
       Height = 13
       Caption = 'C'#243'd de Barra:'
@@ -187,37 +205,67 @@ inherited frmCadProduto: TfrmCadProduto
     object Label4: TLabel
       Left = 21
       Top = 76
-      Width = 50
+      Width = 65
       Height = 13
-      Caption = 'Descri'#231#227'o:'
+      Caption = 'Descri'#231#227'o:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label5: TLabel
-      Left = 32
+      Left = 44
       Top = 138
-      Width = 39
+      Width = 45
       Height = 13
       Caption = 'Marca:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label6: TLabel
-      Left = 6
-      Top = 110
-      Width = 68
+      Left = 4
+      Top = 109
+      Width = 85
       Height = 13
-      Caption = 'Especifica'#231#227'o:'
+      Caption = 'Especifica'#231#227'o:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label7: TLabel
       Left = 21
       Top = 170
-      Width = 51
+      Width = 65
       Height = 13
-      Caption = 'Categoria:'
+      Caption = 'Categoria:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label9: TLabel
-      Left = 168
+      Left = 187
       Top = 170
-      Width = 43
+      Width = 56
       Height = 13
-      Caption = 'Unidade:'
+      Caption = 'Unidade:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object btnLocalizar: TSpeedButton
       Left = 386
@@ -241,7 +289,7 @@ inherited frmCadProduto: TfrmCadProduto
       OnClick = btnLocalizarClick
     end
     object edtIdProd: TEdit
-      Left = 77
+      Left = 91
       Top = 13
       Width = 84
       Height = 21
@@ -249,35 +297,35 @@ inherited frmCadProduto: TfrmCadProduto
       TabOrder = 6
     end
     object edtDesc: TEdit
-      Left = 77
+      Left = 91
       Top = 73
-      Width = 338
+      Width = 332
       Height = 21
       TabOrder = 1
     end
     object edtEspec: TEdit
-      Left = 77
-      Top = 107
-      Width = 338
+      Left = 91
+      Top = 105
+      Width = 332
       Height = 21
       TabOrder = 2
     end
     object cboCat: TComboBox
-      Left = 78
-      Top = 169
+      Left = 91
+      Top = 165
       Width = 84
       Height = 21
       Style = csDropDownList
       TabOrder = 4
       Items.Strings = (
-        'Acess'#243'rio'
+        'Acess'#243'rios'
         'Cal'#231'ados'
         'Textil'
         'Diversos')
     end
     object cboUnidade: TComboBox
-      Left = 217
-      Top = 169
+      Left = 245
+      Top = 167
       Width = 48
       Height = 21
       Style = csDropDownList
@@ -289,9 +337,9 @@ inherited frmCadProduto: TfrmCadProduto
         'P'#199)
     end
     object dblMarca: TDBLookupComboBox
-      Left = 77
+      Left = 91
       Top = 135
-      Width = 290
+      Width = 280
       Height = 21
       KeyField = 'ID'
       ListField = 'DESCRICAO'
@@ -299,12 +347,13 @@ inherited frmCadProduto: TfrmCadProduto
       TabOrder = 3
     end
     object edtCodBarra: TEdit
-      Left = 77
-      Top = 39
+      Left = 91
+      Top = 40
       Width = 134
       Height = 21
       NumbersOnly = True
       TabOrder = 0
+      OnChange = edtCodBarraChange
     end
   end
   object dsMarca: TDataSource

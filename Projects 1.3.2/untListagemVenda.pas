@@ -14,6 +14,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure dsListagemDataChange(Sender: TObject; Field: TField);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Speedbutton2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -69,6 +70,20 @@ begin
    op := 1;
    frmVenda.Caption:='Incluir Venda';
    frmVenda.showModal;
+end;
+
+procedure TfrmListagemVenda.Speedbutton2Click(Sender: TObject);
+begin
+  inherited;
+  if (MessageDlg('Deseja excluir esta Venda?', mtConfirmation, [mbYes, mbNo],0)=mrYes) then
+  dm.sdsComandoSql.CommandText := 'delete from item_Venda where id_Venda = :id_Venda';
+  dm.sdsComandoSql.ParamByName('id_Venda').Text := dm.cdsVenda.FieldByName('id_Venda').Text;
+  dm.sdsComandoSql.ExecSQL();
+  dm.sdsComandoSql.CommandText := 'delete from venda where id_Venda = :id_Venda';
+  dm.sdsComandoSql.ParamByName('id_Venda').Text := dm.cdsVenda.FieldByName('id_Venda').Text;
+  dm.sdsComandoSql.ExecSQL();
+  dm.cdsVenda.Close;
+  dm.cdsVenda.Open;
 end;
 
 end.

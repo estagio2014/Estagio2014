@@ -77,7 +77,6 @@ type
     cdsFornecedorDATACADASTRO: TSQLTimeStampField;
     cdsMarcaID: TFMTBCDField;
     cdsMarcaDESCRICAO: TWideStringField;
-    cdsProdutoIDPRODUTO: TWideStringField;
     cdsProdutoID: TFMTBCDField;
     cdsProdutoCODBARRA: TFMTBCDField;
     cdsProdutoDESCRICAO: TWideStringField;
@@ -98,11 +97,6 @@ type
     dspVenda: TDataSetProvider;
     cdsItemVenda: TClientDataSet;
     cdsVenda: TClientDataSet;
-    cdsItemVendaID_VENDA: TFMTBCDField;
-    cdsItemVendaIDPRODUTO: TWideStringField;
-    cdsItemVendaQUANTIDADE: TFMTBCDField;
-    cdsItemVendaPRECO: TFMTBCDField;
-    cdsItemVendaSUBTOTAL: TFMTBCDField;
     cdsUsuario: TClientDataSet;
     dspUsuario: TDataSetProvider;
     sdsUsuario: TSQLDataSet;
@@ -120,6 +114,14 @@ type
     cdsVendaDATA_VENDA: TSQLTimeStampField;
     cdsVendaFORMA_PAG: TWideStringField;
     cdsVendaTIPO_PAG: TWideStringField;
+    cdsProdutoIDPRODUTO: TFMTBCDField;
+    cdsItemVendaID_VENDA: TFMTBCDField;
+    cdsItemVendaIDPRODUTO: TFMTBCDField;
+    cdsItemVendaDESCRICAO: TWideStringField;
+    cdsItemVendaQUANTIDADE: TFMTBCDField;
+    cdsItemVendaPRECO: TFMTBCDField;
+    cdsItemVendaSUBTOTAL: TFMTBCDField;
+    procedure bancoAfterConnect(Sender: TObject);
   private
     { Private declarations }
   public
@@ -134,5 +136,10 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure Tdm.bancoAfterConnect(Sender: TObject);
+begin
+//Banco.ExecuteDirect('alter session set nls_numeric_characters = ' + QuotedStr('.,'));
+end;
 
 end.

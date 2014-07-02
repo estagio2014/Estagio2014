@@ -53,7 +53,7 @@ begin
   begin
     Speedbutton3.Enabled:=false;
     Speedbutton2.Enabled:=false;
-    btnRelatorio.Enabled:= true;
+    btnRelatorio.Enabled:=false;
   end;
 end;
 

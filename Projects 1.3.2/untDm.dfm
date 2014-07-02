@@ -20,7 +20,7 @@ object dm: Tdm
       'Multiple Transaction=False'
       'Trim Char=False'
       'Decimal Separator=,')
-    Connected = True
+    AfterConnect = bancoAfterConnect
     Left = 32
     Top = 24
   end
@@ -321,9 +321,10 @@ object dm: Tdm
     ProviderName = 'dspProduto'
     Left = 272
     Top = 267
-    object cdsProdutoIDPRODUTO: TWideStringField
+    object cdsProdutoIDPRODUTO: TFMTBCDField
       FieldName = 'IDPRODUTO'
       Required = True
+      Precision = 32
     end
     object cdsProdutoID: TFMTBCDField
       FieldName = 'ID'
@@ -443,7 +444,10 @@ object dm: Tdm
   end
   object sdsItemVenda: TSQLDataSet
     SchemaName = 'calsystem'
-    CommandText = 'select * from Item_Venda'
+    CommandText = 
+      'select id_venda, produto.idProduto, produto.descricao, quantidad' +
+      'e, preco, subtotal from item_venda inner join produto on item_ve' +
+      'nda.idProduto = produto.idProduto'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
@@ -471,9 +475,14 @@ object dm: Tdm
       Required = True
       Precision = 32
     end
-    object cdsItemVendaIDPRODUTO: TWideStringField
+    object cdsItemVendaIDPRODUTO: TFMTBCDField
       FieldName = 'IDPRODUTO'
       Required = True
+      Precision = 32
+    end
+    object cdsItemVendaDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Size = 30
     end
     object cdsItemVendaQUANTIDADE: TFMTBCDField
       FieldName = 'QUANTIDADE'

@@ -45,6 +45,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnConfirmClick(Sender: TObject);
     procedure btnLocalizarClick(Sender: TObject);
+    procedure edtCodBarraChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -191,6 +192,17 @@ begin
   frmListagemMarca.op := 3;
   frmListagemMarca.showModal;
   dm.cdsMarca.Open;
+end;
+
+procedure TfrmCadProduto.edtCodBarraChange(Sender: TObject);
+begin
+  inherited;
+  if Length(edtCodBarra.text)>11 then
+  begin
+      MessageDlg('Atenção! Código de Barra digitado ultrapassa 11 digitos!', mtInformation,[mbOk],0);
+      edtCodBarra.SetFocus;
+      exit;
+  end;
 end;
 
 procedure TfrmCadProduto.FormShow(Sender: TObject);
