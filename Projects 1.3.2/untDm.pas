@@ -106,14 +106,6 @@ type
     cdsUsuarioSENHA: TWideStringField;
     cdsUsuarioNIVELACESS: TWideStringField;
     cdsUsuarioDATACADASTRO: TSQLTimeStampField;
-    cdsVendaID_VENDA: TFMTBCDField;
-    cdsVendaIDCLI: TFMTBCDField;
-    cdsVendaVENDEDOR: TWideStringField;
-    cdsVendaDESCONTO: TFMTBCDField;
-    cdsVendaVALORTOTAL: TFMTBCDField;
-    cdsVendaDATA_VENDA: TSQLTimeStampField;
-    cdsVendaFORMA_PAG: TWideStringField;
-    cdsVendaTIPO_PAG: TWideStringField;
     cdsProdutoIDPRODUTO: TFMTBCDField;
     cdsItemVendaID_VENDA: TFMTBCDField;
     cdsItemVendaIDPRODUTO: TFMTBCDField;
@@ -121,6 +113,14 @@ type
     cdsItemVendaQUANTIDADE: TFMTBCDField;
     cdsItemVendaPRECO: TFMTBCDField;
     cdsItemVendaSUBTOTAL: TFMTBCDField;
+    cdsVendaID_VENDA: TFMTBCDField;
+    cdsVendaVENDEDOR: TWideStringField;
+    cdsVendaNOMECLI: TWideStringField;
+    cdsVendaCPFCNPJ: TWideStringField;
+    cdsVendaVALORTOTAL: TFMTBCDField;
+    cdsVendaDATA_VENDA: TSQLTimeStampField;
+    cdsVendaFORMA_PAG: TWideStringField;
+    cdsVendaTIPO_PAG: TWideStringField;
     procedure bancoAfterConnect(Sender: TObject);
   private
     { Private declarations }

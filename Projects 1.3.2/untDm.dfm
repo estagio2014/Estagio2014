@@ -21,6 +21,7 @@ object dm: Tdm
       'Trim Char=False'
       'Decimal Separator=,')
     AfterConnect = bancoAfterConnect
+    Connected = True
     Left = 32
     Top = 24
   end
@@ -435,7 +436,10 @@ object dm: Tdm
   end
   object sdsVenda: TSQLDataSet
     SchemaName = 'calsystem'
-    CommandText = 'select * from venda'
+    CommandText = 
+      'select id_venda,vendedor, cliente.nomeCli, cliente.Cpfcnpj, valo' +
+      'rtotal, data_venda, forma_pag, tipo_pag from venda inner join cl' +
+      'iente on venda.idCli = cliente.idCli order by id_venda'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
@@ -510,20 +514,18 @@ object dm: Tdm
       Required = True
       Precision = 32
     end
-    object cdsVendaIDCLI: TFMTBCDField
-      FieldName = 'IDCLI'
-      Required = True
-      Precision = 32
-    end
     object cdsVendaVENDEDOR: TWideStringField
       FieldName = 'VENDEDOR'
       Required = True
       Size = 30
     end
-    object cdsVendaDESCONTO: TFMTBCDField
-      FieldName = 'DESCONTO'
-      Precision = 10
-      Size = 2
+    object cdsVendaNOMECLI: TWideStringField
+      FieldName = 'NOMECLI'
+      Size = 50
+    end
+    object cdsVendaCPFCNPJ: TWideStringField
+      FieldName = 'CPFCNPJ'
+      Size = 30
     end
     object cdsVendaVALORTOTAL: TFMTBCDField
       FieldName = 'VALORTOTAL'

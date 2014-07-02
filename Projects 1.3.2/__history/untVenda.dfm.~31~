@@ -3,6 +3,7 @@ inherited frmVenda: TfrmVenda
   ClientHeight = 523
   ClientWidth = 698
   OnShow = FormShow
+  ExplicitTop = -94
   ExplicitWidth = 714
   ExplicitHeight = 557
   PixelsPerInch = 96
@@ -10,6 +11,7 @@ inherited frmVenda: TfrmVenda
   inherited btnConfirm: TSpeedButton
     Left = 230
     Top = 482
+    OnClick = btnConfirmClick
     ExplicitLeft = 230
     ExplicitTop = 482
   end
@@ -39,11 +41,17 @@ inherited frmVenda: TfrmVenda
     Height = 81
     TabOrder = 0
     object Label3: TLabel
-      Left = 205
+      Left = 19
       Top = 48
-      Width = 37
+      Width = 49
       Height = 13
-      Caption = 'Cliente:'
+      Caption = 'Cliente:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object btnLocalizarCli: TSpeedButton
       Left = 571
@@ -68,14 +76,20 @@ inherited frmVenda: TfrmVenda
       OnClick = btnLocalizarCliClick
     end
     object Label6: TLabel
-      Left = 192
+      Left = 188
       Top = 14
-      Width = 50
+      Width = 64
       Height = 13
-      Caption = 'Vendedor:'
+      Caption = 'Vendedor:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label12: TLabel
-      Left = 28
+      Left = 398
       Top = 48
       Width = 56
       Height = 13
@@ -101,7 +115,7 @@ inherited frmVenda: TfrmVenda
       ParentFont = False
     end
     object dblCliente: TDBLookupComboBox
-      Left = 248
+      Left = 70
       Top = 45
       Width = 303
       Height = 21
@@ -109,16 +123,17 @@ inherited frmVenda: TfrmVenda
       ListField = 'NOMECLI'
       ListSource = dsCliente
       TabOrder = 2
+      OnClick = dblClienteClick
     end
     object edtVendedor: TEdit
-      Left = 248
+      Left = 255
       Top = 12
-      Width = 410
+      Width = 403
       Height = 21
       TabOrder = 0
     end
     object edtCpf: TMaskEdit
-      Left = 94
+      Left = 464
       Top = 45
       Width = 91
       Height = 21
@@ -126,6 +141,8 @@ inherited frmVenda: TfrmVenda
       MaxLength = 14
       TabOrder = 1
       Text = '   .   .   -  '
+      OnChange = edtCpfChange
+      OnExit = edtCpfExit
     end
     object edtIdVenda: TEdit
       Left = 95
@@ -392,6 +409,7 @@ inherited frmVenda: TfrmVenda
         FFFFFFFFFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       NumGlyphs = 2
+      OnClick = btnRemoverClick
     end
     object Label7: TLabel
       Left = 495
@@ -407,11 +425,11 @@ inherited frmVenda: TfrmVenda
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 16
+      Left = 10
       Top = 20
-      Width = 48
+      Width = 55
       Height = 13
-      Caption = 'Produto:'
+      Caption = 'Produto:*'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -420,16 +438,16 @@ inherited frmVenda: TfrmVenda
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 15
-      Top = 48
-      Width = 48
+      Left = 22
+      Top = 49
+      Width = 43
       Height = 13
       Caption = 'Estoque:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
     end
     object Label10: TLabel
@@ -446,16 +464,16 @@ inherited frmVenda: TfrmVenda
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 270
-      Top = 48
-      Width = 35
+      Left = 277
+      Top = 49
+      Width = 31
       Height = 13
       Caption = 'Pre'#231'o:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
     end
     object SpeedButton1: TSpeedButton
@@ -501,11 +519,17 @@ inherited frmVenda: TfrmVenda
       Caption = 'C'#243'd de Barra:'
     end
     object Label14: TLabel
-      Left = 418
-      Top = 316
-      Width = 128
+      Left = 397
+      Top = 312
+      Width = 149
       Height = 16
-      Caption = 'Forma de Pagamento:'
+      Caption = 'Forma de Pagamento:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label15: TLabel
       Left = 11
@@ -529,10 +553,11 @@ inherited frmVenda: TfrmVenda
     end
     object DBGrid1: TDBGrid
       Left = 11
-      Top = 92
-      Width = 676
+      Top = 89
+      Width = 681
       Height = 211
       DataSource = dsItemVenda
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 8
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -543,24 +568,28 @@ inherited frmVenda: TfrmVenda
         item
           Expanded = False
           FieldName = 'ID_VENDA'
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'digo Venda'
-          Width = 120
-          Visible = True
+          Visible = False
         end
         item
           Expanded = False
           FieldName = 'IDPRODUTO'
+          Visible = False
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DESCRICAO'
           Title.Alignment = taCenter
-          Title.Caption = 'C'#243'digo Produto'
-          Width = 134
+          Title.Caption = 'Produto'
+          Width = 368
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'QUANTIDADE'
           Title.Alignment = taCenter
-          Title.Caption = 'Qtde'
+          Title.Caption = 'Quantidade'
+          Width = 117
           Visible = True
         end
         item
@@ -568,7 +597,6 @@ inherited frmVenda: TfrmVenda
           FieldName = 'PRECO'
           Title.Alignment = taCenter
           Title.Caption = 'Pre'#231'o'
-          Width = 165
           Visible = True
         end
         item
@@ -576,7 +604,6 @@ inherited frmVenda: TfrmVenda
           FieldName = 'SUBTOTAL'
           Title.Alignment = taCenter
           Title.Caption = 'Subtotal'
-          Width = 165
           Visible = True
         end>
     end
@@ -626,6 +653,7 @@ inherited frmVenda: TfrmVenda
       Top = 45
       Width = 84
       Height = 24
+      Enabled = False
       TabOrder = 3
     end
     object edtDataVenda: TMaskEdit
@@ -654,12 +682,14 @@ inherited frmVenda: TfrmVenda
       MaxLength = 13
       TabOrder = 1
       Text = '             '
+      OnChange = edtCodBarraChange
     end
     object cboFormPag: TComboBox
       Left = 552
       Top = 309
       Width = 130
       Height = 24
+      Style = csDropDownList
       TabOrder = 6
       Items.Strings = (
         'Boleto'
@@ -707,6 +737,7 @@ inherited frmVenda: TfrmVenda
       Font.Style = []
       ParentFont = False
       TabOrder = 7
+      OnChange = edtDescontoChange
     end
   end
   object dsCliente: TDataSource

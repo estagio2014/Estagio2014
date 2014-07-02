@@ -46,6 +46,7 @@ type
     procedure btnConfirmClick(Sender: TObject);
     procedure btnLocalizarClick(Sender: TObject);
     procedure edtCodBarraChange(Sender: TObject);
+    procedure edtPrecoVendaKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -202,6 +203,16 @@ begin
       MessageDlg('Atenção! Código de Barra digitado ultrapassa 11 digitos!', mtInformation,[mbOk],0);
       edtCodBarra.SetFocus;
       exit;
+  end;
+end;
+
+procedure TfrmCadProduto.edtPrecoVendaKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  if (key in [';', ':', '[', ']', '{', '}', '+', '-', '*', '*', '/', 'ª', 'º', '!', '@', '#', '$','%', '¨', '(', ')', '§', '_', '?', '\', '¹', '²', '³', '£', '¢', '¬']) then
+  begin
+    key := #0;
+    messageDlg('O Caracter informado é inválido', mtInformation,[mbOk],0);
   end;
 end;
 

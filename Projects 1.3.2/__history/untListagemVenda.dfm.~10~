@@ -191,75 +191,67 @@ inherited frmListagemVenda: TfrmListagemVenda
     DataSource = dsListagem
     Columns = <
       item
-        Alignment = taCenter
+        Alignment = taLeftJustify
         Expanded = False
         FieldName = 'ID_VENDA'
         Title.Alignment = taCenter
-        Title.Caption = 'N'#250'mero Venda'
-        Width = 98
+        Title.Caption = 'C'#243'digo'
+        Width = 79
         Visible = True
       end
       item
-        Alignment = taCenter
+        Expanded = False
+        FieldName = 'IDCLI'
+        Title.Alignment = taCenter
+        Title.Caption = 'Cliente'
+        Width = 183
+        Visible = True
+      end
+      item
         Expanded = False
         FieldName = 'VENDEDOR'
         Title.Alignment = taCenter
         Title.Caption = 'Vendedor'
-        Width = 190
+        Width = 152
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
-        FieldName = 'NOMECLI'
+        FieldName = 'DESCONTO'
         Title.Alignment = taCenter
-        Title.Caption = 'Cliente'
-        Width = 238
+        Title.Caption = 'Desconto'
+        Width = 97
         Visible = True
       end
       item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'CPFCNPJ'
-        Title.Alignment = taCenter
-        Title.Caption = 'CPF/CNPJ'
-        Width = 141
-        Visible = True
-      end
-      item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'VALORTOTAL'
         Title.Alignment = taCenter
         Title.Caption = 'Valor Total'
-        Width = 75
+        Width = 93
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'DATA_VENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Data Venda'
-        Width = 113
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'FORMA_PAG'
         Title.Alignment = taCenter
-        Title.Caption = 'Forma Pagamento'
-        Width = 100
+        Title.Caption = 'Forma de Pagamento'
+        Width = 143
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'TIPO_PAG'
         Title.Alignment = taCenter
-        Title.Caption = 'Tipo Pagamento'
-        Width = 90
+        Title.Caption = 'Tipo de Pagamento'
+        Width = 107
         Visible = True
       end>
   end

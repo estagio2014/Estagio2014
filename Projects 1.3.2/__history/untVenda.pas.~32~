@@ -129,8 +129,9 @@ begin
   inherited;
   with dm.sdsComandoSql do
   begin
-    CommandText:='delete from item_venda where id_venda = :id_venda';
+    CommandText:='delete from item_venda where id_venda = :id_venda and idProduto = :idProduto';
     ParamByName('id_venda').Text := dm.cdsItemVenda.FieldByName('id_venda').Text;
+    ParamByName('idProduto').Text := dm.cdsItemVenda.FieldByName('idProduto').Text;
     ExecSQL();
   end;
   dm.cdsItemVenda.Close;

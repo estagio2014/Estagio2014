@@ -161,7 +161,7 @@ inherited frmCadProduto: TfrmCadProduto
       ParentFont = False
     end
     object edtPrecoCusto: TEdit
-      Left = 96
+      Left = 99
       Top = 6
       Width = 112
       Height = 21
@@ -172,6 +172,7 @@ inherited frmCadProduto: TfrmCadProduto
       Top = 7
       Width = 76
       Height = 21
+      NumbersOnly = True
       TabOrder = 2
     end
     object edtPrecoVenda: TEdit
@@ -180,6 +181,7 @@ inherited frmCadProduto: TfrmCadProduto
       Width = 112
       Height = 21
       TabOrder = 1
+      OnKeyPress = edtPrecoVendaKeyPress
     end
   end
   object GroupBox1: TGroupBox

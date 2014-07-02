@@ -3,7 +3,6 @@ inherited frmVenda: TfrmVenda
   ClientHeight = 523
   ClientWidth = 698
   OnShow = FormShow
-  ExplicitTop = -94
   ExplicitWidth = 714
   ExplicitHeight = 557
   PixelsPerInch = 96
@@ -604,6 +603,7 @@ inherited frmVenda: TfrmVenda
           FieldName = 'SUBTOTAL'
           Title.Alignment = taCenter
           Title.Caption = 'Subtotal'
+          Width = 64
           Visible = True
         end>
     end

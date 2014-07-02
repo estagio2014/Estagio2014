@@ -76,14 +76,11 @@ procedure TfrmListagemVenda.Speedbutton2Click(Sender: TObject);
 begin
   inherited;
   if (MessageDlg('Deseja excluir esta Venda?', mtConfirmation, [mbYes, mbNo],0)=mrYes) then
- { dm.sdsComandoSql.CommandText := 'delete from item_Venda where id_venda = :id_venda';
-  dm.sdsComandoSql.ParamByName('id_venda').Text := dm.cdsVenda.FieldByName('id_venda').Text;
-  dm.sdsComandoSql.ExecSQL(); }
-  dm.sdsComandoSql.CommandText:='delete from item_venda where id_venda = :id_venda';
-  dm.sdsComandoSql.ParamByName('id_venda').Text := dm.cdsItemVenda.FieldByName('id_venda').Text;
+  dm.sdsComandoSql.CommandText := 'delete from item_Venda where id_Venda = :id_Venda';
+  dm.sdsComandoSql.ParamByName('id_Venda').Text := dm.cdsVenda.FieldByName('id_Venda').Text;
   dm.sdsComandoSql.ExecSQL();
-  dm.sdsComandoSql.CommandText := 'delete from venda where id_Venda = :id';
-  dm.sdsComandoSql.ParamByName('id').Text := dm.cdsVenda.FieldByName('id_Venda').Text;
+  dm.sdsComandoSql.CommandText := 'delete from venda where id_Venda = :id_Venda';
+  dm.sdsComandoSql.ParamByName('id_Venda').Text := dm.cdsVenda.FieldByName('id_Venda').Text;
   dm.sdsComandoSql.ExecSQL();
   dm.cdsVenda.Close;
   dm.cdsVenda.Open;
