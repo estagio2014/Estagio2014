@@ -1,5 +1,7 @@
 inherited frmListagemCompra: TfrmListagemCompra
   Caption = 'Listagem de Compra'
+  OnClose = FormClose
+  OnShow = FormShow
   ExplicitWidth = 808
   ExplicitHeight = 436
   PixelsPerInch = 96
@@ -31,6 +33,7 @@ inherited frmListagemCompra: TfrmListagemCompra
       Top = 10
       Width = 77
       Height = 43
+      OnClick = Speedbutton3Click
       ExplicitLeft = 532
       ExplicitTop = 10
       ExplicitWidth = 77

@@ -3,6 +3,7 @@ inherited frmVenda: TfrmVenda
   ClientHeight = 523
   ClientWidth = 698
   OnShow = FormShow
+  ExplicitTop = -94
   ExplicitWidth = 714
   ExplicitHeight = 557
   PixelsPerInch = 96
@@ -23,12 +24,12 @@ inherited frmVenda: TfrmVenda
   object Label5: TLabel
     Left = 20
     Top = 491
-    Width = 133
-    Height = 13
+    Width = 150
+    Height = 16
     Caption = '* CAMPO OBRIGAT'#211'RIO'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -13
     Font.Name = 'Tahoma'
     Font.Style = [fsBold, fsUnderline]
     ParentFont = False
@@ -90,9 +91,9 @@ inherited frmVenda: TfrmVenda
     object Label12: TLabel
       Left = 398
       Top = 48
-      Width = 56
+      Width = 63
       Height = 13
-      Caption = 'CPF/CNPJ:'
+      Caption = 'CPF/CNPJ:*'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -511,11 +512,17 @@ inherited frmVenda: TfrmVenda
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 423
+      Left = 406
       Top = 20
-      Width = 80
+      Width = 97
       Height = 16
-      Caption = 'C'#243'd de Barra:'
+      Caption = 'C'#243'd de Barra:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Label14: TLabel
       Left = 397
@@ -567,20 +574,17 @@ inherited frmVenda: TfrmVenda
         item
           Expanded = False
           FieldName = 'ID_VENDA'
-          Visible = False
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'digo da Venda'
+          Width = 172
+          Visible = True
         end
         item
           Expanded = False
           FieldName = 'IDPRODUTO'
-          Visible = False
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'DESCRICAO'
           Title.Alignment = taCenter
-          Title.Caption = 'Produto'
-          Width = 368
+          Title.Caption = 'C'#243'digo Produto'
+          Width = 165
           Visible = True
         end
         item
@@ -588,7 +592,7 @@ inherited frmVenda: TfrmVenda
           FieldName = 'QUANTIDADE'
           Title.Alignment = taCenter
           Title.Caption = 'Quantidade'
-          Width = 117
+          Width = 110
           Visible = True
         end
         item
@@ -596,6 +600,7 @@ inherited frmVenda: TfrmVenda
           FieldName = 'PRECO'
           Title.Alignment = taCenter
           Title.Caption = 'Pre'#231'o'
+          Width = 104
           Visible = True
         end
         item
@@ -603,7 +608,7 @@ inherited frmVenda: TfrmVenda
           FieldName = 'SUBTOTAL'
           Title.Alignment = taCenter
           Title.Caption = 'Subtotal'
-          Width = 64
+          Width = 93
           Visible = True
         end>
     end
@@ -624,7 +629,7 @@ inherited frmVenda: TfrmVenda
     object dblProduto: TDBLookupComboBox
       Left = 69
       Top = 16
-      Width = 348
+      Width = 327
       Height = 24
       KeyField = 'IDPRODUTO'
       ListField = 'DESCRICAO'
@@ -682,7 +687,7 @@ inherited frmVenda: TfrmVenda
       MaxLength = 13
       TabOrder = 1
       Text = '             '
-      OnChange = edtCodBarraChange
+      OnExit = edtCodBarraExit
     end
     object cboFormPag: TComboBox
       Left = 552
@@ -737,7 +742,7 @@ inherited frmVenda: TfrmVenda
       Font.Style = []
       ParentFont = False
       TabOrder = 7
-      OnChange = edtDescontoChange
+      OnKeyPress = edtDescontoKeyPress
     end
   end
   object dsCliente: TDataSource

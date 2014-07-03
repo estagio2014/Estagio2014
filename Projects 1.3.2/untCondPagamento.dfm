@@ -1,6 +1,7 @@
 inherited frmCondPagamento: TfrmCondPagamento
   Caption = 'Condi'#231#227'o de Pagamento'
   ClientHeight = 343
+  OnShow = FormShow
   ExplicitWidth = 624
   ExplicitHeight = 377
   PixelsPerInch = 96
@@ -30,12 +31,12 @@ inherited frmCondPagamento: TfrmCondPagamento
       Height = 13
       Caption = 'Parcelas:*'
     end
-    object Label2: TLabel
-      Left = 370
-      Top = 17
-      Width = 106
-      Height = 13
-      Caption = 'Forma de Pagamento:'
+    object btnGerarParcelas: TSpeedButton
+      Left = 496
+      Top = 12
+      Width = 89
+      Height = 24
+      Caption = 'Gerar Parcelas'
     end
     object cboParcelas: TComboBox
       Left = 80
@@ -68,16 +69,9 @@ inherited frmCondPagamento: TfrmCondPagamento
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
     end
-    object edtFormPag: TEdit
-      Left = 479
-      Top = 14
-      Width = 121
-      Height = 21
-      TabOrder = 2
-    end
   end
   object DataSource1: TDataSource
-    Left = 544
-    Top = 240
+    Left = 536
+    Top = 208
   end
 end

@@ -15,6 +15,7 @@ type
     procedure dsListagemDataChange(Sender: TObject; Field: TField);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Speedbutton2Click(Sender: TObject);
+    procedure Speedbutton3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,6 +55,7 @@ begin
   dm.cdsVenda.Close;
   dm.cdsCliente.Close;
   dm.cdsProduto.Close;
+  dm.cdsItemVenda.Close;
 end;
 
 procedure TfrmListagemVenda.FormShow(Sender: TObject);
@@ -62,11 +64,13 @@ begin
   dm.cdsVenda.Open;
   dm.cdsProduto.Open;
   dm.cdsCliente.Open;
+ // dm.cdsItemVenda.Open;
 end;
 
 procedure TfrmListagemVenda.Speedbutton1Click(Sender: TObject);
 begin
   inherited;
+   dm.banco.StartTransaction(dm.transacao);
    op := 1;
    frmVenda.Caption:='Incluir Venda';
    frmVenda.showModal;
@@ -76,10 +80,7 @@ procedure TfrmListagemVenda.Speedbutton2Click(Sender: TObject);
 begin
   inherited;
   if (MessageDlg('Deseja excluir esta Venda?', mtConfirmation, [mbYes, mbNo],0)=mrYes) then
- { dm.sdsComandoSql.CommandText := 'delete from item_Venda where id_venda = :id_venda';
-  dm.sdsComandoSql.ParamByName('id_venda').Text := dm.cdsVenda.FieldByName('id_venda').Text;
-  dm.sdsComandoSql.ExecSQL(); }
-  dm.sdsComandoSql.CommandText:='delete from item_venda where id_venda = :id_venda';
+  dm.sdsComandoSql.CommandText := 'delete from item_venda where id_venda = :id_venda';
   dm.sdsComandoSql.ParamByName('id_venda').Text := dm.cdsItemVenda.FieldByName('id_venda').Text;
   dm.sdsComandoSql.ExecSQL();
   dm.sdsComandoSql.CommandText := 'delete from venda where id_Venda = :id';
@@ -87,6 +88,15 @@ begin
   dm.sdsComandoSql.ExecSQL();
   dm.cdsVenda.Close;
   dm.cdsVenda.Open;
+end;
+
+procedure TfrmListagemVenda.Speedbutton3Click(Sender: TObject);
+begin
+  inherited;
+   dm.banco.StartTransaction(dm.transacao);
+   op := 2;
+   frmVenda.Caption:='Alterar Venda';
+   frmVenda.showModal;
 end;
 
 end.

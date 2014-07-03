@@ -219,6 +219,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'IDPRODUTO'
         Title.Alignment = taCenter
         Title.Caption = 'C'#243'digo'
+        Width = 90
         Visible = True
       end
       item
@@ -227,6 +228,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'CODBARRA'
         Title.Alignment = taCenter
         Title.Caption = 'C'#243'digo de Barra'
+        Width = 124
         Visible = True
       end
       item
@@ -234,6 +236,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'DESCRICAO'
         Title.Alignment = taCenter
         Title.Caption = 'Descri'#231#227'o'
+        Width = 162
         Visible = True
       end
       item
@@ -241,6 +244,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'COMPLEMENTO'
         Title.Alignment = taCenter
         Title.Caption = 'Especifica'#231#245'es'
+        Width = 163
         Visible = True
       end
       item
@@ -248,6 +252,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'DESCRICAO_1'
         Title.Alignment = taCenter
         Title.Caption = 'Marca'
+        Width = 117
         Visible = True
       end
       item
@@ -255,6 +260,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'CATEGORIA'
         Title.Alignment = taCenter
         Title.Caption = 'Categoria'
+        Width = 68
         Visible = True
       end
       item
@@ -262,6 +268,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'UNIDADE'
         Title.Alignment = taCenter
         Title.Caption = 'Unidade'
+        Width = 74
         Visible = True
       end
       item
@@ -269,6 +276,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'PRECOCUSTO'
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Custo'
+        Width = 75
         Visible = True
       end
       item
@@ -276,6 +284,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'PRECOVENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Venda'
+        Width = 78
         Visible = True
       end
       item
@@ -290,7 +299,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'OBSERVACOES'
         Title.Alignment = taCenter
         Title.Caption = 'Observa'#231#245'es'
-        Visible = True
+        Visible = False
       end
       item
         Expanded = False
@@ -304,6 +313,7 @@ inherited frmListagemProduto: TfrmListagemProduto
         FieldName = 'DATACADASTRO'
         Title.Alignment = taCenter
         Title.Caption = 'Data de Cadastro'
+        Width = 99
         Visible = True
       end>
   end

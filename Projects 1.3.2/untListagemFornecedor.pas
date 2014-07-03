@@ -75,8 +75,15 @@ procedure TfrmListagemFornecedor.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
-dm.cdsFornecedor.Close;
-dm.cdsCidade.Close;
+  if frmListagemFornecedor.op = 3 then
+  begin
+    dm.cdsCidade.Open;
+    dm.cdsFornecedor.Open;
+  end
+  else begin
+  dm.cdsFornecedor.Close;
+  dm.cdsCidade.Close;
+  end;
 end;
 
 procedure TfrmListagemFornecedor.FormShow(Sender: TObject);

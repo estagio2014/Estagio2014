@@ -1,7 +1,8 @@
 object dm: Tdm
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 562
-  Width = 635
+  Width = 722
   object banco: TSQLConnection
     ConnectionName = 'OracleConnection'
     DriverName = 'Oracle'
@@ -30,19 +31,19 @@ object dm: Tdm
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 96
-    Top = 75
+    Left = 80
+    Top = 139
   end
   object sdsCliente: TSQLDataSet
     SchemaName = 'delphi'
     CommandText = 
       'select * from cliente inner join cidade on cliente.id_cid = cida' +
-      'de.id_cid'
+      'de.id_cid order by idCli'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 96
-    Top = 139
+    Left = 80
+    Top = 203
   end
   object sdsFornecedor: TSQLDataSet
     SchemaName = 'calsystem'
@@ -52,8 +53,8 @@ object dm: Tdm
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 96
-    Top = 203
+    Left = 80
+    Top = 267
   end
   object sdsProduto: TSQLDataSet
     SchemaName = 'calsystem'
@@ -61,27 +62,27 @@ object dm: Tdm
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 96
-    Top = 267
+    Left = 80
+    Top = 331
   end
   object sdsComandoSql: TSQLDataSet
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 104
-    Top = 504
+    Left = 360
+    Top = 208
   end
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
-    Left = 184
-    Top = 75
+    Left = 168
+    Top = 139
   end
   object cdsCidade: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCidade'
-    Left = 272
-    Top = 75
+    Left = 256
+    Top = 139
     object cdsCidadeID_CID: TFMTBCDField
       FieldName = 'ID_CID'
       Required = True
@@ -102,15 +103,15 @@ object dm: Tdm
   end
   object dspCliente: TDataSetProvider
     DataSet = sdsCliente
-    Left = 184
-    Top = 139
+    Left = 168
+    Top = 203
   end
   object cdsCliente: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCliente'
-    Left = 272
-    Top = 139
+    Left = 256
+    Top = 203
     object cdsClienteIDCLI: TFMTBCDField
       FieldName = 'IDCLI'
       Required = True
@@ -213,15 +214,15 @@ object dm: Tdm
   end
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
-    Left = 184
-    Top = 203
+    Left = 168
+    Top = 267
   end
   object cdsFornecedor: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFornecedor'
-    Left = 272
-    Top = 203
+    Left = 256
+    Top = 267
     object cdsFornecedorIDFORNECEDOR: TFMTBCDField
       FieldName = 'IDFORNECEDOR'
       Required = True
@@ -313,15 +314,15 @@ object dm: Tdm
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
-    Left = 184
-    Top = 267
+    Left = 168
+    Top = 331
   end
   object cdsProduto: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto'
-    Left = 272
-    Top = 267
+    Left = 256
+    Top = 331
     object cdsProdutoIDPRODUTO: TFMTBCDField
       FieldName = 'IDPRODUTO'
       Required = True
@@ -395,13 +396,13 @@ object dm: Tdm
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 96
-    Top = 331
+    Left = 80
+    Top = 395
   end
   object dspMarca: TDataSetProvider
     DataSet = sdsMarca
-    Left = 184
-    Top = 331
+    Left = 168
+    Top = 395
   end
   object cdsMarca: TClientDataSet
     Aggregates = <>
@@ -422,8 +423,8 @@ object dm: Tdm
     Params = <>
     ProviderName = 'dspMarca'
     StoreDefs = True
-    Left = 272
-    Top = 331
+    Left = 256
+    Top = 395
     object cdsMarcaID: TFMTBCDField
       FieldName = 'ID'
       Required = True
@@ -437,43 +438,39 @@ object dm: Tdm
   object sdsVenda: TSQLDataSet
     SchemaName = 'calsystem'
     CommandText = 
-      'select id_venda,vendedor, cliente.nomeCli, cliente.Cpfcnpj, valo' +
-      'rtotal, data_venda, forma_pag, tipo_pag from venda inner join cl' +
-      'iente on venda.idCli = cliente.idCli order by id_venda'
+      'select * from venda inner join cliente on venda.idCli = cliente.' +
+      'idCli order by id_venda'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 96
-    Top = 443
+    Left = 440
+    Top = 82
   end
   object sdsItemVenda: TSQLDataSet
     SchemaName = 'calsystem'
-    CommandText = 
-      'select id_venda, produto.idProduto, produto.descricao, quantidad' +
-      'e, preco, subtotal from item_venda inner join produto on item_ve' +
-      'nda.idProduto = produto.idProduto'
+    CommandText = 'select * from item_venda'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 96
-    Top = 391
+    Left = 440
+    Top = 142
   end
   object dspItemVenda: TDataSetProvider
     DataSet = sdsItemVenda
-    Left = 184
-    Top = 387
+    Left = 528
+    Top = 138
   end
   object dspVenda: TDataSetProvider
     DataSet = sdsVenda
-    Left = 184
-    Top = 443
+    Left = 528
+    Top = 82
   end
   object cdsItemVenda: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItemVenda'
-    Left = 272
-    Top = 387
+    Left = 616
+    Top = 138
     object cdsItemVendaID_VENDA: TFMTBCDField
       FieldName = 'ID_VENDA'
       Required = True
@@ -484,31 +481,25 @@ object dm: Tdm
       Required = True
       Precision = 32
     end
-    object cdsItemVendaDESCRICAO: TWideStringField
-      FieldName = 'DESCRICAO'
-      Size = 30
-    end
     object cdsItemVendaQUANTIDADE: TFMTBCDField
       FieldName = 'QUANTIDADE'
       Precision = 32
     end
     object cdsItemVendaPRECO: TFMTBCDField
       FieldName = 'PRECO'
-      Precision = 10
-      Size = 2
+      Precision = 32
     end
     object cdsItemVendaSUBTOTAL: TFMTBCDField
       FieldName = 'SUBTOTAL'
-      Precision = 10
-      Size = 2
+      Precision = 32
     end
   end
   object cdsVenda: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVenda'
-    Left = 272
-    Top = 443
+    Left = 616
+    Top = 82
     object cdsVendaID_VENDA: TFMTBCDField
       FieldName = 'ID_VENDA'
       Required = True
@@ -527,6 +518,11 @@ object dm: Tdm
       FieldName = 'CPFCNPJ'
       Size = 30
     end
+    object cdsVendaDESCONTO: TFMTBCDField
+      FieldName = 'DESCONTO'
+      Precision = 10
+      Size = 2
+    end
     object cdsVendaVALORTOTAL: TFMTBCDField
       FieldName = 'VALORTOTAL'
       Precision = 10
@@ -544,13 +540,25 @@ object dm: Tdm
       FixedChar = True
       Size = 1
     end
+    object cdsVendaIDCLI: TFMTBCDField
+      FieldName = 'IDCLI'
+      Required = True
+      Visible = False
+      Precision = 32
+    end
+    object cdsVendaIDCLI_1: TFMTBCDField
+      FieldName = 'IDCLI_1'
+      Required = True
+      Visible = False
+      Precision = 32
+    end
   end
   object cdsUsuario: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspUsuario'
-    Left = 272
-    Top = 16
+    Left = 256
+    Top = 80
     object cdsUsuarioID_USUARIO: TFMTBCDField
       FieldName = 'ID_USUARIO'
       Required = True
@@ -578,8 +586,8 @@ object dm: Tdm
   end
   object dspUsuario: TDataSetProvider
     DataSet = sdsUsuario
-    Left = 184
-    Top = 16
+    Left = 168
+    Top = 80
   end
   object sdsUsuario: TSQLDataSet
     SchemaName = 'calsystem'
@@ -587,7 +595,69 @@ object dm: Tdm
     MaxBlobSize = -1
     Params = <>
     SQLConnection = banco
-    Left = 104
-    Top = 16
+    Left = 88
+    Top = 80
+  end
+  object sdsCompra: TSQLDataSet
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = banco
+    Left = 448
+    Top = 197
+  end
+  object dspCompra: TDataSetProvider
+    DataSet = sdsCompra
+    Left = 536
+    Top = 197
+  end
+  object cdsCompra: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCompra'
+    Left = 616
+    Top = 197
+  end
+  object sdsItemCompra: TSQLDataSet
+    SchemaName = 'calsystem'
+    CommandText = 'select * from item_compra'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = banco
+    Left = 448
+    Top = 269
+  end
+  object dspItemCompra: TDataSetProvider
+    DataSet = sdsItemCompra
+    Left = 536
+    Top = 269
+  end
+  object cdsItemCompra: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspItemCompra'
+    Left = 624
+    Top = 269
+    object cdsItemCompraID_COMPRA: TFMTBCDField
+      FieldName = 'ID_COMPRA'
+      Required = True
+      Precision = 32
+    end
+    object cdsItemCompraIDPRODUTO: TFMTBCDField
+      FieldName = 'IDPRODUTO'
+      Required = True
+      Precision = 32
+    end
+    object cdsItemCompraQUANTIDADE: TFMTBCDField
+      FieldName = 'QUANTIDADE'
+      Precision = 32
+    end
+    object cdsItemCompraPRECO_COMPRA: TFMTBCDField
+      FieldName = 'PRECO_COMPRA'
+      Precision = 32
+    end
+    object cdsItemCompraSUBTOTAL: TFMTBCDField
+      FieldName = 'SUBTOTAL'
+      Precision = 32
+    end
   end
 end

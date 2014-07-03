@@ -3,6 +3,7 @@ inherited frmCompra: TfrmCompra
   ClientHeight = 464
   ClientWidth = 752
   OnShow = FormShow
+  ExplicitTop = -35
   ExplicitWidth = 768
   ExplicitHeight = 498
   PixelsPerInch = 96
@@ -54,12 +55,18 @@ inherited frmCompra: TfrmCompra
     object Label3: TLabel
       Left = 335
       Top = 14
-      Width = 59
+      Width = 74
       Height = 13
-      Caption = 'Fornecedor:'
+      Caption = 'Fornecedor:*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object btnLocalizarCli: TSpeedButton
-      Left = 666
+      Left = 671
       Top = 7
       Width = 74
       Height = 26
@@ -78,6 +85,7 @@ inherited frmCompra: TfrmCompra
         333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
         333333773FF77333333333370007333333333333777333333333}
       NumGlyphs = 2
+      OnClick = btnLocalizarCliClick
     end
     object Label6: TLabel
       Left = 20
@@ -108,11 +116,15 @@ inherited frmCompra: TfrmCompra
       TabOrder = 0
     end
     object dblForn: TDBLookupComboBox
-      Left = 396
+      Left = 413
       Top = 11
-      Width = 267
+      Width = 254
       Height = 21
+      KeyField = 'IDFORNECEDOR'
+      ListField = 'RAZAOSOCIAL'
+      ListSource = dsFornecedor
       TabOrder = 1
+      OnClick = dblFornClick
     end
     object edtRepresentante: TEdit
       Left = 102
@@ -130,6 +142,7 @@ inherited frmCompra: TfrmCompra
       MaxLength = 18
       TabOrder = 3
       Text = '  .   .   /    -  '
+      OnChange = edtCnpjChange
     end
   end
   object GroupBox2: TGroupBox
@@ -390,11 +403,11 @@ inherited frmCompra: TfrmCompra
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 16
+      Left = 11
       Top = 15
-      Width = 48
+      Width = 55
       Height = 13
-      Caption = 'Produto:'
+      Caption = 'Produto:*'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -428,7 +441,7 @@ inherited frmCompra: TfrmCompra
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object SpeedButton1: TSpeedButton
+    object edtPesquisarProd: TSpeedButton
       Left = 595
       Top = 10
       Width = 77
@@ -448,6 +461,7 @@ inherited frmCompra: TfrmCompra
         333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
         333333773FF77333333333370007333333333333777333333333}
       NumGlyphs = 2
+      OnClick = edtPesquisarProdClick
     end
     object Label2: TLabel
       Left = 18
@@ -497,16 +511,48 @@ inherited frmCompra: TfrmCompra
       ParentFont = False
     end
     object DBGrid1: TDBGrid
-      Left = 7
+      Left = 15
       Top = 78
       Width = 733
       Height = 185
+      DataSource = dsItemCompra
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_COMPRA'
+          Width = 94
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IDPRODUTO'
+          Width = 120
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'QUANTIDADE'
+          Width = 126
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECO_COMPRA'
+          Width = 133
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SUBTOTAL'
+          Width = 91
+          Visible = True
+        end>
     end
     object edtTotal: TEdit
       Left = 623
@@ -527,7 +573,11 @@ inherited frmCompra: TfrmCompra
       Top = 11
       Width = 348
       Height = 21
+      KeyField = 'IDPRODUTO'
+      ListField = 'DESCRICAO'
+      ListSource = dsProduto
       TabOrder = 2
+      OnClick = dblProdutoClick
     end
     object edtQtdade: TEdit
       Left = 67
@@ -543,6 +593,7 @@ inherited frmCompra: TfrmCompra
       Width = 84
       Height = 21
       TabOrder = 4
+      OnKeyPress = edtPrecoKeyPress
     end
     object edtDataCompra: TMaskEdit
       Left = 133
@@ -570,8 +621,9 @@ inherited frmCompra: TfrmCompra
       MaxLength = 13
       TabOrder = 6
       Text = '             '
+      OnChange = edtCodBarraChange
     end
-    object RadioButton1: TRadioButton
+    object rdbVista: TRadioButton
       Left = 111
       Top = 276
       Width = 66
@@ -585,7 +637,7 @@ inherited frmCompra: TfrmCompra
       ParentFont = False
       TabOrder = 7
     end
-    object RadioButton2: TRadioButton
+    object rdbParcelado: TRadioButton
       Left = 177
       Top = 276
       Width = 89
@@ -604,6 +656,7 @@ inherited frmCompra: TfrmCompra
       Top = 272
       Width = 130
       Height = 21
+      Style = csDropDownList
       TabOrder = 9
       Items.Strings = (
         'Boleto'
@@ -611,7 +664,7 @@ inherited frmCompra: TfrmCompra
         'Cheque'
         'Dinheiro')
     end
-    object Edit1: TEdit
+    object edtDesconto: TEdit
       Left = 423
       Top = 300
       Width = 117
@@ -626,15 +679,18 @@ inherited frmCompra: TfrmCompra
     end
   end
   object dsFornecedor: TDataSource
+    DataSet = dm.cdsFornecedor
     Left = 520
     Top = 8
   end
   object dsItemCompra: TDataSource
+    DataSet = dm.cdsItemCompra
     Left = 672
     Top = 184
   end
   object dsProduto: TDataSource
-    Left = 424
-    Top = 88
+    DataSet = dm.cdsProduto
+    Left = 432
+    Top = 112
   end
 end

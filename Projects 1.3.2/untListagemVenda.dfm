@@ -27,6 +27,7 @@ inherited frmListagemVenda: TfrmListagemVenda
     inherited Speedbutton3: TSpeedButton
       Left = 550
       Width = 82
+      OnClick = Speedbutton3Click
       ExplicitLeft = 550
       ExplicitWidth = 82
     end

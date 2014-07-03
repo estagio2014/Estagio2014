@@ -13,12 +13,13 @@ type
     cboParcelas: TComboBox;
     Label1: TLabel;
     DBGrid1: TDBGrid;
-    edtFormPag: TEdit;
-    Label2: TLabel;
     DataSource1: TDataSource;
+    btnGerarParcelas: TSpeedButton;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
+  op:byte;
     { Public declarations }
   end;
 
@@ -28,5 +29,16 @@ var
 implementation
 
 {$R *.dfm}
+
+uses untVenda;
+
+procedure TfrmCondPagamento.FormShow(Sender: TObject);
+begin
+  inherited;
+   if (frmVenda.op = 1) then
+   begin
+      cboParcelas.SetFocus;
+   end;
+end;
 
 end.

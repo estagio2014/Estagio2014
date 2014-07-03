@@ -60,7 +60,6 @@ end;
 procedure TfrmListagemProduto.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
-  dm.cdsProduto.Locate('descricao',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
   if rdbCodBarra.Checked = true then
   begin
     dm.cdsProduto.Locate('codBarra',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
@@ -75,8 +74,15 @@ procedure TfrmListagemProduto.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
+  if frmListagemProduto.op = 3 then
+  begin
+    dm.cdsCidade.Open;
+    dm.cdsCliente.Open;
+  end
+  else begin
   dm.cdsProduto.Close;
   dm.cdsMarca.Close;
+  end;
 end;
 
 procedure TfrmListagemProduto.FormShow(Sender: TObject);

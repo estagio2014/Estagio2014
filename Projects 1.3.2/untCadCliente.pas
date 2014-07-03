@@ -244,7 +244,7 @@ begin
         Close;
       end;
     Except
-      Application.MessageBox('O Cpf cadastrado já existe!','Alerta',0);
+      Application.MessageBox('O CPF/CNPJ cadastrado já existe ou está incorreto!','Alerta',0);
   end;
       if frmListagemCliente.op = 2 then
       begin

@@ -12,6 +12,9 @@ type
     btnRelatorio: TSpeedButton;
     procedure Speedbutton1Click(Sender: TObject);
     procedure dsListagemDataChange(Sender: TObject; Field: TField);
+    procedure Speedbutton3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -45,12 +48,39 @@ begin
   end;  }
 end;
 
+procedure TfrmListagemCompra.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+ { dm.cdsCompra.Open;
+  dm.cdsFornecedor.Open;
+  dm.cdsProduto.Open;
+  dm.cdsItemCompra.Open;}
+end;
+
+procedure TfrmListagemCompra.FormShow(Sender: TObject);
+begin
+  inherited;
+ { dm.cdsCompra.Open;
+  dm.cdsFornecedor.Open;
+  dm.cdsProduto.Open;
+  dm.cdsItemCompra.Open;}
+end;
+
 procedure TfrmListagemCompra.Speedbutton1Click(Sender: TObject);
 begin
   inherited;
-      op := 1;
-      frmCompra.Caption:='Incluir Compra';
-      frmCompra.ShowModal;
+  op := 1;
+  frmCompra.Caption:='Incluir Compra';
+  frmCompra.ShowModal;
+end;
+
+procedure TfrmListagemCompra.Speedbutton3Click(Sender: TObject);
+begin
+  inherited;
+  op := 2;
+  frmCompra.Caption:='Alterar Compra';
+  frmCompra.ShowModal;
 end;
 
 end.

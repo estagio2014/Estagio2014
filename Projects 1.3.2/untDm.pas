@@ -107,12 +107,6 @@ type
     cdsUsuarioNIVELACESS: TWideStringField;
     cdsUsuarioDATACADASTRO: TSQLTimeStampField;
     cdsProdutoIDPRODUTO: TFMTBCDField;
-    cdsItemVendaID_VENDA: TFMTBCDField;
-    cdsItemVendaIDPRODUTO: TFMTBCDField;
-    cdsItemVendaDESCRICAO: TWideStringField;
-    cdsItemVendaQUANTIDADE: TFMTBCDField;
-    cdsItemVendaPRECO: TFMTBCDField;
-    cdsItemVendaSUBTOTAL: TFMTBCDField;
     cdsVendaID_VENDA: TFMTBCDField;
     cdsVendaVENDEDOR: TWideStringField;
     cdsVendaNOMECLI: TWideStringField;
@@ -121,11 +115,32 @@ type
     cdsVendaDATA_VENDA: TSQLTimeStampField;
     cdsVendaFORMA_PAG: TWideStringField;
     cdsVendaTIPO_PAG: TWideStringField;
+    cdsVendaIDCLI: TFMTBCDField;
+    cdsVendaDESCONTO: TFMTBCDField;
+    cdsVendaIDCLI_1: TFMTBCDField;
+    cdsItemVendaID_VENDA: TFMTBCDField;
+    cdsItemVendaIDPRODUTO: TFMTBCDField;
+    cdsItemVendaQUANTIDADE: TFMTBCDField;
+    cdsItemVendaPRECO: TFMTBCDField;
+    cdsItemVendaSUBTOTAL: TFMTBCDField;
+    sdsCompra: TSQLDataSet;
+    dspCompra: TDataSetProvider;
+    cdsCompra: TClientDataSet;
+    sdsItemCompra: TSQLDataSet;
+    dspItemCompra: TDataSetProvider;
+    cdsItemCompra: TClientDataSet;
+    cdsItemCompraID_COMPRA: TFMTBCDField;
+    cdsItemCompraIDPRODUTO: TFMTBCDField;
+    cdsItemCompraQUANTIDADE: TFMTBCDField;
+    cdsItemCompraPRECO_COMPRA: TFMTBCDField;
+    cdsItemCompraSUBTOTAL: TFMTBCDField;
     procedure bancoAfterConnect(Sender: TObject);
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    transacao:TTransactionDesc;
   end;
 
 var
@@ -140,6 +155,11 @@ implementation
 procedure Tdm.bancoAfterConnect(Sender: TObject);
 begin
 //Banco.ExecuteDirect('alter session set nls_numeric_characters = ' + QuotedStr('.,'));
+end;
+
+procedure Tdm.DataModuleCreate(Sender: TObject);
+begin
+  transacao.IsolationLevel := xilREADCOMMITTED;
 end;
 
 end.
