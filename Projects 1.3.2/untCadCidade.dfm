@@ -9,12 +9,12 @@ inherited frmCadCidade: TfrmCadCidade
   TextHeight = 13
   inherited btnConfirm: TSpeedButton
     Left = 5
-    Top = 79
+    Top = 78
     Width = 80
     Height = 27
     OnClick = btnConfirmClick
     ExplicitLeft = 5
-    ExplicitTop = 79
+    ExplicitTop = 78
     ExplicitWidth = 80
     ExplicitHeight = 27
   end

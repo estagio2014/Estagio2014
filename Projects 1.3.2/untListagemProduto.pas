@@ -60,13 +60,16 @@ end;
 procedure TfrmListagemProduto.edtPesquisarChange(Sender: TObject);
 begin
   inherited;
+  if  (edtPesquisar.Text) <> '' then
+  begin
   if rdbCodBarra.Checked = true then
   begin
-    dm.cdsProduto.Locate('codBarra',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+    dm.cdsProduto.Locate('CODBARRA',edtPesquisar.Text,[]);
   end;
   if rdbDescricao.Checked = true then
   begin
     dm.cdsProduto.Locate('descricao',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+  end;
   end;
 end;
 

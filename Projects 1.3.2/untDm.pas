@@ -78,7 +78,6 @@ type
     cdsMarcaID: TFMTBCDField;
     cdsMarcaDESCRICAO: TWideStringField;
     cdsProdutoID: TFMTBCDField;
-    cdsProdutoCODBARRA: TFMTBCDField;
     cdsProdutoDESCRICAO: TWideStringField;
     cdsProdutoCOMPLEMENTO: TWideStringField;
     cdsProdutoCATEGORIA: TWideStringField;
@@ -134,6 +133,7 @@ type
     cdsItemCompraQUANTIDADE: TFMTBCDField;
     cdsItemCompraPRECO_COMPRA: TFMTBCDField;
     cdsItemCompraSUBTOTAL: TFMTBCDField;
+    cdsProdutoCODBARRA: TFMTBCDField;
     procedure bancoAfterConnect(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

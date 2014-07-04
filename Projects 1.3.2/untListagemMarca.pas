@@ -68,6 +68,7 @@ procedure TfrmListagemMarca.FormShow(Sender: TObject);
 begin
   inherited;
   dm.cdsMarca.Open;
+
 end;
 
 procedure TfrmListagemMarca.Speedbutton1Click(Sender: TObject);

@@ -63,7 +63,7 @@ begin
   if rdbRazao.Checked = true then
   begin
     dm.cdsFornecedor.Locate('razaoSocial',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
-    dm.cdsFornecedor.Locate('NomeFant',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+    dm.cdsFornecedor.Locate('NomeFant_',edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
   end;
   if rdbCnpj.Checked = true then
   begin

@@ -274,6 +274,13 @@ begin
   inherited;
   if (frmListagemVenda.op = 1) then
   begin
+  edtVendedor.Enabled:=true;
+  dblCliente.Enabled:= true;
+  edtCpf.Enabled:= true;
+  rdbParcelado.Enabled:= true;
+  rdbVista.Enabled:= true;
+  edtDesconto.Enabled:= true;
+  cboFormPag.Enabled:=true;
   edtDataVenda.Text := DateToStr(date);
   edtVendedor.SetFocus;
   edtIdVenda.Clear;
@@ -306,21 +313,28 @@ begin
   if (frmListagemVenda.op = 2) then
   begin
    edtIdVenda.Text := dm.cdsVenda.FieldByName('id_Venda').Text;
+   edtVendedor.Enabled:=false;
    edtVendedor.Text:= dm.cdsVenda.FieldByName('vendedor').Text;
+   dblCliente.Enabled:= false;
    dblCliente.KeyValue := dm.cdsVenda.FieldByName('idCli').Text;
+   edtCpf.Enabled:= false;
    edtCpf.Text := dm.cdsVenda.FieldByName('cpfCnpj').Text;
    dblProduto.KeyValue := dm.cdsItemVenda.FieldByName('idProduto').Text;
   if (dm.cdsVenda.FieldByName('tipo_pag').Text = 'V') then
   begin
     rdbVista.Checked := True;
+    rdbParcelado.Enabled:= false;
   end
   else if(dm.cdsVenda.FieldByName('tipo_pag').Text = 'P') then
   begin
     rdbParcelado.Checked := True;
+    rdbVista.Enabled := false;
   end;
+  cboFormPag.Enabled:=false;
   cboFormPag.ItemIndex := (cboFormPag.Items.IndexOf(dm.cdsVenda.FieldByName('Forma_pag').Text));
   edtDataVenda.Text := dm.cdsVenda.FieldByName('data_Venda').Text;
   edtDesconto.Text:= dm.cdsVenda.FieldByName('desconto').Text;
+  edtDesconto.Enabled:= false;
   edtTotal.Text := dm.cdsVenda.FieldByName('valortotal').Text;
   dm.sdsItemVenda.CommandText := 'select * from item_Venda where id_Venda = :idVenda';
   dm.sdsItemVenda.ParamByName('idVenda').Text := edtIdVenda.Text;

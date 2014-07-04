@@ -29,7 +29,8 @@ uses
   untCondPagamento in 'untCondPagamento.pas' {frmCondPagamento},
   untListagemContas in 'untListagemContas.pas' {frmListagemContas},
   untListagemContasPagar in 'untListagemContasPagar.pas' {frmListagemContaPagar},
-  untRelatorios in 'untRelatorios.pas' {frmRelatorios};
+  untRelatorios in 'untRelatorios.pas' {frmRelatorios},
+  untLogin in 'untLogin.pas' {frmLogin};
 
 {$R *.res}
 
@@ -37,6 +38,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Cyan Dusk');
+  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmListagem, frmListagem);
   Application.CreateForm(TfrmListagemCliente, frmListagemCliente);

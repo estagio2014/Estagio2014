@@ -135,8 +135,6 @@ begin
    begin
    Action:=caFree;
    end;
-
-
 end;
 
 procedure TfrmPrincipal.Fornecedor1Click(Sender: TObject);
