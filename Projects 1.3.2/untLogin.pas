@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,System.UITypes, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untCadPrincipal, Vcl.StdCtrls,
-  Vcl.Imaging.jpeg, Vcl.ExtCtrls, Vcl.Buttons, System.Classes;
+  Vcl.Imaging.jpeg, Vcl.ExtCtrls, Vcl.Buttons;
 
 type
   TfrmLogin = class(TfrmCadPrincipal)
@@ -48,6 +48,13 @@ procedure TfrmLogin.btnConfirmClick(Sender: TObject);
 begin
   inherited;
   if (Trim(edtUsuario.Text) = '') or (Trim(edtSenha.Text) = '' ) then
+  begin
+      MessageDlg('USUÁRIO ou SENHA inválido(s)!', mtError,[mbOk],0);
+      edtUsuario.SetFocus;
+      exit;
+  end
+  else if not(dm.cdsUsuario.Locate('login', edtUsuario.Text, []) and
+    dm.cdsUsuario.Locate('Senha', edtSenha.Text, [])) then
   begin
       MessageDlg('USUÁRIO ou SENHA inválido(s)!', mtError,[mbOk],0);
       edtUsuario.SetFocus;

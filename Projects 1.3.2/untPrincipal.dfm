@@ -3560,6 +3560,7 @@ object frmPrincipal: TfrmPrincipal
           7D51B47C51B47C51B47C51B47C51B47C51B47C51FFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000}
         Caption = 'Contas a Receber'
+        OnClick = ContasaReceber1Click
       end
     end
     object Utilitrios1: TMenuItem

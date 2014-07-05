@@ -55,6 +55,7 @@ type
     procedure btnCompraClick(Sender: TObject);
     procedure btnVendaClick(Sender: TObject);
     procedure ContasaPagar1Click(Sender: TObject);
+    procedure ContasaReceber1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,7 +72,7 @@ implementation
 uses untListagemCliente, untListagemFornecedor, untListagemProduto,
   untListagemCidade, untCadUsuario, untListagemUsuario, untListagemMarca,
   untVenda, untListagemVenda, untListagemCompra, untCompra, untContasPagar,
-  untContasReceber, untListagemContasPagar;
+  untContasReceber, untListagemContasPagar, untListagemContasReceber;
 
 procedure TfrmPrincipal.BlocodeNotas1Click(Sender: TObject);
 begin
@@ -126,6 +127,11 @@ end;
 procedure TfrmPrincipal.ContasaPagar1Click(Sender: TObject);
 begin
   frmListagemContaPagar.showModal;
+end;
+
+procedure TfrmPrincipal.ContasaReceber1Click(Sender: TObject);
+begin
+  frmListagemContasReceber.ShowModal;
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);

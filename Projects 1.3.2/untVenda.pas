@@ -38,7 +38,6 @@ type
     Label12: TLabel;
     edtCpf: TMaskEdit;
     Label13: TLabel;
-    edtCodBarra: TMaskEdit;
     cboFormPag: TComboBox;
     Label14: TLabel;
     Label15: TLabel;
@@ -49,19 +48,20 @@ type
     edtIdVenda: TEdit;
     Label1: TLabel;
     dsItemVenda: TDataSource;
+    edtCodBarra: TEdit;
     procedure FormShow(Sender: TObject);
     procedure btnLocalizarCliClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure dblProdutoClick(Sender: TObject);
     procedure dblClienteClick(Sender: TObject);
-    procedure edtCpfChange(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
     procedure btnConfirmClick(Sender: TObject);
     procedure edtCpfExit(Sender: TObject);
     procedure edtCodBarraExit(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure edtDescontoKeyPress(Sender: TObject; var Key: Char);
+    procedure edtCpfEnter(Sender: TObject);
   private
      procedure calculaTotal;
     { Private declarations }
@@ -122,6 +122,49 @@ end;
 procedure TfrmVenda.btnConfirmClick(Sender: TObject);
 begin
   inherited;
+  if (Trim(edtVendedor.Text) = '') then
+  begin
+    MessageDlg('Campo VENDEDOR Obrigatório!', mtError,[mbOk],0);
+    edtVendedor.SetFocus;
+    exit;
+  end;
+  if Trim(dblCliente.Text)= '' then
+  begin
+    MessageDlg('Campo Cliente Obrigatório!', mtError,[mbOk],0);
+    dblCliente.SetFocus;
+    exit;
+  end;
+  if Trim(edtCpf.Text)= '' then
+  begin
+    MessageDlg('Campo CPF/CNPJ Obrigatório!', mtError,[mbOk],0);
+    edtCpf.SetFocus;
+    exit;
+  end;
+  if Trim(edtCodBarra.Text)= '' then
+  begin
+    MessageDlg('Campo CÓD BARRA Obrigatório!', mtError,[mbOk],0);
+    edtCodBarra.SetFocus;
+    exit;
+  end;
+  if Trim(edtQtdade.Text)= '' then
+  begin
+    MessageDlg('Campo QTDE Obrigatório!', mtError,[mbOk],0);
+    edtQtdade.SetFocus;
+    exit;
+  end;
+  if (Trim(cboFormPag.Text)= '') then
+  begin
+    MessageDlg('Campo Forma Pagamento Obrigatório!', mtError,[mbOk],0);
+    cboFormPag.SetFocus;
+    exit;
+  end;
+  if (dm.cdsItemVenda.RecordCount = 0) then
+  begin
+    MessageDlg('Item(s) de venda não encontrado! Favor Incluir Item(s).', mtError,[mbOk],0);
+    dblProduto.SetFocus;
+    exit;
+  end;
+
   if (frmListagemVenda.op = 1) then
   begin
     edtTotal.Text:= FloatToStr(StrToFloat(edtTotal.Text) - StrToFloat(edtDesconto.Text));
@@ -147,7 +190,12 @@ begin
     dm.sdsComandoSql.ExecSQL();
     dm.cdsVenda.Close;
     dm.cdsVenda.Open;
-   // dm.banco.Commit(dm.transacao);
+   { // lançamento
+    dm.sdsComandoSql.CommandText:= 'inser into lancamento (id_, id_venda, tipo_lanc, valor, forma_pagamento, qtde_parc)'+
+    'values (seqLancamento.nextval, :id_venda, :tipo_lanc, :valor, :forma_pagamento, qtde_parc)';
+       }
+
+    dm.banco.Commit(dm.transacao);
     Close;
     end;
   end;
@@ -180,10 +228,9 @@ begin
     dm.sdsComandoSql.ExecSQL();
     dm.cdsVenda.Close;
     dm.cdsVenda.Open;
-  //  dm.banco.Commit(dm.transacao);
+   dm.banco.Commit(dm.transacao);
     Close;
   end;
-  dm.banco.Commit(dm.transacao);
 end;
 
 procedure TfrmVenda.btnLocalizarCliClick(Sender: TObject);
@@ -226,7 +273,18 @@ end;
 procedure TfrmVenda.dblClienteClick(Sender: TObject);
 begin
   inherited;
+  if (dm.cdsCliente.FieldByName('tipoPessoa').Text = 'F') then
+  begin
+    edtCpf.EditMask:= '999.999.999-99';
+    edtCpf.Width:= 91;
+    edtCpf.Text := dm.cdsCliente.FieldByName('cpfCnpj').Text;
+  end
+  else if (dm.cdsCliente.FieldByName('tipoPessoa').Text = 'J') then
+  begin
+  edtCpf.EditMask:= '99.999.999/9999-99';
+  edtCpf.Width:= 112;
   edtCpf.Text := dm.cdsCliente.FieldByName('cpfCnpj').Text;
+  end;
 end;
 
 procedure TfrmVenda.dblProdutoClick(Sender: TObject);
@@ -240,17 +298,29 @@ end;
 procedure TfrmVenda.edtCodBarraExit(Sender: TObject);
 begin
   inherited;
+  if  (edtCodBarra.Text) <> '' then
+  begin
   if(dm.cdsProduto.Locate('CodBarra',edtCodBarra.Text,[])) then
   begin
    dblProduto.KeyValue:=dm.cdsProduto.FieldByName('idProduto').AsInteger;
   end;
 end;
+end;
 
-procedure TfrmVenda.edtCpfChange(Sender: TObject);
+procedure TfrmVenda.edtCpfEnter(Sender: TObject);
 begin
   inherited;
-//  dm.cdsCliente.Locate('cpfCnpj',edtCpf.Text,[loPartialKey,loCaseInsensitive]);
- // dblCliente.ListField:= dm.sdsComandoSql.CommandText:='select nomeCli from cliente where cpfCnpj ='+(edtCpf.Text);
+  if (MessageDlg('Deseja inserir um CNPJ?', mtConfirmation, [mbYes, mbNo],0)= mrYes) then
+  begin
+  edtCpf.EditMask:= '99.999.999/9999-99';
+  edtCpf.Width:= 112;
+  edtCpf.SetFocus;
+  end
+  else begin
+  edtCpf.EditMask:= '999.999.999-99';
+  edtCpf.Width:= 91;
+  edtCpf.SetFocus;
+  end;
 end;
 
 procedure TfrmVenda.edtCpfExit(Sender: TObject);

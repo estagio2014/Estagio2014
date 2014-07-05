@@ -199,7 +199,7 @@ end;
 procedure TfrmCadProduto.edtCodBarraChange(Sender: TObject);
 begin
   inherited;
-  if Length(edtCodBarra.text)>11 then
+  if Length(edtCodBarra.text)>=11 then
   begin
       MessageDlg('Atenção! Código de Barra digitado ultrapassa 11 digitos!', mtInformation,[mbOk],0);
       edtCodBarra.SetFocus;

@@ -3,7 +3,6 @@ inherited frmCompra: TfrmCompra
   ClientHeight = 464
   ClientWidth = 752
   OnShow = FormShow
-  ExplicitTop = -35
   ExplicitWidth = 768
   ExplicitHeight = 498
   PixelsPerInch = 96
@@ -11,6 +10,7 @@ inherited frmCompra: TfrmCompra
   inherited btnConfirm: TSpeedButton
     Left = 293
     Top = 424
+    OnClick = btnConfirmClick
     ExplicitLeft = 293
     ExplicitTop = 424
   end
@@ -107,7 +107,7 @@ inherited frmCompra: TfrmCompra
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object edtIdVenda: TEdit
+    object edtIdCompra: TEdit
       Left = 102
       Top = 12
       Width = 75
@@ -269,6 +269,7 @@ inherited frmCompra: TfrmCompra
         FFFFFFFFFFFFFFFFFFFF9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E9E
         9E9EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       NumGlyphs = 2
+      OnClick = btnAdicionarClick
     end
     object btnRemover: TSpeedButton
       Left = 653
@@ -388,6 +389,7 @@ inherited frmCompra: TfrmCompra
         FFFFFFFFFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       NumGlyphs = 2
+      OnClick = btnRemoverClick
     end
     object Label7: TLabel
       Left = 556
@@ -516,6 +518,7 @@ inherited frmCompra: TfrmCompra
       Width = 733
       Height = 185
       DataSource = dsItemCompra
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -526,31 +529,41 @@ inherited frmCompra: TfrmCompra
         item
           Expanded = False
           FieldName = 'ID_COMPRA'
-          Width = 94
+          Title.Alignment = taCenter
+          Title.Caption = 'N'#250'mero Compra'
+          Width = 115
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'IDPRODUTO'
-          Width = 120
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'digo Produto'
+          Width = 145
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'QUANTIDADE'
-          Width = 126
+          Title.Alignment = taCenter
+          Title.Caption = 'Quantidade'
+          Width = 142
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'PRECO_COMPRA'
-          Width = 133
+          Title.Alignment = taCenter
+          Title.Caption = 'Pre'#231'o'
+          Width = 181
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'SUBTOTAL'
-          Width = 91
+          Title.Alignment = taCenter
+          Title.Caption = 'Subtotal'
+          Width = 124
           Visible = True
         end>
     end

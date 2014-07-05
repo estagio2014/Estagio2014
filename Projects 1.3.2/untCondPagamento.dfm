@@ -37,6 +37,20 @@ inherited frmCondPagamento: TfrmCondPagamento
       Width = 89
       Height = 24
       Caption = 'Gerar Parcelas'
+      OnClick = btnGerarParcelasClick
+    end
+    object Label2: TLabel
+      Left = 159
+      Top = 18
+      Width = 9
+      Height = 16
+      Caption = 'X'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object cboParcelas: TComboBox
       Left = 80
@@ -45,17 +59,17 @@ inherited frmCondPagamento: TfrmCondPagamento
       Height = 21
       TabOrder = 0
       Items.Strings = (
-        'x2'
-        'x3'
-        'x4'
-        'x5'
-        'x6'
-        'x7'
-        'x8'
-        'x9'
-        'x10'
-        'x11'
-        'x12')
+        '2'
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8'
+        '9'
+        '10'
+        '11'
+        '12')
     end
     object DBGrid1: TDBGrid
       Left = 8

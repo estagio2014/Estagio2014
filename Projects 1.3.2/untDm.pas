@@ -117,7 +117,6 @@ type
     cdsVendaIDCLI: TFMTBCDField;
     cdsVendaDESCONTO: TFMTBCDField;
     cdsVendaIDCLI_1: TFMTBCDField;
-    cdsItemVendaID_VENDA: TFMTBCDField;
     cdsItemVendaIDPRODUTO: TFMTBCDField;
     cdsItemVendaQUANTIDADE: TFMTBCDField;
     cdsItemVendaPRECO: TFMTBCDField;
@@ -134,6 +133,28 @@ type
     cdsItemCompraPRECO_COMPRA: TFMTBCDField;
     cdsItemCompraSUBTOTAL: TFMTBCDField;
     cdsProdutoCODBARRA: TFMTBCDField;
+    cdsCompraID_COMPRA: TFMTBCDField;
+    cdsCompraIDFORNECEDOR: TFMTBCDField;
+    cdsCompraDATA_COMPRA: TSQLTimeStampField;
+    cdsCompraFORMA_PAG: TWideStringField;
+    cdsCompraVALORTOTAL: TFMTBCDField;
+    cdsCompraDESCONTO: TFMTBCDField;
+    cdsCompraTIPO_PAG: TWideStringField;
+    cdsCompraRAZAOSOCIAL: TWideStringField;
+    cdsCompraCNPJ: TWideStringField;
+    cdsCompraIDFORNECEDOR_1: TFMTBCDField;
+    cdsCompraREPRES: TWideStringField;
+    sdsLancamento: TSQLDataSet;
+    dspLancamento: TDataSetProvider;
+    cdsLancamento: TClientDataSet;
+    cdsLancamentoID_: TFMTBCDField;
+    cdsLancamentoID_COMPRA: TFMTBCDField;
+    cdsLancamentoID_VENDA: TFMTBCDField;
+    cdsLancamentoTIPO_LANC: TWideStringField;
+    cdsLancamentoVALOR: TFMTBCDField;
+    cdsLancamentoFORMA_PAGAMENTO: TWideStringField;
+    cdsLancamentoQTDE_PARC: TFMTBCDField;
+    cdsItemVendaID_VENDA: TFMTBCDField;
     procedure bancoAfterConnect(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

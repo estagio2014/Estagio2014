@@ -481,7 +481,7 @@ inherited frmCadCliente: TfrmCadCliente
       Width = 102
       Height = 21
       TabOrder = 4
-      OnChange = edtRgChange
+      OnKeyPress = edtRgKeyPress
     end
     object edtCpf: TMaskEdit
       Left = 75

@@ -15,7 +15,9 @@ type
     DBGrid1: TDBGrid;
     DataSource1: TDataSource;
     btnGerarParcelas: TSpeedButton;
+    Label2: TLabel;
     procedure FormShow(Sender: TObject);
+    procedure btnGerarParcelasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,6 +33,17 @@ implementation
 {$R *.dfm}
 
 uses untVenda;
+
+procedure TfrmCondPagamento.btnGerarParcelasClick(Sender: TObject);
+//var
+  //I: Integer;
+begin
+  inherited;
+  {for I := 1 to cboParcelas.Text do
+  begin
+    dm.sdsComandoSql.commandText:= 'insert into fatura values '
+  end;}
+end;
 
 procedure TfrmCondPagamento.FormShow(Sender: TObject);
 begin

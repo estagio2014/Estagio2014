@@ -15,7 +15,7 @@ type
     btnLocalizarCli: TSpeedButton;
     Label6: TLabel;
     Label12: TLabel;
-    edtIdVenda: TEdit;
+    edtIdCompra: TEdit;
     dblForn: TDBLookupComboBox;
     edtRepresentante: TEdit;
     edtCnpj: TMaskEdit;
@@ -55,7 +55,12 @@ type
     procedure btnLocalizarCliClick(Sender: TObject);
     procedure edtPesquisarProdClick(Sender: TObject);
     procedure dblFornClick(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
+    procedure btnConfirmClick(Sender: TObject);
+    procedure btnRemoverClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
+  procedure calculaTotal;
     { Private declarations }
   public
     op:byte;
@@ -69,7 +74,62 @@ implementation
 
 {$R *.dfm}
 
-uses untListagemFornecedor, untDm, untListagemProduto, untListagemCompra;
+uses untListagemFornecedor, untDm, untListagemProduto, untListagemCompra,
+  untCondPagamento;
+
+procedure TfrmCompra.btnAdicionarClick(Sender: TObject);
+begin
+  inherited;
+  dm.sdsComandoSql.CommandText:='insert into item_compra values(:id_compra, :idProduto, :qtdade, :preco_compra, :subTotal)';
+  dm.sdsComandoSql.ParamByName('id_compra').Text := edtIdCompra.Text;
+  dm.sdsComandoSql.ParamByName('idProduto').AsInteger := dblProduto.KeyValue;
+  dm.sdsComandoSql.ParamByName('qtdade').Text := edtQtdade.Text;
+  dm.sdsComandoSql.ParamByName('preco_compra').Text := edtPreco.Text;
+  dm.sdsComandoSql.ParamByName('subTotal').AsFloat := StrToFloat(edtQtdade.Text) * StrToFloat(edtPreco.Text);
+  dm.sdsComandoSql.ExecSQL();
+  dm.cdsItemCompra.Close;
+  dm.cdsItemCompra.Open;
+  calculaTotal;
+end;
+
+procedure TfrmCompra.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+  dm.banco.Rollback(dm.transacao);
+end;
+
+procedure TfrmCompra.btnConfirmClick(Sender: TObject);
+begin
+  inherited;
+  if (frmListagemCompra.op = 1) then
+  begin
+    edtTotal.Text:= FloatToStr(StrToFloat(edtTotal.Text) - StrToFloat(edtDesconto.Text));
+    if (rdbParcelado.Checked = true) then
+    begin
+      frmCondPagamento.showModal;
+    end
+    else begin
+    dm.sdsComandoSql.CommandText := 'insert into compra values(seqCompra.currval, :idFornecedor, :data_compra, :forma_pag, :valorTotal,  :desconto, :tipo_pag)';
+    dm.sdsComandoSql.ParamByName('idFornecedor').AsInteger :=  dblForn.KeyValue;
+    dm.sdsComandoSql.ParamByName('data_Compra').Text := edtDataCompra.text;
+    dm.sdsComandoSql.ParamByName('forma_pag').Text:= cboFormPag.Text;
+    dm.sdsComandoSql.ParamByName('Valortotal').Text := edtTotal.Text;
+    dm.sdsComandoSql.ParamByName('desconto').Text := edtDesconto.Text;
+    if rdbVista.Checked = true then
+    begin
+      dm.sdsComandoSql.ParamByName('tipo_pag').AsString:='V';
+    end
+    else begin
+      dm.sdsComandoSql.ParamByName('tipo_pag').AsString:='P';
+    end;
+    dm.sdsComandoSql.ExecSQL();
+    dm.cdsCompra.Close;
+    dm.cdsCompra.Open;
+    dm.banco.Commit(dm.transacao);
+    Close;
+    end;
+  end;
+end;
 
 procedure TfrmCompra.btnLocalizarCliClick(Sender: TObject);
 begin
@@ -80,10 +140,39 @@ begin
   dm.cdsCidade.Open;
 end;
 
+procedure TfrmCompra.btnRemoverClick(Sender: TObject);
+begin
+  inherited;
+  with dm.sdsComandoSql do
+  begin
+    CommandText:='delete from item_compra where id_compra = :id_compra and idProduto = :idProduto';
+    ParamByName('id_compra').Text := dm.cdsItemCompra.FieldByName('id_compra').Text;
+    ParamByName('idProduto').Text := dm.cdsItemCompra.FieldByName('idProduto').Text;
+    ExecSQL();
+  end;
+  dm.cdsItemCompra.Close;
+  dm.cdsItemCompra.Open;
+  calculaTotal;
+end;
+
+procedure TfrmCompra.calculaTotal;
+var totalGeral: extended;
+begin
+totalGeral := 0;
+dm.cdsItemCompra.First;
+while not(dm.cdsItemCompra.Eof)//End of file
+do begin
+totalGeral := totalGeral + dm.cdsItemCompra.FieldByName('subTotal').AsFloat;
+dm.cdsItemCompra.Next; //condição de parada
+end;
+edtTotal.Text := floattoStr(totalGeral);
+end;
+
 procedure TfrmCompra.dblFornClick(Sender: TObject);
 begin
   inherited;
   edtCnpj.Text := dm.cdsFornecedor.FieldByName('Cnpj').Text;
+  edtRepresentante.Text := dm.cdsFornecedor.FieldByName('repres').Text;
 end;
 
 procedure TfrmCompra.dblProdutoClick(Sender: TObject);
@@ -141,11 +230,20 @@ begin
   edtPreco.Clear;
   rdbVista.Checked := true;
   edtDesconto.Clear;
-  end;
- { if (frmListagemCompra = 2) then
-  begin
+  edtTotal.Text := '0';
+  edtDesconto.Text:= '0';
+  cboFormPag.ItemIndex := -1;
 
-  end; }
+  dm.sdsComandoSql.CommandText := 'select seqCompra.nextval as id_Compra from dual';
+  dm.sdsComandoSql.Open;
+  edtIdCompra.Text := dm.sdsComandoSql.FieldByName('id_Compra').Text;
+  dm.sdsComandoSql.Close;
+  dm.sdsItemCompra.CommandText := 'select * from item_compra where id_compra = :id_compra';
+  dm.sdsItemCompra.ParamByName('id_compra').Text := edtIdCompra.Text;
+  dm.sdsItemCompra.ExecSQL();
+  dm.cdsItemCompra.Close;
+  dm.cdsItemCompra.Open;
+  end;
 end;
 
 end.

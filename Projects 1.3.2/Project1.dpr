@@ -30,7 +30,9 @@ uses
   untListagemContas in 'untListagemContas.pas' {frmListagemContas},
   untListagemContasPagar in 'untListagemContasPagar.pas' {frmListagemContaPagar},
   untRelatorios in 'untRelatorios.pas' {frmRelatorios},
-  untLogin in 'untLogin.pas' {frmLogin};
+  untLogin in 'untLogin.pas' {frmLogin},
+  untListagemContasReceber in 'untListagemContasReceber.pas' {frmListagemContasReceber},
+  untLancamento in 'untLancamento.pas' {frmLancamento};
 
 {$R *.res}
 
@@ -38,8 +40,8 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Cyan Dusk');
-  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmListagem, frmListagem);
   Application.CreateForm(TfrmListagemCliente, frmListagemCliente);
   Application.CreateForm(TfrmListagemFornecedor, frmListagemFornecedor);
@@ -65,5 +67,7 @@ begin
   Application.CreateForm(TfrmListagemContas, frmListagemContas);
   Application.CreateForm(TfrmListagemContaPagar, frmListagemContaPagar);
   Application.CreateForm(TfrmRelatorios, frmRelatorios);
+  Application.CreateForm(TfrmListagemContasReceber, frmListagemContasReceber);
+  Application.CreateForm(TfrmLancamento, frmLancamento);
   Application.Run;
 end.
