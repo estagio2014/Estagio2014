@@ -32,7 +32,8 @@ uses
   untRelatorios in 'untRelatorios.pas' {frmRelatorios},
   untLogin in 'untLogin.pas' {frmLogin},
   untListagemContasReceber in 'untListagemContasReceber.pas' {frmListagemContasReceber},
-  untLancamento in 'untLancamento.pas' {frmLancamento};
+  untLancamento in 'untLancamento.pas' {frmLancamento},
+  untSplash in 'untSplash.pas' {frmSplash};
 
 {$R *.res}
 
@@ -40,34 +41,35 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Cyan Dusk');
-  Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmListagem, frmListagem);
-  Application.CreateForm(TfrmListagemCliente, frmListagemCliente);
-  Application.CreateForm(TfrmListagemFornecedor, frmListagemFornecedor);
-  Application.CreateForm(TfrmListagemProduto, frmListagemProduto);
-  Application.CreateForm(TfrmCadPrincipal, frmCadPrincipal);
-  Application.CreateForm(TfrmCadCliente, frmCadCliente);
-  Application.CreateForm(Tdm, dm);
-  Application.CreateForm(TfrmListagemCidade, frmListagemCidade);
-  Application.CreateForm(TfrmCadCidade, frmCadCidade);
-  Application.CreateForm(TfrmCadFornecedor, frmCadFornecedor);
-  Application.CreateForm(TfrmCadProduto, frmCadProduto);
-  Application.CreateForm(TfrmCadUsuario, frmCadUsuario);
-  Application.CreateForm(TfrmListagemUsuario, frmListagemUsuario);
-  Application.CreateForm(TfrmCadMarca, frmCadMarca);
-  Application.CreateForm(TfrmListagemMarca, frmListagemMarca);
-  Application.CreateForm(TfrmVenda, frmVenda);
-  Application.CreateForm(TfrmListagemVenda, frmListagemVenda);
-  Application.CreateForm(TfrmCompra, frmCompra);
-  Application.CreateForm(TfrmListagemCompra, frmListagemCompra);
-  Application.CreateForm(TfrmContasPagar, frmContasPagar);
-  Application.CreateForm(TfrmContasReceber, frmContasReceber);
-  Application.CreateForm(TfrmCondPagamento, frmCondPagamento);
-  Application.CreateForm(TfrmListagemContas, frmListagemContas);
-  Application.CreateForm(TfrmListagemContaPagar, frmListagemContaPagar);
-  Application.CreateForm(TfrmRelatorios, frmRelatorios);
-  Application.CreateForm(TfrmListagemContasReceber, frmListagemContasReceber);
+  Application.CreateForm(TfrmSplash, frmSplash);
   Application.CreateForm(TfrmLancamento, frmLancamento);
+  Application.CreateForm(TfrmListagemContasReceber, frmListagemContasReceber);
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmRelatorios, frmRelatorios);
+  Application.CreateForm(TfrmListagemContaPagar, frmListagemContaPagar);
+  Application.CreateForm(TfrmListagemContas, frmListagemContas);
+  Application.CreateForm(TfrmCondPagamento, frmCondPagamento);
+  Application.CreateForm(TfrmContasReceber, frmContasReceber);
+  Application.CreateForm(TfrmContasPagar, frmContasPagar);
+  Application.CreateForm(TfrmListagemCompra, frmListagemCompra);
+  Application.CreateForm(TfrmCompra, frmCompra);
+  Application.CreateForm(TfrmListagemVenda, frmListagemVenda);
+  Application.CreateForm(TfrmVenda, frmVenda);
+  Application.CreateForm(TfrmListagemMarca, frmListagemMarca);
+  Application.CreateForm(TfrmCadMarca, frmCadMarca);
+  Application.CreateForm(TfrmListagemUsuario, frmListagemUsuario);
+  Application.CreateForm(TfrmCadUsuario, frmCadUsuario);
+  Application.CreateForm(TfrmCadProduto, frmCadProduto);
+  Application.CreateForm(TfrmCadFornecedor, frmCadFornecedor);
+  Application.CreateForm(TfrmCadCidade, frmCadCidade);
+  Application.CreateForm(TfrmListagemCidade, frmListagemCidade);
+  Application.CreateForm(TfrmCadCliente, frmCadCliente);
+  Application.CreateForm(TfrmCadPrincipal, frmCadPrincipal);
+  Application.CreateForm(TfrmListagemProduto, frmListagemProduto);
+  Application.CreateForm(TfrmListagemFornecedor, frmListagemFornecedor);
+  Application.CreateForm(TfrmListagemCliente, frmListagemCliente);
+  Application.CreateForm(TfrmListagem, frmListagem);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(Tdm, dm);
   Application.Run;
 end.
