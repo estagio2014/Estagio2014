@@ -23,14 +23,7 @@ uses
   untVenda in 'untVenda.pas' {frmVenda},
   untListagemVenda in 'untListagemVenda.pas' {frmListagemVenda},
   untCompra in 'untCompra.pas' {frmCompra},
-  untListagemCompra in 'untListagemCompra.pas' {frmListagemCompra},
-  untContasPagar in 'untContasPagar.pas' {frmContasPagar},
-  untContasReceber in 'untContasReceber.pas' {frmContasReceber},
-  untCondPagamento in 'untCondPagamento.pas' {frmCondPagamento},
-  untListagemContas in 'untListagemContas.pas' {frmListagemContas},
-  untListagemContasPagar in 'untListagemContasPagar.pas' {frmListagemContaPagar},
-  untRelatorios in 'untRelatorios.pas' {frmRelatorios},
-  untLogin in 'untLogin.pas' {frmLogin};
+  untListagemCompra in 'untListagemCompra.pas' {frmListagemCompra};
 
 {$R *.res}
 
@@ -38,7 +31,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Cyan Dusk');
-  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmListagem, frmListagem);
   Application.CreateForm(TfrmListagemCliente, frmListagemCliente);
@@ -59,11 +51,5 @@ begin
   Application.CreateForm(TfrmListagemVenda, frmListagemVenda);
   Application.CreateForm(TfrmCompra, frmCompra);
   Application.CreateForm(TfrmListagemCompra, frmListagemCompra);
-  Application.CreateForm(TfrmContasPagar, frmContasPagar);
-  Application.CreateForm(TfrmContasReceber, frmContasReceber);
-  Application.CreateForm(TfrmCondPagamento, frmCondPagamento);
-  Application.CreateForm(TfrmListagemContas, frmListagemContas);
-  Application.CreateForm(TfrmListagemContaPagar, frmListagemContaPagar);
-  Application.CreateForm(TfrmRelatorios, frmRelatorios);
   Application.Run;
 end.

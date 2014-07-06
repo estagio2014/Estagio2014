@@ -10,12 +10,12 @@ inherited frmCadCliente: TfrmCadCliente
   TextHeight = 13
   inherited btnConfirm: TSpeedButton
     Left = 200
-    Top = 263
+    Top = 264
     Width = 82
     Height = 28
     OnClick = btnConfirmClick
     ExplicitLeft = 200
-    ExplicitTop = 263
+    ExplicitTop = 264
     ExplicitWidth = 82
     ExplicitHeight = 28
   end
@@ -51,9 +51,9 @@ inherited frmCadCliente: TfrmCadCliente
     object Label9: TLabel
       Left = 5
       Top = 15
-      Width = 75
+      Width = 62
       Height = 13
-      Caption = 'Logradouro:*'
+      Caption = 'Endere'#231'o:*'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -62,30 +62,18 @@ inherited frmCadCliente: TfrmCadCliente
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 23
+      Left = 33
       Top = 45
-      Width = 44
+      Width = 32
       Height = 13
-      Caption = 'Bairro:*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
+      Caption = 'Bairro:'
     end
     object Label11: TLabel
-      Left = 35
+      Left = 41
       Top = 73
-      Width = 30
+      Width = 23
       Height = 13
-      Caption = 'CEP:*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
+      Caption = 'CEP:'
     end
     object Label12: TLabel
       Left = 129
@@ -135,16 +123,16 @@ inherited frmCadCliente: TfrmCadCliente
       OnClick = SpeedButton1Click
     end
     object edtEndereco: TEdit
-      Left = 82
-      Top = 12
-      Width = 344
+      Left = 67
+      Top = 14
+      Width = 337
       Height = 21
       TabOrder = 0
     end
     object edtBairro: TEdit
       Left = 67
-      Top = 40
-      Width = 359
+      Top = 42
+      Width = 337
       Height = 21
       TabOrder = 1
     end
@@ -186,30 +174,18 @@ inherited frmCadCliente: TfrmCadCliente
     Height = 105
     TabOrder = 2
     object Label13: TLabel
-      Left = 7
+      Left = 15
       Top = 16
-      Width = 59
+      Width = 46
       Height = 13
-      Caption = 'Telefone:*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
+      Caption = 'Telefone:'
     end
     object Label14: TLabel
-      Left = 154
+      Left = 165
       Top = 16
-      Width = 49
+      Width = 37
       Height = 13
-      Caption = 'Celular:*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
+      Caption = 'Celular:'
     end
     object Label15: TLabel
       Left = 33
@@ -452,12 +428,6 @@ inherited frmCadCliente: TfrmCadCliente
       Width = 39
       Height = 13
       Caption = 'Apelido:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
     end
     object edtIdCli: TEdit
       Left = 76
@@ -476,16 +446,16 @@ inherited frmCadCliente: TfrmCadCliente
       OnKeyPress = edtNomeCliKeyPress
     end
     object edtRg: TEdit
-      Left = 199
+      Left = 200
       Top = 90
       Width = 102
       Height = 21
+      NumbersOnly = True
       TabOrder = 4
-      OnChange = edtRgChange
     end
     object edtCpf: TMaskEdit
       Left = 75
-      Top = 90
+      Top = 92
       Width = 86
       Height = 21
       EditMask = '999.999.999-99;1;_'
@@ -502,8 +472,8 @@ inherited frmCadCliente: TfrmCadCliente
       Style = csDropDownList
       TabOrder = 7
       Items.Strings = (
-        'M'
-        'F')
+        'Masc'
+        'Fem')
     end
     object cboEstadoCivil: TComboBox
       Left = 233
@@ -544,21 +514,20 @@ inherited frmCadCliente: TfrmCadCliente
       TabOrder = 1
       OnKeyPress = edtApelidoKeyPress
     end
-    object edtDataNasc: TMaskEdit
-      Left = 78
+    object edtDataNasc: TDateTimePicker
+      Left = 76
       Top = 116
-      Width = 67
+      Width = 77
       Height = 21
-      EditMask = '99/99/9999;1;_'
-      MaxLength = 10
+      Date = 41732.038624710650000000
+      Time = 41732.038624710650000000
       TabOrder = 5
-      Text = '  /  /    '
       OnExit = edtDataNascExit
     end
   end
   object dsCidade: TDataSource
     DataSet = dm.cdsCidade
-    Left = 440
-    Top = 240
+    Left = 408
+    Top = 160
   end
 end

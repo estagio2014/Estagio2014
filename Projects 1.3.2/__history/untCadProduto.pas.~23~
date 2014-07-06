@@ -3,7 +3,7 @@ unit untCadProduto;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils,System.UITypes, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untCadPrincipal, Vcl.ExtCtrls,
   Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Data.DB;
 
@@ -31,6 +31,7 @@ type
     edtEspec: TEdit;
     cboCat: TComboBox;
     cboUnidade: TComboBox;
+    edtCodBarra: TMaskEdit;
     dblMarca: TDBLookupComboBox;
     mmObs: TMemo;
     Label14: TLabel;
@@ -41,13 +42,10 @@ type
     rdbIndisponivel: TRadioButton;
     dsMarca: TDataSource;
     btnLocalizar: TSpeedButton;
-    edtCodBarra: TEdit;
     procedure FormShow(Sender: TObject);
     procedure btnConfirmClick(Sender: TObject);
     procedure btnLocalizarClick(Sender: TObject);
     procedure edtCodBarraChange(Sender: TObject);
-    procedure edtPrecoVendaKeyPress(Sender: TObject; var Key: Char);
-    procedure edtPrecoCustoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -108,23 +106,25 @@ begin
       edtPrecoVenda.SetFocus;
       exit;
     end;
-    if frmListagemProduto.op = 1 then
-    begin
     if MessageDlg('Deseja Alterar o ESTOQUE ATUAL?', mtInformation,[mbYes,mbNo],0)= mrYes then
     begin
-    dm.sdsComandoSql.CommandText:='INSERT into produto values (seqProduto.nextval, :id, :codBarra, :descricao, :complemento, :categoria, :unidade,  :precoCusto, :precoVenda, :estoqueAtual, :obs, :situacao, :dataCadastro)';
+
+    if frmListagemProduto.op = 1 then
+    begin
+    dm.sdsComandoSql.CommandText:='INSERT into produto values (seqProduto.nextval, :codBarra, :descricao, :complemento, :idMarca, :categoria, :unidade,  :precoCusto, :precoVenda, :estoqueAtual, :obs, :dataCadastro, :situacao)';
     with dm.sdsComandoSql do
     begin
-      ParamByName('id').AsInteger := dblMarca.KeyValue;
       ParamByName('codBarra').Text := edtCodBarra.Text;
       ParamByName('descricao').Text := edtDesc.Text;
       ParamByName('complemento').Text := edtEspec.Text;
+      ParamByName('idMarca').AsInteger := dblMarca.KeyValue;
       ParamByName('categoria').Text := cboCat.Text;
       ParamByName('unidade').Text := cboUnidade.Text;
       ParamByName('precoCusto').Text := edtPrecoCusto.Text;
       ParamByName('precoVenda').Text := edtPrecoVenda.Text;
       ParamByName('estoqueAtual').Text := edtEstoqueAtual.Text;
       ParamByName('obs').Text := mmObs.Text;
+      ParamByName('dataCadastro').Text := edtDataCadPro.Text;
       if rdbDisponivel.Checked = true then
       begin
         dm.sdsComandoSql.ParamByName('situacao').AsString:='D';
@@ -134,7 +134,6 @@ begin
         rdbIndisponivel.Checked := true;
         dm.sdsComandoSql.ParamByName('situacao').AsString:='I';
       end;
-      ParamByName('dataCadastro').Text := edtDataCadPro.Text;
     end;
     dm.sdsComandoSql.ExecSQL();
     dm.cdsProduto.Close;
@@ -142,31 +141,20 @@ begin
     MessageDlg('Produto cadastrado com Sucesso!', mtInformation,[mbOk],0);
     Close;
    end;
-    end;
    if frmListagemProduto.op = 2 then
    begin
-     dm.sdsComandoSql.CommandText:= 'UPDATE produto set id = :id, codBarra = :codBarra, descricao = :descricao, complemento = :complemento, categoria = :categoria,'+
-      'unidade = :unidade, precoCusto = :precoCusto, precoVenda = :precoVenda, estoqueAtual = :estoqueAtual, observacoes = :obs, dataCadastro = :dataCadastro, situacao = :situacao where idProduto = :idProduto';
+     dm.sdsComandoSql.CommandText:= 'UPDATE produto set codBarra = :codBarra, descricao = :descricao, complemento = :complemento, idMarca = :idMarca, categoria = :categoria,'+
+      'unidade = :unidade, precoCusto = :precoCusto, precoVenda = :precoVenda, estoqueAtual = :estoqueAtual, observacoes = :obs, dataCadastro = :dataCadastro, situacao = :situacao';
       with dm.sdsComandoSql do
       begin
-        ParamByName('idProduto').Text := edtIdProd.Text;
-        ParamByName('id').AsInteger := dblMarca.KeyValue;
         ParamByName('codBarra').Text := edtCodBarra.Text;
         ParamByName('descricao').Text := edtDesc.Text;
         ParamByName('complemento').Text := edtEspec.Text;
-        ParamByName('id').AsInteger := dblMarca.KeyValue;
+        ParamByName('idMarca').AsInteger := dblMarca.KeyValue;
         ParamByName('categoria').Text := cboCat.Text;
         ParamByName('unidade').Text := cboUnidade.Text;
         ParamByName('precoCusto').Text := edtPrecoCusto.Text;
         ParamByName('precoVenda').Text := edtPrecoVenda.Text;
-        if edtEstoqueAtual.text = dm.cdsProduto.FieldByName('estoqueAtual').Text then
-        begin
-	 	      ParamByName('estoqueAtual').Text := edtEstoqueAtual.Text;
-        end
-        else if MessageDlg('Deseja Alterar o ESTOQUE ATUAL?', mtInformation,[mbYes,mbNo],0)= mrYes then
-	      begin
-	 	      ParamByName('estoqueAtual').Text := edtEstoqueAtual.Text;
-	      end;
         ParamByName('estoqueAtual').Text := edtEstoqueAtual.Text;
         ParamByName('obs').Text := mmObs.Text;
         ParamByName('dataCadastro').Text := edtDataCadPro.Text;
@@ -199,39 +187,7 @@ end;
 procedure TfrmCadProduto.edtCodBarraChange(Sender: TObject);
 begin
   inherited;
-  if Length(edtCodBarra.text)>11 then
-  begin
-      MessageDlg('Atenção! Código de Barra digitado ultrapassa 11 digitos!', mtInformation,[mbOk],0);
-      edtCodBarra.SetFocus;
-      exit;
-  end;
-end;
 
-procedure TfrmCadProduto.edtPrecoCustoKeyPress(Sender: TObject; var Key: Char);
-begin
-  inherited;
- // if (key in ['.', ';', ':', '[', ']', '{', '}', '+', '-', '*', '*', '/', 'ª', 'º', '!', '@', '#', '$',
-{'%', '¨', '(', ')', '§', '_', '?', '\', '¹', '²', '³', '£', '¢', '¬']) then
-begin
-    key := #0;
-    messageDlg('O Caracter informado é inválido', mtInformation,[mbOk],0);
-end;  }
-If ((not(Key in ['0'..'9',#8])) and (not(key in [',',#8])))then Key := #0;
-  If (key in [','])and (Pos(',',edtPrecoCusto.text)<>0) then Key :=#0;
-end;
-
-procedure TfrmCadProduto.edtPrecoVendaKeyPress(Sender: TObject; var Key: Char);
-begin
-  inherited;
- // if (key in ['.', ';', ':', '[', ']', '{', '}', '+', '-', '*', '*', '/', 'ª', 'º', '!', '@', '#', '$',
-{'%', '¨', '(', ')', '§', '_', '?', '\', '¹', '²', '³', '£', '¢', '¬']) then
-  begin
-    key := #0;
-    messageDlg('O Caracter informado é inválido', mtInformation,[mbOk],0);
-  end;    }
-
-  If ((not(Key in ['0'..'9',#8])) and (not(key in [',',#8])))then Key := #0;
-  If (key in [','])and (Pos(',',edtPrecoVenda.text)<>0) then Key :=#0;
 end;
 
 procedure TfrmCadProduto.FormShow(Sender: TObject);
@@ -256,11 +212,11 @@ begin
   end;
   if frmListagemProduto.op = 2 then
   begin
-    edtIdProd.Text := dm.cdsProduto.FieldByName('idProduto').Text;
+    edtIdProd.Text := dm.cdsProduto.FieldByName('idProd').Text;
     edtCodBarra.Text := dm.cdsProduto.FieldByName('codBarra').Text;
     edtDesc.Text := dm.cdsProduto.FieldByName('descricao').Text;
     edtEspec.Text := dm.cdsProduto.FieldByName('complemento').Text;
-    dblMarca.KeyValue := dm.cdsProduto.FieldByName('id').AsInteger;
+    dblMarca.KeyValue := dm.cdsProduto.FieldByName('idProd').AsInteger;
     cboCat.ItemIndex := (cboCat.Items.IndexOf(dm.cdsProduto.FieldByName('categoria').Text));
     cboUnidade.ItemIndex := (cboUnidade.Items.IndexOf(dm.cdsProduto.FieldByName('unidade').Text));
     edtPrecoCusto.Text := dm.cdsProduto.FieldByName('precoCusto').Text;

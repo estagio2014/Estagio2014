@@ -71,7 +71,6 @@ type
     procedure dblCidadeClick(Sender: TObject);
     procedure edtDataNascExit(Sender: TObject);
     procedure edtEmailExit(Sender: TObject);
-    procedure edtRgChange(Sender: TObject);
   private
     { Private declarations }
     function Cpf(CPF_Text: string): boolean;
@@ -147,7 +146,7 @@ begin
             edtApelido.SetFocus;
             exit;
           end;
-          if edtCpf.Text = '  .   .   /    -  ' then
+          if edtCpf.Text = '   .   .   -  ' then
           begin
             MessageDlg('Campo CNPJ Obrigatório!', mtError,[mbOk],0);
             edtCpf.SetFocus;
@@ -156,6 +155,12 @@ begin
           if Trim(edtRg.Text) = '' then
           begin
             MessageDlg('Campo INSC ESTADUAL Obrigatório!', mtError,[mbOk],0);
+            edtRg.SetFocus;
+            exit;
+          end;
+          if dm.cdsCliente.Locate('rg', edtRg.Text,[]) then
+          begin
+            MessageDlg('INSC ESTADUAL já cadastrado, favor informar outro.', mtError,[mbOk],0);
             edtRg.SetFocus;
             exit;
           end;
@@ -184,7 +189,7 @@ begin
               dblCidade.SetFocus;
               exit;
               end;
-            if edtTelefone.Text = '(  )    -    'then
+            if edtTelefone.Text = '(  )    -    ' then
             begin
               MessageDlg('Campo TELEFONE Obrigatório!', mtError,[mbOk],0);
               edtTelefone.SetFocus;
@@ -196,13 +201,11 @@ begin
               edtCelular.SetFocus;
               exit;
             end;
-
       if frmListagemCliente.op=1 then
       begin
-        dm.sdsComandoSql.CommandText := 'INSERT into cliente values(seqCliente.nextval,:id_cid, :nomeCli, :apelido, :tipoPessoa, :cpfCnpj, :rg, :dataNasc, :estadoCivil, :genero, :endereco, :bairro, :cep, :tel, :cel, :email, :midSocial, :obs, :dataCad, :situacao)';
+        dm.sdsComandoSql.CommandText := 'INSERT into cliente values(seqCliente.nextval, :nomeCli, :apelido, :tipoPessoa, :cpfCnpj, :rg, :dataNasc, :estadoCivil, :genero, :endereco, :bairro, :cep, :tel, :cel, :email, :midSocial, :obs, :dataCad, :situacao, :id_cid)';
         with dm.sdsComandoSql do
         begin
-          ParamByName('id_cid').AsInteger := dblCidade.KeyValue;
           ParamByName('nomeCli').Text := edtNomeCli.Text;
           ParamByName('Apelido').Text := edtApelido.Text;
           if rdbPessoaFisica.Checked = true then
@@ -235,7 +238,7 @@ begin
           begin
             dm.sdsComandoSql.ParamByName('situacao').AsString:='I';
           end;
-
+          ParamByName('id_cid').AsInteger := dblCidade.KeyValue;
         end;
         dm.sdsComandoSql.ExecSQL();
         MessageDlg('Cliente cadastrado com Sucesso!', mtInformation,[mbOk],0);
@@ -244,15 +247,14 @@ begin
         Close;
       end;
     Except
-      Application.MessageBox('O CPF/CNPJ cadastrado já existe ou está incorreto!','Alerta',0);
+     Application.MessageBox('O Cpf cadastrado já existe!','Alerta',0);
   end;
       if frmListagemCliente.op = 2 then
       begin
-        dm.sdsComandoSql.CommandText := 'UPDATE cliente set id_cid = :id_cid,nomeCli = :nomeCli, Apelido = :Apelido, tipoPessoa = :tipoPessoa, cpfCnpj = :cpfCnpj, rg = :rg, dataNasc = :dataNasc, estadoCivil = :estadoCivil, genero = :genero, endereco = :endereco, bairro = :bairro, cep = :cep,'+
-        'telefone = :tel, celular = :cel, email = :email, midiaSocial = :midSocial, observacao = :obs, dataCadastro = :dataCad, situacao = :situacao where idCli = :idCli';
+        dm.sdsComandoSql.CommandText := 'UPDATE cliente set nomeCli = :nomeCli, Apelido = :Apelido, tipoPessoa = :tipoPessoa, cpfCnpj = :cpfCnpj, rg = :rg, dataNasc = :dataNasc, estadoCivil = :estadoCivil, genero = :genero, endereco = :endereco, bairro = :bairro, cep = :cep,'+
+        'telefone = :tel, celular = :cel, email = :email, midiaSocial = :midSocial, observacoes = :obs, dataCadastro = :dataCad, situacao = :situacao, id_cid = :id_cid where idCli = :idCli';
           with dm.sdsComandoSql do
           begin
-            ParamByName('id_cid').AsInteger := dblCidade.KeyValue;
             ParamByName('idCli').Text := edtIdCli.Text;
             ParamByName('nomeCli').Text := edtNomeCli.Text;
             ParamByName('Apelido').Text := edtApelido.Text;
@@ -286,6 +288,7 @@ begin
             begin
               dm.sdsComandoSql.ParamByName('situacao').AsString:='I';
             end;
+            ParamByName('id_cid').AsInteger := dblCidade.KeyValue;
           end;
         dm.sdsComandoSql.ExecSQL();
         MessageDlg('Alteração realizada com Sucesso!', mtInformation,[mbOk],0);
@@ -339,7 +342,7 @@ end;
 procedure TfrmCadCliente.dblCidadeClick(Sender: TObject);
 begin
   inherited;
-  edtUf.Text := dm.cdsCidade.FieldByName('uf').Text;
+edtUf.Text := dm.cdsCidade.FieldByName('uf_cid').Text;
 end;
 
 procedure TfrmCadCliente.edtApelidoKeyPress(Sender: TObject; var Key: Char);
@@ -426,51 +429,40 @@ end;
 end;
 
 
-procedure TfrmCadCliente.edtRgChange(Sender: TObject);
-begin
-  inherited;
-  if Length(edtRg.text)>15 then
-  begin
-      MessageDlg('Atenção! RG/ Insc. Estadual digitado ultrapassa 15 digitos!', mtInformation,[mbOk],0);
-      edtRg.SetFocus;
-      exit;
-  end;
-end;
-
 procedure TfrmCadCliente.FormShow(Sender: TObject);
 begin
   inherited;
-  if frmListagemCliente.op=1 then
-  begin
-    edtDataCadastro.Text:= DateToStr(date);
-    edtDataNasc.text := DateToStr(date);
-    edtIdCli.Clear;
-    edtNomeCli.Clear;
-    edtApelido.Clear;
-    edtCpf.Clear;
-    edtRg.Clear;
-    cboEstadoCivil.ItemIndex:= -1;
-    cboSexo.ItemIndex:= -1;
-    edtEndereco.Clear;
-    edtBairro.Clear;
-    edtCep.Clear;
-    dblCidade.KeyValue:= -1;
-    edtUf.Clear;
-    edtTelefone.Clear;
-    edtCelular.Clear;
-    edtEmail.Clear;
-    edtMidiaSocial.Clear;
-    mmObs.Clear;
-    edtNomeCli.SetFocus;
-    rdbPessoaFisica.Checked:=true;
-    rdbAtivo.Checked:=true;
-  end;
+if frmListagemCliente.op=1 then
+begin
+  edtDataCadastro.Text:= DateToStr(date);
+  edtDataNasc.text := DateToStr(date);
+  edtIdCli.Clear;
+  edtNomeCli.Clear;
+  edtApelido.Clear;
+  edtCpf.Clear;
+  edtRg.Clear;
+  cboEstadoCivil.ItemIndex:= -1;
+  cboSexo.ItemIndex:= -1;
+  edtEndereco.Clear;
+  edtBairro.Clear;
+  edtCep.Clear;
+  dblCidade.KeyValue:= -1;
+  edtUf.Clear;
+  edtTelefone.Clear;
+  edtCelular.Clear;
+  edtEmail.Clear;
+  edtMidiaSocial.Clear;
+  mmObs.Clear;
+  edtNomeCli.SetFocus;
+  rdbPessoaFisica.Checked:=true;
+  rdbAtivo.Checked:=true;
+end;
     if frmListagemCliente.op=2 then
       begin
-        edtIdCli.Text := dm.cdsCliente.FieldByName('idCli').Text;
-        edtNomeCli.Text := dm.cdsCliente.FieldByName('nomeCli').Text;
-        edtApelido.Text := dm.cdsCliente.FieldByName('apelido').Text;
-        if (dm.cdsCliente.FieldByName('tipoPessoa').Text = 'F') then
+      edtIdCli.Text := dm.cdsCliente.FieldByName('idCli').Text;
+       edtNomeCli.Text := dm.cdsCliente.FieldByName('nomeCli').Text;
+       edtApelido.Text := dm.cdsCliente.FieldByName('apelido').Text;
+       if (dm.cdsCliente.FieldByName('tipoPessoa').Text = 'F') then
           begin
             rdbPessoaFisica.Checked := True;
           end
@@ -487,12 +479,12 @@ begin
       edtBairro.Text := dm.cdsCliente.FieldByName('bairro').Text;
       edtCep.Text := dm.cdsCliente.FieldByName('cep').Text;
       dblCidade.KeyValue := dm.cdsCliente.FieldByName('id_cid').AsInteger;
-      edtUf.Text := dm.cdsCidade.FieldByName('uf').Text;
+      edtUf.Text := dm.cdsCidade.FieldByName('uf_cid').Text;
       edtTelefone.Text := dm.cdsCliente.FieldByName('telefone').Text;
       edtCelular.Text := dm.cdsCliente.FieldByName('celular').Text;
       edtEmail.Text := dm.cdsCliente.FieldByName('email').Text;
       edtMidiaSocial.Text := dm.cdsCliente.FieldByName('midiaSocial').Text;
-      mmObs.Text := dm.cdsCliente.FieldByName('observacao').Text;
+      mmObs.Text := dm.cdsCliente.FieldByName('observacoes').Text;
       edtDataCadastro.Text := dm.cdsCliente.FieldByName('dataCadastro').Text;
       if (dm.cdsCliente.FieldByName('situacao').Text = 'A') then
         begin
@@ -527,8 +519,7 @@ begin
   cboSexo.Visible:=true;
   Label8.Visible:=true; // Estado Civil
   cboEstadoCivil.Visible:=true;
-  Label22.Caption:='Apelido:';
-  Label22.Font.Style:=[];
+  Label22.Caption:='Apelido';
   edtDataNasc.Left:=75;
                             //posições das Labels
   Label1.Left:= 54;
@@ -568,14 +559,13 @@ begin
   Label8.Visible:=false; // Estado Civil
   cboEstadoCivil.Visible:=false;
   Label22.Caption:='Razão social:*';
-  Label22.Font.Style:=[fsBold];
   edtDataNasc.Left:=98;
   Label1.Left:= 75;
-  Label2.Left:=5;
+  Label2.Left:=7;
   Label4.left:=61;
   Label5.Left:= 4;// Data Nasc
 
-  Label22.Left:= 19;
+  Label22.Left:= 25;
 
 
   Label16.Caption:='Site:';

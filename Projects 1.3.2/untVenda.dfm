@@ -3,7 +3,6 @@ inherited frmVenda: TfrmVenda
   ClientHeight = 523
   ClientWidth = 698
   OnShow = FormShow
-  ExplicitTop = -94
   ExplicitWidth = 714
   ExplicitHeight = 557
   PixelsPerInch = 96
@@ -89,7 +88,7 @@ inherited frmVenda: TfrmVenda
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 387
+      Left = 398
       Top = 48
       Width = 63
       Height = 13
@@ -133,15 +132,15 @@ inherited frmVenda: TfrmVenda
       TabOrder = 0
     end
     object edtCpf: TMaskEdit
-      Left = 453
+      Left = 464
       Top = 45
-      Width = 112
+      Width = 91
       Height = 21
-      EditMask = '99.999.999/9999-99;1;_'
-      MaxLength = 18
+      EditMask = '999.999.999-99;1;_'
+      MaxLength = 14
       TabOrder = 1
-      Text = '  .   .   /    -  '
-      OnEnter = edtCpfEnter
+      Text = '   .   .   -  '
+      OnChange = edtCpfChange
       OnExit = edtCpfExit
     end
     object edtIdVenda: TEdit
@@ -564,7 +563,7 @@ inherited frmVenda: TfrmVenda
       Height = 211
       DataSource = dsItemVenda
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 7
+      TabOrder = 8
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -13
@@ -624,7 +623,7 @@ inherited frmVenda: TfrmVenda
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 9
     end
     object dblProduto: TDBLookupComboBox
       Left = 69
@@ -643,7 +642,7 @@ inherited frmVenda: TfrmVenda
       Width = 74
       Height = 24
       Enabled = False
-      TabOrder = 9
+      TabOrder = 10
     end
     object edtQtdade: TEdit
       Left = 189
@@ -651,7 +650,7 @@ inherited frmVenda: TfrmVenda
       Width = 71
       Height = 24
       NumbersOnly = True
-      TabOrder = 1
+      TabOrder = 2
     end
     object edtPreco: TEdit
       Left = 312
@@ -659,7 +658,7 @@ inherited frmVenda: TfrmVenda
       Width = 84
       Height = 24
       Enabled = False
-      TabOrder = 2
+      TabOrder = 3
     end
     object edtDataVenda: TMaskEdit
       Left = 129
@@ -675,8 +674,19 @@ inherited frmVenda: TfrmVenda
       Font.Style = [fsBold]
       MaxLength = 10
       ParentFont = False
-      TabOrder = 10
+      TabOrder = 11
       Text = '  /  /    '
+    end
+    object edtCodBarra: TMaskEdit
+      Left = 506
+      Top = 17
+      Width = 88
+      Height = 24
+      EditMask = '9999999999999;1;_'
+      MaxLength = 13
+      TabOrder = 1
+      Text = '             '
+      OnExit = edtCodBarraExit
     end
     object cboFormPag: TComboBox
       Left = 552
@@ -684,7 +694,7 @@ inherited frmVenda: TfrmVenda
       Width = 130
       Height = 24
       Style = csDropDownList
-      TabOrder = 5
+      TabOrder = 6
       Items.Strings = (
         'Boleto'
         'Cart'#227'o de Cr'#233'dito'
@@ -703,7 +713,7 @@ inherited frmVenda: TfrmVenda
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object rdbParcelado: TRadioButton
       Left = 205
@@ -717,7 +727,7 @@ inherited frmVenda: TfrmVenda
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 5
     end
     object edtDesconto: TEdit
       Left = 372
@@ -730,16 +740,8 @@ inherited frmVenda: TfrmVenda
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 7
       OnKeyPress = edtDescontoKeyPress
-    end
-    object edtCodBarra: TEdit
-      Left = 505
-      Top = 16
-      Width = 86
-      Height = 24
-      TabOrder = 11
-      OnExit = edtCodBarraExit
     end
   end
   object dsCliente: TDataSource

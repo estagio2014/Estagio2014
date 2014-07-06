@@ -77,7 +77,9 @@ type
     cdsFornecedorDATACADASTRO: TSQLTimeStampField;
     cdsMarcaID: TFMTBCDField;
     cdsMarcaDESCRICAO: TWideStringField;
+    cdsProdutoIDPRODUTO: TWideStringField;
     cdsProdutoID: TFMTBCDField;
+    cdsProdutoCODBARRA: TFMTBCDField;
     cdsProdutoDESCRICAO: TWideStringField;
     cdsProdutoCOMPLEMENTO: TWideStringField;
     cdsProdutoCATEGORIA: TWideStringField;
@@ -96,6 +98,11 @@ type
     dspVenda: TDataSetProvider;
     cdsItemVenda: TClientDataSet;
     cdsVenda: TClientDataSet;
+    cdsItemVendaID_VENDA: TFMTBCDField;
+    cdsItemVendaIDPRODUTO: TWideStringField;
+    cdsItemVendaQUANTIDADE: TFMTBCDField;
+    cdsItemVendaPRECO: TFMTBCDField;
+    cdsItemVendaSUBTOTAL: TFMTBCDField;
     cdsUsuario: TClientDataSet;
     dspUsuario: TDataSetProvider;
     sdsUsuario: TSQLDataSet;
@@ -105,42 +112,18 @@ type
     cdsUsuarioSENHA: TWideStringField;
     cdsUsuarioNIVELACESS: TWideStringField;
     cdsUsuarioDATACADASTRO: TSQLTimeStampField;
-    cdsProdutoIDPRODUTO: TFMTBCDField;
     cdsVendaID_VENDA: TFMTBCDField;
+    cdsVendaIDCLI: TFMTBCDField;
     cdsVendaVENDEDOR: TWideStringField;
-    cdsVendaNOMECLI: TWideStringField;
-    cdsVendaCPFCNPJ: TWideStringField;
+    cdsVendaDESCONTO: TFMTBCDField;
     cdsVendaVALORTOTAL: TFMTBCDField;
     cdsVendaDATA_VENDA: TSQLTimeStampField;
     cdsVendaFORMA_PAG: TWideStringField;
     cdsVendaTIPO_PAG: TWideStringField;
-    cdsVendaIDCLI: TFMTBCDField;
-    cdsVendaDESCONTO: TFMTBCDField;
-    cdsVendaIDCLI_1: TFMTBCDField;
-    cdsItemVendaID_VENDA: TFMTBCDField;
-    cdsItemVendaIDPRODUTO: TFMTBCDField;
-    cdsItemVendaQUANTIDADE: TFMTBCDField;
-    cdsItemVendaPRECO: TFMTBCDField;
-    cdsItemVendaSUBTOTAL: TFMTBCDField;
-    sdsCompra: TSQLDataSet;
-    dspCompra: TDataSetProvider;
-    cdsCompra: TClientDataSet;
-    sdsItemCompra: TSQLDataSet;
-    dspItemCompra: TDataSetProvider;
-    cdsItemCompra: TClientDataSet;
-    cdsItemCompraID_COMPRA: TFMTBCDField;
-    cdsItemCompraIDPRODUTO: TFMTBCDField;
-    cdsItemCompraQUANTIDADE: TFMTBCDField;
-    cdsItemCompraPRECO_COMPRA: TFMTBCDField;
-    cdsItemCompraSUBTOTAL: TFMTBCDField;
-    cdsProdutoCODBARRA: TFMTBCDField;
-    procedure bancoAfterConnect(Sender: TObject);
-    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    transacao:TTransactionDesc;
   end;
 
 var
@@ -151,15 +134,5 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
-
-procedure Tdm.bancoAfterConnect(Sender: TObject);
-begin
-//Banco.ExecuteDirect('alter session set nls_numeric_characters = ' + QuotedStr('.,'));
-end;
-
-procedure Tdm.DataModuleCreate(Sender: TObject);
-begin
-  transacao.IsolationLevel := xilREADCOMMITTED;
-end;
 
 end.

@@ -35,8 +35,6 @@ type
     Cliente1: TMenuItem;
     Cidade1: TMenuItem;
     Marca1: TMenuItem;
-    btnCompra: TSpeedButton;
-    btnVenda: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnClienteClick(Sender: TObject);
     procedure btnFornecedorClick(Sender: TObject);
@@ -49,12 +47,6 @@ type
     procedure BlocodeNotas1Click(Sender: TObject);
     procedure Calculadora1Click(Sender: TObject);
     procedure Usurio1Click(Sender: TObject);
-    procedure Marca1Click(Sender: TObject);
-    procedure Venda1Click(Sender: TObject);
-    procedure Compra1Click(Sender: TObject);
-    procedure btnCompraClick(Sender: TObject);
-    procedure btnVendaClick(Sender: TObject);
-    procedure ContasaPagar1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -69,9 +61,7 @@ implementation
 {$R *.dfm}
 
 uses untListagemCliente, untListagemFornecedor, untListagemProduto,
-  untListagemCidade, untCadUsuario, untListagemUsuario, untListagemMarca,
-  untVenda, untListagemVenda, untListagemCompra, untCompra, untContasPagar,
-  untContasReceber, untListagemContasPagar;
+  untListagemCidade, untCadUsuario, untListagemUsuario;
 
 procedure TfrmPrincipal.BlocodeNotas1Click(Sender: TObject);
 begin
@@ -83,11 +73,6 @@ begin
 frmListagemCliente.showModal;
 end;
 
-procedure TfrmPrincipal.btnCompraClick(Sender: TObject);
-begin
-  frmListagemCompra.showModal;
-end;
-
 procedure TfrmPrincipal.btnFornecedorClick(Sender: TObject);
 begin
 frmListagemFornecedor.ShowModal;
@@ -96,11 +81,6 @@ end;
 procedure TfrmPrincipal.btnProdutoClick(Sender: TObject);
 begin
 frmListagemProduto.ShowModal;
-end;
-
-procedure TfrmPrincipal.btnVendaClick(Sender: TObject);
-begin
-  frmListagemVenda.ShowModal;
 end;
 
 procedure TfrmPrincipal.Calculadora1Click(Sender: TObject);
@@ -118,16 +98,6 @@ begin
 frmListagemCliente.showModal;
 end;
 
-procedure TfrmPrincipal.Compra1Click(Sender: TObject);
-begin
-  frmListagemCompra.ShowModal;
-end;
-
-procedure TfrmPrincipal.ContasaPagar1Click(Sender: TObject);
-begin
-  frmListagemContaPagar.showModal;
-end;
-
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    Action:=caNone;
@@ -135,16 +105,13 @@ begin
    begin
    Action:=caFree;
    end;
+
+
 end;
 
 procedure TfrmPrincipal.Fornecedor1Click(Sender: TObject);
 begin
 frmListagemFornecedor.showModal;
-end;
-
-procedure TfrmPrincipal.Marca1Click(Sender: TObject);
-begin
-  frmListagemMarca.showModal;
 end;
 
 procedure TfrmPrincipal.Produto1Click(Sender: TObject);
@@ -160,11 +127,6 @@ end;
 procedure TfrmPrincipal.Usurio1Click(Sender: TObject);
 begin
 frmListagemUsuario.ShowModal;
-end;
-
-procedure TfrmPrincipal.Venda1Click(Sender: TObject);
-begin
-  frmListagemVenda.showModal;
 end;
 
 end.
