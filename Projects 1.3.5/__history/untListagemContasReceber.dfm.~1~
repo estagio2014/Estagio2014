@@ -1,0 +1,10 @@
+inherited frmListagemContasReceber: TfrmListagemContasReceber
+  Caption = 'Listagem de Contas a Receber'
+  ExplicitWidth = 727
+  ExplicitHeight = 416
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel2: TPanel
+    ExplicitTop = 341
+  end
+end

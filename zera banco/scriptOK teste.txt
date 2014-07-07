@@ -64,7 +64,7 @@ Drop sequence seqLancamento;
 
 
 Create table cidade (
-	id_cid Number NOT NULL ,
+	id_cid Integer NOT NULL ,
 	nome_cid Varchar2 (50),
 	uf Char (2),
 	datacadastro Date,
@@ -72,8 +72,8 @@ Create table cidade (
 );
 
 Create table cliente (
-	idcli Number NOT NULL ,
-	id_cid Number NOT NULL ,
+	idcli Integer NOT NULL ,
+	id_cid Integer NOT NULL ,
 	nomeCli Varchar2 (50),
 	apelido Varchar2 (50),
 	tipopessoa Char (1),
@@ -96,8 +96,8 @@ Create table cliente (
 );
 
 Create table fornecedor (
-	idFornecedor Number NOT NULL ,
-	id_cid Number NOT NULL ,
+	idFornecedor Integer NOT NULL ,
+	id_cid Integer NOT NULL ,
 	nomeFant_ Varchar2 (50),
 	razaoSocial Varchar2 (50),
 	cnpj Varchar2 (30) unique,
@@ -118,15 +118,15 @@ Create table fornecedor (
 );
 
 Create table produto (
-	idProduto Number NOT NULL ,
-	id Number NOT NULL ,
+	idProduto Integer NOT NULL ,
+	id Integer NOT NULL ,
 	codBarra Number unique,
 	descricao Varchar2 (30),
 	complemento Varchar2 (30),
 	categoria Varchar2 (11),
 	unidade Char (2),
-	precoCusto Number(10,2),
-	precoVenda Number(10,2),
+	precoCusto float,
+	precoVenda float,
 	estoqueAtual Integer,
 	observacoes Varchar2 (200),
 	situacao Char (1),
@@ -135,21 +135,22 @@ Create table produto (
 );
 
 Create table Venda (
-	id_venda Number NOT NULL ,
-	idcli Number NOT NULL ,
+	id_venda Integer NOT NULL ,
+	idcli Integer NOT NULL ,
 	vendedor Varchar2 (30) NOT NULL ,
-	desconto Number(10,2),
-	valorTotal Number(10,2),
+	desconto float,
+	valorTotal float,
 	data_Venda Date,
 	forma_pag Varchar2 (20),
 	tipo_pag Char (1) NOT NULL ,
+	situacao varchar2 (20),
  Constraint pk_Venda primary key (id_venda) 
 );
 
 Create table Usuario (
-	id_usuario Number NOT NULL ,
+	id_usuario Integer NOT NULL ,
 	nome Varchar2 (20) NOT NULL ,
-	login Varchar2 (20) NOT NULL ,
+	login Varchar2 (20) NOT NULL,
 	senha Varchar2 (20) NOT NULL ,
 	nivelAcess Varchar2 (20) NOT NULL ,
 	dataCadastro Date,
@@ -157,62 +158,65 @@ Create table Usuario (
 );
 
 Create table Compra (
-	id_compra Number NOT NULL ,
-	idFornecedor Number NOT NULL ,
+	id_compra Integer NOT NULL ,
+	idFornecedor Integer NOT NULL ,
 	data_compra Date,
 	forma_pag Varchar2 (20),
-	valorTotal Number(10,2),
-	desconto Number(10,2),
+	valorTotal float,
+	desconto float,
 	tipo_pag Char (1),
+	situacao varchar2 (20),
  Constraint pk_Compra primary key (id_compra) 
 );
 
 Create table Item_venda (
-	id_venda Number NOT NULL ,
-	idProduto Varchar2 (20) NOT NULL ,
+	id_venda Integer NOT NULL ,
+	idProduto Integer NOT NULL ,
 	quantidade Number,
-	preco Number(10,2),
-	subTotal Number(10,2),
+	preco float,
+	subTotal float,
  Constraint pk_Item_venda primary key (id_venda,idProduto) 
 );
 
 Create table Fatura (
-	id Number NOT NULL ,
-	id_Lancamento Number NOT NULL ,
+	id Integer NOT NULL ,
+	id_Lancamento Integer NOT NULL ,
 	num_parcela Number,
-	vlr_parcela Number(10,2),
-	vlr_receber Number(10,2),
+	vlr_parcela float,
+	vlr_receber float,
+	data_emissao Date,
 	data_venc Date,
 	data_recebido Date,
-	vlr_restante Number(10,2),
+	vlr_restante float,
 	tipo_pagamento Varchar2 (20),
 	num_fatura Number,
- Constraint pk_Fatura primary key (id) 
+ Constraint pk_Fatura primary key (id,num_parcela) 
 );
 
 Create table Marca (
-	id Number NOT NULL ,
+	id Integer NOT NULL ,
 	descricao Varchar2 (30),
  Constraint pk_Marca primary key (id) 
 );
 
 Create table Item_compra (
-	id_compra Number NOT NULL ,
-	idProduto Varchar2 (20) NOT NULL ,
+	id_compra Integer NOT NULL ,
+	idProduto Integer NOT NULL ,
 	quantidade Number,
-	preco_compra Number(10,2),
-	subTotal Number(10,2),
+	preco_compra float,
+	subTotal float,
  Constraint pk_Item_compra primary key (id_compra,idProduto) 
 );
 
 Create table Lancamento (
-	id_ Number NOT NULL ,
-	id_compra Number,
-	id_venda Number,
+	id_ Integer NOT NULL ,
+	id_compra Integer,
+	id_venda Integer,
 	tipo_lanc Varchar2 (20),
-	valor Varchar2 (20),
+	valor float,
 	forma_pagamento Varchar2 (20),
 	qtde_parc Integer,
+	data_lanc Date,
  Constraint pk_Lancamento primary key (id_) 
 );
 
@@ -227,4 +231,21 @@ Create sequence seqCompra;
 Create sequence seqFatura;
 Create sequence seqLancamento;
 
+insert into usuario values (seqUsuario.nextVal, 'Administrador', 'admin', 'admin','Administrador', sysdate);
+
 commit;
+
+
+==========
+splash
+
+//time
+Close;
+  Update;
+  fmLogin.ShowModal;
+
+  //onClose 
+  Action:= caFree;
+
+  //frmLogin 
+  classes
