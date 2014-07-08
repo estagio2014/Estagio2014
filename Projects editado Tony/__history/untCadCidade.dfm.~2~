@@ -1,0 +1,187 @@
+inherited frmCadCidade: TfrmCadCidade
+  Caption = 'Cadastro de Cidade'
+  ClientHeight = 221
+  ClientWidth = 342
+  OnShow = FormShow
+  ExplicitWidth = 358
+  ExplicitHeight = 255
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnConfirm: TSpeedButton
+    Left = 73
+    Top = 158
+    Width = 80
+    Height = 27
+    OnClick = btnConfirmClick
+    ExplicitLeft = 73
+    ExplicitTop = 158
+    ExplicitWidth = 80
+    ExplicitHeight = 27
+  end
+  inherited btnCancelar: TSpeedButton
+    Left = 185
+    Top = 158
+    Width = 80
+    Height = 27
+    ExplicitLeft = 185
+    ExplicitTop = 158
+    ExplicitWidth = 80
+    ExplicitHeight = 27
+  end
+  object Label1: TLabel [2]
+    Left = 28
+    Top = 72
+    Width = 15
+    Height = 13
+    Caption = 'ID:'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel [3]
+    Left = 127
+    Top = 72
+    Width = 37
+    Height = 13
+    Caption = 'Nome:*'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label3: TLabel [4]
+    Left = 22
+    Top = 113
+    Width = 23
+    Height = 13
+    Caption = 'UF:*'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label4: TLabel [5]
+    Left = 140
+    Top = 113
+    Width = 85
+    Height = 13
+    Caption = 'Data de Cadastro'
+  end
+  object Label5: TLabel [6]
+    Left = 11
+    Top = 196
+    Width = 120
+    Height = 13
+    Caption = '* = Campo Obrigat'#243'rio'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Times New Roman'
+    Font.Style = [fsBold, fsUnderline]
+    ParentFont = False
+  end
+  inherited Panel1: TPanel
+    Width = 342
+    ExplicitWidth = 342
+    object Label6: TLabel
+      Left = 102
+      Top = 18
+      Width = 126
+      Height = 16
+      Caption = 'Cadastro de Cidade'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+  end
+  object edtIdCidade: TEdit
+    Left = 48
+    Top = 69
+    Width = 73
+    Height = 21
+    Enabled = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+  end
+  object edtNomeCidade: TEdit
+    Left = 164
+    Top = 69
+    Width = 162
+    Height = 21
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+  end
+  object cboUF: TComboBox
+    Left = 48
+    Top = 110
+    Width = 73
+    Height = 21
+    Style = csDropDownList
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    Items.Strings = (
+      'AC'
+      'AL'
+      'AP'
+      'AM'
+      'BA'
+      'CE'
+      'DF'
+      'ES'
+      'GO'
+      'MA'
+      'MT'
+      'MS'
+      'MG'
+      'PR'
+      'PB'
+      'PA'
+      'PE'
+      'PI'
+      'RJ'
+      'RN'
+      'RS'
+      'RO'
+      'RR'
+      'SC'
+      'SE'
+      'SP'
+      'TO')
+  end
+  object edtDataCadastro: TMaskEdit
+    Left = 231
+    Top = 110
+    Width = 65
+    Height = 21
+    Enabled = False
+    EditMask = '99/99/9999;1;_'
+    MaxLength = 10
+    TabOrder = 4
+    Text = '  /  /    '
+  end
+end
