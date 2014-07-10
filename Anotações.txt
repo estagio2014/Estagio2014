@@ -1,9 +1,3 @@
-Alterar Banco, Tabelas:
+* Reta Final 
 
-* Produto:
-- Id varchar para number.
-- Categoria tamanho 11.
-
-* Atributos na grid da listagem de venda
-
-teste
+- Relatórios.

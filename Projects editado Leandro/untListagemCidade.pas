@@ -1,0 +1,107 @@
+unit untListagemCidade;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untListagemPrincipal, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Data.DB;
+
+type
+  TfrmListagemCidade = class(TfrmListagem)
+    procedure dsListagemDataChange(Sender: TObject; Field: TField);
+    procedure edtPesquisarChange(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    op:byte;
+  end;
+
+var
+  frmListagemCidade: TfrmListagemCidade;
+
+implementation
+
+{$R *.dfm}
+
+uses untDm, untCadCidade, untCadCliente;
+
+procedure TfrmListagemCidade.dsListagemDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+ //DBGrid1.SelectedRows.CurrentRowSelected:=true;
+edtTotaldeReg.Text := IntToStr(dm.cdsCidade.RecordCount);
+Speedbutton3.Enabled:=true;
+Speedbutton2.Enabled:=true;
+if (dm.cdsCidade.RecordCount = 0) then
+begin
+  Speedbutton3.Enabled:=false;
+  Speedbutton2.Enabled:=false;
+end else;
+end;
+
+procedure TfrmListagemCidade.edtPesquisarChange(Sender: TObject);
+begin
+  inherited;
+dm.cdsCidade.Locate('nome_cid', edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+end;
+
+procedure TfrmListagemCidade.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  if frmListagemCidade.op = 3 then
+  begin
+    dm.cdsCidade.Open;
+  end
+  else begin
+  dm.cdsCidade.Close;
+  end;
+end;
+
+procedure TfrmListagemCidade.FormShow(Sender: TObject);
+begin
+  inherited;
+  dm.cdsCidade.Open;
+end;
+
+procedure TfrmListagemCidade.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+ op:=1;
+ frmCadCidade.Caption:='Incluir Cidade';
+ frmCadCidade.ShowModal;
+end;
+
+procedure TfrmListagemCidade.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  try
+    if (MessageDlg('Deseja Excluir esta Cidade?', mtConfirmation,[mbYes,mbNo],0)=mrYes) then
+    begin
+      dm.sdsComandoSql.CommandText:='delete from cidade where id_cid =:id';
+      dm.sdsComandoSql.ParamByName('id').Text:=dm.cdsCidade.FieldByName('id_cid').Text;
+      dm.sdsComandoSql.ExecSQL();
+      dm.cdsCidade.Close;
+      dm.cdsCidade.Open;
+    end;
+  Except
+     Application.MessageBox('Erro ao Excluir! Esta Cidade está sendo utilizada em outro CADASTRO.','Alerta',0);
+  end;
+end;
+
+procedure TfrmListagemCidade.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+op :=2;
+frmCadCidade.Caption:='Alterar Cidade';
+frmCadCidade.ShowModal;
+end;
+
+end.
