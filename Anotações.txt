@@ -1,3 +1,32 @@
 * Reta Final 
 
-- Relatórios.
+- Relatórios Vendas e Compras / filtros vendas por semana ou mensal produtos mais vendidos 
+
+botão visualisar venda / compra
+
+quando add item de compra limpar campos 
+
+comprar itens de compra aumentar o estoque do produto
+
+vender itens de venda diminuir o estoque do produto
+
+quando estoque chegar a 0 alterar status para indisponivel
+
+chamar id pelo duplo click
+
+verificar situação de itens antes de incluir em venda ou compra
+
+limpar campo cpf/cnpj de cliente ao mudar de tipo pessoa
+
+usar currency grid <testar>
+
+contas a pagar e receber .. 
+
+
+
+
+
+
+
+
+
