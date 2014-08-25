@@ -323,10 +323,9 @@ object dm: Tdm
     ProviderName = 'dspProduto'
     Left = 256
     Top = 331
-    object cdsProdutoIDPRODUTO: TFMTBCDField
+    object cdsProdutoIDPRODUTO: TWideStringField
       FieldName = 'IDPRODUTO'
       Required = True
-      Precision = 32
     end
     object cdsProdutoID: TFMTBCDField
       FieldName = 'ID'

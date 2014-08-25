@@ -105,7 +105,6 @@ type
     cdsUsuarioSENHA: TWideStringField;
     cdsUsuarioNIVELACESS: TWideStringField;
     cdsUsuarioDATACADASTRO: TSQLTimeStampField;
-    cdsProdutoIDPRODUTO: TFMTBCDField;
     cdsVendaID_VENDA: TFMTBCDField;
     cdsVendaVENDEDOR: TWideStringField;
     cdsVendaNOMECLI: TWideStringField;
@@ -204,6 +203,7 @@ type
     sdsRelatorioCliente: TSQLDataSet;
     sdsRelatorioFornecedor: TSQLDataSet;
     sdsRelatorioProduto: TSQLDataSet;
+    cdsProdutoIDPRODUTO: TWideStringField;
     procedure bancoAfterConnect(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private
