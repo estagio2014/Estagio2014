@@ -1,7 +1,0 @@
-inherited frmListagemCompra: TfrmListagemCompra
-  Caption = 'Listagem de Compra'
-  ExplicitWidth = 808
-  ExplicitHeight = 436
-  PixelsPerInch = 96
-  TextHeight = 13
-end
