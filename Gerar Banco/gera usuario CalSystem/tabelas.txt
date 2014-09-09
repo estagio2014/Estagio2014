@@ -1,0 +1,78 @@
+create table cidade
+(id_cid integer primary key,
+nome_cid varchar(50),
+uf_cid char(2),
+datacadastro date);
+
+create sequence seqCidade;
+
+
+create table cliente
+(idCli integer primary key,
+nomeCli varchar(50),
+Apelido varchar(50),
+tipoPessoa char(1),
+cpfCnpj varchar(30) unique,
+rg varchar(15),
+dataNasc date,
+estadoCivil varchar(15),
+genero char(1),
+endereco varchar(50),
+bairro varchar(30),
+cep varchar(10),
+telefone varchar(13),
+celular varchar(13),
+email varchar(50),
+midiaSocial varchar(80),
+observacoes varchar(200),
+datacadastro date,
+situacao char(1),
+id_cid integer references cidade);
+
+create sequence seqCliente;
+
+
+create table Fornecedor
+(idFor integer primary key,
+NomeFant varchar(50),
+RazaoSocial varchar(50),
+Cnpj varchar(30) unique,
+InscEst varchar(20),
+DataFund date,
+endereco varchar(50),
+bairro varchar(30),
+cep varchar(10),
+Repres varchar(50),
+telefone varchar(13),
+celular varchar(13),
+email varchar(50),
+site varchar(50),
+observacoes varchar(200),
+datacadastro date,
+situacao char(1),
+id_cid integer references cidade);
+
+create sequence seqFornecedor;
+
+create table Marca (idMarca integer primary key,
+descricao varchar(30));
+
+create sequence seqMarca;
+
+create table Produto (idProd integer primary key,
+codBarra integer unique,
+descricao varchar(30),
+complemento varchar(30),
+idMarca integer references marca,
+categoria varchar(11),
+unidade varchar(3),
+PrecoCusto number(10,2),
+PrecoVenda number(10,2),
+estoqueAtual float,
+desconto number(10,2),
+observacoes varchar(200),
+dataCadastro date,
+situacao char(1));
+
+create sequence seqProduto;
+

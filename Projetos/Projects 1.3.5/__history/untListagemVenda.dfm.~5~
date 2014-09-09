@@ -1,0 +1,31 @@
+inherited frmListagemVenda: TfrmListagemVenda
+  Caption = 'Listagem de Venda'
+  ExplicitWidth = 808
+  ExplicitHeight = 436
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited Speedbutton1: TSpeedButton
+      OnClick = Speedbutton1Click
+    end
+    inherited Speedbutton2: TSpeedButton
+      Left = 474
+      ExplicitLeft = 474
+    end
+    inherited Label1: TLabel
+      Top = 11
+      Width = 95
+      Caption = 'Pesquisar Venda:'
+      ExplicitTop = 11
+      ExplicitWidth = 95
+    end
+    inherited edtPesquisar: TEdit
+      Left = 112
+      Top = 9
+      Width = 233
+      ExplicitLeft = 112
+      ExplicitTop = 9
+      ExplicitWidth = 233
+    end
+  end
+end

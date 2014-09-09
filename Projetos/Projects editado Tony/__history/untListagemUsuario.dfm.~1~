@@ -1,0 +1,12 @@
+inherited frmListagemUsuario: TfrmListagemUsuario
+  Caption = 'Listagem de Usu'#225'rio'
+  ExplicitWidth = 815
+  ExplicitHeight = 436
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited Speedbutton1: TSpeedButton
+      OnClick = Speedbutton1Click
+    end
+  end
+end

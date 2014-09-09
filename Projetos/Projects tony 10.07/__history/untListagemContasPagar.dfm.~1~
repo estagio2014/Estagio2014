@@ -1,0 +1,76 @@
+inherited frmListagemContaPagar: TfrmListagemContaPagar
+  Caption = 'Listagem de Contas a Pagar'
+  ClientWidth = 736
+  ExplicitWidth = 752
+  ExplicitHeight = 416
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 736
+    ExplicitWidth = 711
+    inherited btnVoltar: TSpeedButton
+      Left = 636
+      Top = 9
+      Width = 87
+      ExplicitLeft = 636
+      ExplicitTop = 9
+      ExplicitWidth = 87
+    end
+    inherited btnBaixa: TSpeedButton
+      Left = 442
+      Top = 9
+      Width = 100
+      ExplicitLeft = 442
+      ExplicitTop = 9
+      ExplicitWidth = 100
+    end
+    inherited btnEstorno: TSpeedButton
+      Left = 542
+      Top = 9
+      ExplicitLeft = 542
+      ExplicitTop = 9
+    end
+    inherited Label2: TLabel
+      Width = 146
+      Caption = 'Pesquisar Contas a Pagar:'
+      ExplicitWidth = 146
+    end
+    inherited edtPesquisar: TEdit
+      Left = 158
+      ExplicitLeft = 158
+    end
+    object rdbFornecedor: TRadioButton
+      Left = 24
+      Top = 40
+      Width = 81
+      Height = 17
+      Caption = 'Fornecedor'
+      TabOrder = 1
+    end
+    object rdb: TRadioButton
+      Left = 111
+      Top = 40
+      Width = 113
+      Height = 17
+      Caption = 'rdb'
+      TabOrder = 2
+    end
+  end
+  inherited DBGrid1: TDBGrid
+    Width = 736
+  end
+  inherited Panel2: TPanel
+    Width = 736
+    ExplicitLeft = 0
+    ExplicitTop = 337
+    ExplicitWidth = 711
+    inherited Label1: TLabel
+      Left = 539
+      ExplicitLeft = 539
+    end
+    inherited edtTotalReg: TEdit
+      Left = 651
+      ExplicitLeft = 651
+    end
+  end
+end

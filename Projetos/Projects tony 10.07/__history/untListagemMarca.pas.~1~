@@ -1,0 +1,25 @@
+unit untListagemMarca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untListagemPrincipal, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmListagemMarca = class(TfrmListagem)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmListagemMarca: TfrmListagemMarca;
+
+implementation
+
+{$R *.dfm}
+
+end.

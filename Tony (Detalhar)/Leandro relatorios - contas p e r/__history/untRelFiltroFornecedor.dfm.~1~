@@ -1,0 +1,5 @@
+inherited frmfiltrofornecedor: Tfrmfiltrofornecedor
+  Caption = 'Filtros Para Impress'#227'o'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

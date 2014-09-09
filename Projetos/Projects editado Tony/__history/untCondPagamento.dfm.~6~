@@ -1,0 +1,91 @@
+inherited frmCondPagamento: TfrmCondPagamento
+  Caption = 'Condi'#231#227'o de Pagamento'
+  ClientHeight = 343
+  OnShow = FormShow
+  ExplicitWidth = 624
+  ExplicitHeight = 377
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnConfirm: TSpeedButton
+    Left = 195
+    Top = 296
+    ExplicitLeft = 195
+    ExplicitTop = 296
+  end
+  inherited btnCancelar: TSpeedButton
+    Left = 315
+    Top = 296
+    ExplicitLeft = 315
+    ExplicitTop = 296
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 609
+    Height = 290
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 24
+      Top = 18
+      Width = 50
+      Height = 13
+      Caption = 'Parcelas:*'
+    end
+    object btnGerarParcelas: TSpeedButton
+      Left = 496
+      Top = 6
+      Width = 89
+      Height = 35
+      Caption = 'Gerar Parcelas'
+      OnClick = btnGerarParcelasClick
+    end
+    object Label2: TLabel
+      Left = 159
+      Top = 18
+      Width = 9
+      Height = 16
+      Caption = 'X'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object cboParcelas: TComboBox
+      Left = 80
+      Top = 15
+      Width = 73
+      Height = 21
+      TabOrder = 0
+      Items.Strings = (
+        '2'
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8'
+        '9'
+        '10'
+        '11'
+        '12')
+    end
+    object DBGrid1: TDBGrid
+      Left = 8
+      Top = 47
+      Width = 592
+      Height = 217
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+  end
+  object DataSource1: TDataSource
+    Left = 536
+    Top = 208
+  end
+end

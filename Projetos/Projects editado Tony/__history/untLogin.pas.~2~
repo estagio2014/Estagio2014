@@ -1,0 +1,42 @@
+unit untLogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untCadPrincipal, Vcl.StdCtrls,
+  Vcl.Imaging.jpeg, Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TfrmLogin = class(TfrmCadPrincipal)
+    Image1: TImage;
+    edtUsuario: TEdit;
+    edtSenha: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    ComboBox1: TComboBox;
+    procedure btnConfirmClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLogin: TfrmLogin;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmLogin.btnConfirmClick(Sender: TObject);
+begin
+  inherited;
+  if dm.cdsUsuario.Locate('login', edtUsuario.Text,[])and dm.cdsUsuario.Locate('senha', edtSenha.Text,[]) then
+    begin
+
+    end;
+end;
+
+end.

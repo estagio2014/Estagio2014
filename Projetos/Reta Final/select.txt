@@ -1,0 +1,12 @@
+Produtos dos ultimos 10 dias 
+select * from produto
+where sysdate - datacadastro<= 10
+---------------------------------
+select * from venda
+where sysdate - data_venda<= 10
+---------------------------------
+select * from compra
+where sysdate - data_compra<= 10
+
+**************************************
+

@@ -1,26 +1,26 @@
 * Reta Final 
 
-- Relatórios Vendas e Compras / filtros vendas por semana ou mensal produtos mais vendidos (valores)
+- Relatórios Vendas e Compras / filtros vendas por semana ou mensal produtos mais vendidos (valores) /// desenvolvimento
 
-botão visualisar venda / compra 
+botão visualisar venda / compra  OK!
 
-quando add item de compra limpar campos 
+quando add item de compra limpar campos  // OK
 
-comprar itens de compra aumentar o estoque do produto
+comprar itens de compra aumentar o estoque do produto // OK
 
-vender itens de venda diminuir o estoque do produto
+vender itens de venda diminuir o estoque do produto // OK
 
-quando estoque chegar a 0 alterar status para indisponivel
+quando estoque chegar a 0 alterar status para indisponivel 
 
 chamar id pelo duplo click
 
 verificar situação de itens antes de incluir em venda ou compra
 
-limpar campo cpf/cnpj de cliente ao mudar de tipo pessoa
+limpar campo cpf/cnpj de cliente ao mudar de tipo pessoa // OK
 
-usar currency grid <testar>
+usar currency grid <testar> 
 
-contas a pagar e receber .. 
+contas a pagar e receber .. // OK
 
 
 
@@ -38,6 +38,9 @@ order by idCli
 select * from fornecedor inner join cidade on fornecedor.id_cid = cidade.id_cid 
 where situacao = 'A'
 order by razaosocial
+
+
+ORGANIZAR PASTA!
 
 
 
