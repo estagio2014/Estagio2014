@@ -1,0 +1,7 @@
+inherited frmListagemMarca: TfrmListagemMarca
+  Caption = 'Listagem de Marca'
+  ExplicitWidth = 815
+  ExplicitHeight = 436
+  PixelsPerInch = 96
+  TextHeight = 13
+end
