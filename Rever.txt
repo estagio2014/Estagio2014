@@ -1,0 +1,43 @@
+====================================================================================
+|		REVER PROJETO?																|
+|Ao tentar informar uma data com o dia que ultrapasse dia 31 ou mês 12 inválido;	|
+|venda situação(informar na mão)? Contas a pagar e a receber?						|
+|Por nos campos com valores mascara R$00,00 usando os eventos enter e exit;			|
+|botões contas ou teclas de atalho?													|
+|tradução das mensagem, esc e ver ordens pelo tab;									|
+====================================================================================
+Cliente:
+
+* Endereço / Telefone / CPF / Email;
+* Remover Cliente / Venda e por Cidade;
+* Trazer selecionado cliente por data;
+
+=====================================================
+
+Contas a pagar e a receber:
+
+* ordernar por data;
+* dia da compra por data de vencimento;
+* acrescentar no filtro Nº da compra (Paisagem?);
+* Filtro config?
+* Tirar lançamento e por venda + cliente (Paisagem?);
+* Totalizadores( por situação);
+
+======================================================
+Compra:
+
+*Acrescentar Nº da compra;
+
+===================================================== 
+
+	Cancelar no compra ou venda:
+	
+- Caso o mesmo seja parcelada e for cancelada, não deve deixar cancelar caso uma parcela já tenha sido recebida, tendo que estornar a parcela para efetuar o cancelamento;
+- Caso não tenha recebido parcela alguma, ou a compra/venda tenha sido realizada avista, poderá ser cancelado.
+- Lembrando que a quantidade do produto deve retornar para o estoque.
+
+
+
+
+
+
