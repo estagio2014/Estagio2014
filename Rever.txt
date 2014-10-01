@@ -26,7 +26,7 @@ Contas a pagar e a receber:
 ======================================================
 Compra:
 
-*Acrescentar Nº da compra;
+*Acrescentar Nº da compra; OK
 
 ===================================================== 
 
