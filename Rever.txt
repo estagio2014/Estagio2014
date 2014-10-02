@@ -5,6 +5,7 @@
 |Por nos campos com valores mascara R$00,00 usando os eventos enter e exit;			|
 |botões contas ou teclas de atalho?													|
 |tradução das mensagem, esc e ver ordens pelo tab;									|
+|caso tenha outro cod de barra tratar a exceção;									|
 ====================================================================================
 Cliente:
 
