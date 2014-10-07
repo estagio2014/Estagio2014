@@ -1,0 +1,41 @@
+unit untRelFiltroContasReceber;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untRelFiltro, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  TfrmfiltroContasReceber = class(TfrmRelFiltro)
+    RadioGroup1: TRadioGroup;
+    rdbData: TRadioButton;
+    rdbContasReceber: TRadioButton;
+    rdbContasCliente: TRadioButton;
+    Label1: TLabel;
+    edtDataInicio: TMaskEdit;
+    edtDataFim: TMaskEdit;
+    Label2: TLabel;
+    btnConfirmar: TSpeedButton;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmfiltroContasReceber: TfrmfiltroContasReceber;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmfiltroContasReceber.FormShow(Sender: TObject);
+begin
+  inherited;
+  rdbContasReceber.Checked := True;
+end;
+
+end.

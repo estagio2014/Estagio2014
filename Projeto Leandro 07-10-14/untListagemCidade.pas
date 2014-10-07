@@ -1,0 +1,135 @@
+unit untListagemCidade;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untListagemPrincipal, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Data.DB, Vcl.Mask;
+
+type
+  TfrmListagemCidade = class(TfrmListagem)
+    procedure dsListagemDataChange(Sender: TObject; Field: TField);
+    procedure edtPesquisarChange(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1TitleClick(Column: TColumn);
+  private
+    { Private declarations }
+  public
+    op:byte;
+  end;
+
+var
+  frmListagemCidade: TfrmListagemCidade;
+
+implementation
+
+{$R *.dfm}
+
+uses untDm, untCadCidade, untCadCliente, untCadFornecedor;
+
+procedure TfrmListagemCidade.DBGrid1DblClick(Sender: TObject);
+begin
+  inherited;
+  if (frmListagemCidade.op = 3) then
+   begin
+   frmCadCliente.dblCidade.KeyValue:= dm.cdsCidade.FieldByName('id_cid').AsInteger;
+   frmCadCliente.edtUf.Text := dm.cdsCidade.FieldByName('uf').Text;
+   frmListagemCidade.Close;
+   end
+   else if (frmListagemCidade.op = 4) then
+   begin
+   frmCadFornecedor.dblCidade.KeyValue:= dm.cdsCidade.FieldByName('id_cid').AsInteger;
+   frmCadFornecedor.edtUf.Text := dm.cdsCidade.FieldByName('uf').Text;
+   frmListagemCidade.Close;
+   end;
+
+end;
+
+procedure TfrmListagemCidade.DBGrid1TitleClick(Column: TColumn);
+begin
+  inherited;
+  dm.cdsCidade.IndexFieldNames := Column.FieldName;
+end;
+
+procedure TfrmListagemCidade.dsListagemDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  edtTotaldeReg.Text := IntToStr(dm.cdsCidade.RecordCount);
+
+  if (dm.cdsCidade.RecordCount = 0) then
+  begin
+  btnAlterar.Enabled := False;
+  btnExcluir.Enabled := False;
+  end
+  else begin
+  btnAlterar.Enabled := True;
+  btnExcluir.Enabled := True;
+  end;
+end;
+
+procedure TfrmListagemCidade.edtPesquisarChange(Sender: TObject);
+begin
+  inherited;
+  dm.cdsCidade.Locate('nome_cid', edtPesquisar.Text,[loPartialKey,loCaseInsensitive]);
+end;
+
+procedure TfrmListagemCidade.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  if frmListagemCidade.op = 3 then
+  begin
+    dm.cdsCidade.Open;
+  end
+  else begin
+  dm.cdsCidade.Close;
+  end;
+end;
+
+procedure TfrmListagemCidade.FormShow(Sender: TObject);
+begin
+  inherited;
+  dm.cdsCidade.Open;
+end;
+
+procedure TfrmListagemCidade.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+ op:=1;
+ frmCadCidade.Caption:='Incluir Cidade';
+ frmCadCidade.ShowModal;
+end;
+
+procedure TfrmListagemCidade.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  try
+    if (MessageDlg('Deseja Excluir esta Cidade?', mtConfirmation,[mbYes,mbNo],0)=mrYes) then
+    begin
+      dm.sdsComandoSql.CommandText:='delete from cidade where id_cid =:id';
+      dm.sdsComandoSql.ParamByName('id').Text:=dm.cdsCidade.FieldByName('id_cid').Text;
+      dm.sdsComandoSql.ExecSQL();
+      dm.cdsCidade.Close;
+      dm.cdsCidade.Open;
+    end;
+  Except
+     Application.MessageBox('Erro ao Excluir! Esta Cidade está sendo utilizada em outro CADASTRO.','Alerta',0);
+  end;
+end;
+
+procedure TfrmListagemCidade.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+op :=2;
+frmCadCidade.Caption:='Alterar Cidade';
+frmCadCidade.ShowModal;
+end;
+
+end.

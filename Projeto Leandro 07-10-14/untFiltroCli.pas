@@ -1,0 +1,146 @@
+unit untFiltroCli;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.Mask;
+
+type
+  Tfrmfiltrocliente = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    btnConfirmar: TSpeedButton;
+    edtDataInicio: TMaskEdit;
+    edtDataFim: TMaskEdit;
+    RadioGroup1: TRadioGroup;
+    rdbData: TRadioButton;
+    rdbClientes: TRadioButton;
+    rdbClienteVenda: TRadioButton;
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure rdbDataClick(Sender: TObject);
+    procedure rdbClientesClick(Sender: TObject);
+    procedure rdbClienteVendaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmfiltrocliente: Tfrmfiltrocliente;
+
+implementation
+
+{$R *.dfm}
+
+uses untDm, untRelatorios;
+
+procedure Tfrmfiltrocliente.btnConfirmarClick(Sender: TObject);
+begin
+if(rdbData.Checked) then
+begin
+  if(edtDataInicio.Text > edtDataFim.Text) then
+    begin
+      ShowMessage('Data inválida, informe uma data correta!');
+      edtDataInicio.Clear;
+      edtDataFim.Clear;
+      edtDataInicio.SetFocus;
+    end
+    else if((edtDataInicio.Text = '  /  /    ') or (edtDataFim.Text = '  /  /    ')) then
+    begin
+         btnConfirmar.Enabled;
+         ShowMessage('Informe corretamente as datas!');
+         edtDataInicio.SetFocus;
+    end
+   else if(StrToDate(edtDataFim.Text) > (date)) then
+    begin
+      MessageDlg('Data Final informada não pode ser maior do que a data atual!', mtInformation,[mbOk],0);
+      edtDataFim.Text := '';
+      edtDataFim.SetFocus;
+      exit;
+    end
+  else
+   begin
+     with dm.SQLDataSetClienteVenda do
+      begin
+      CommandText:='select * from cliente where datacadastro between :datainicio and :datafim';
+      ParamByName('datainicio').Text:= edtDataInicio.Text;
+      ParamByName('datafim').Text:= edtDataFim.Text;
+    //  dm.SQLDataSetClienteVenda.ExecSQL();
+      dm.cdsCliente.Close;
+      dm.cdsCliente.Open;
+      end;
+
+  //  Close;
+        frmRelatorios.frxReportCliente.ShowReport();
+end;
+end;
+  if(rdbClientes.Checked)  then
+    begin
+        frmRelatorios.frxReportTodosCli.ShowReport();
+    end
+  else if (rdbClienteVenda.Checked) then
+       begin
+         frmRelatorios.frxReportClienteVenda.ShowReport();
+       end;
+
+end;
+
+procedure Tfrmfiltrocliente.rdbDataClick(Sender: TObject);
+begin
+if(rdbData.Checked)then
+  begin
+    edtDataInicio.Enabled := True;
+    edtDataFim.Enabled := True;
+  end;
+end;
+
+procedure Tfrmfiltrocliente.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if(Key = VK_F3) then
+    begin
+      btnConfirmar.Click;
+    end
+  else if(Key = VK_ESCAPE) then
+  begin
+     close;
+  end;
+end;
+
+procedure Tfrmfiltrocliente.FormShow(Sender: TObject);
+begin
+  rdbClientes.Checked := True;
+end;
+
+procedure Tfrmfiltrocliente.rdbClientesClick(Sender: TObject);
+begin
+  if(rdbClientes.Checked)then
+  begin
+    edtDataInicio.Clear;
+    edtDataFim.Clear;
+
+    edtDataInicio.Enabled := False;
+    edtDataFim.Enabled := False;
+
+  end;
+end;
+
+procedure Tfrmfiltrocliente.rdbClienteVendaClick(Sender: TObject);
+begin
+    if(rdbClienteVenda.Checked)then
+  begin
+    edtDataInicio.Clear;
+    edtDataFim.Clear;
+
+    edtDataInicio.Enabled := False;
+    edtDataFim.Enabled := False;
+  end;
+end;
+
+end.

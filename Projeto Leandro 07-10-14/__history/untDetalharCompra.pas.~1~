@@ -1,0 +1,73 @@
+unit untDetalharCompra;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Buttons, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls;
+
+type
+  TfrmDetalhesCompra = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    DBGrid1: TDBGrid;
+    btnConfirmar: TSpeedButton;
+    dsListagem: TDataSource;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDetalhesCompra: TfrmDetalhesCompra;
+
+implementation
+
+{$R *.dfm}
+
+uses untDm;
+
+procedure TfrmDetalhesCompra.FormShow(Sender: TObject);
+begin
+  Label10.Caption := dm.cdsCompra.FieldByName('id_compra').Text;
+  Label11.Caption := dm.cdsCompra.FieldByName('repres').Text;
+  Label12.Caption := dm.cdsCompra.FieldByName('razaoSocial').Text;
+  Label13.Caption := dm.cdsCompra.FieldByName('Cnpj').Text;
+  Label15.Caption := dm.cdsCompra.FieldByName('tipo_pag').Text;
+  Label16.Caption := dm.cdsCompra.FieldByName('forma_pag').Text;
+  Label17.Caption := dm.cdsCompra.FieldByName('situacao').Text;
+  Label18.Caption := dm.cdsCompra.FieldByName('data_compra').Text;
+  Label19.Caption := dm.cdsCompra.FieldByName('desconto').Text;
+  Label20.Caption := dm.cdsCompra.FieldByName('ValorTotal').Text;
+
+
+  dm.sdsItemCompra.CommandText:= 'select id_compra, produto.idProduto, produto.descricao, quantidade, preco, subtotal from item_compra inner join produto on item_compra.idProduto = produto.idProduto where id_compra = :id_compra';
+  dm.sdsItemCompra.ParamByName('id_compra').Text := Label10.Caption;
+  dm.sdsItemCompra.ExecSQL();
+  dm.cdsItemCompra.Close;
+  dm.cdsItemCompra.Open;
+end;
+
+end.

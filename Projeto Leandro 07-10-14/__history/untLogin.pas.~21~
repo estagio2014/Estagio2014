@@ -1,0 +1,119 @@
+unit untLogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,System.UITypes, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, untCadPrincipal, Vcl.StdCtrls,
+  Vcl.Imaging.jpeg, Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TfrmLogin = class(TfrmCadPrincipal)
+    edtUsuario: TEdit;
+    edtSenha: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Image1: TImage;
+    procedure btnConfirmClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLogin: TfrmLogin;
+  ControlaAcesso : Integer;
+
+implementation
+
+{$R *.dfm}
+
+uses untDm, untPrincipal;
+
+procedure TfrmLogin.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  if (Trim(edtUsuario.Text) = '') or (Trim(edtSenha.Text) = '' ) then
+  begin
+      MessageDlg('USUÁRIO ou SENHA inválido(s)!', mtError,[mbOk],0);
+      edtUsuario.SetFocus;
+      exit;
+  end
+  else if not(dm.cdsUsuario.Locate('login', edtUsuario.Text, []) and
+    dm.cdsUsuario.Locate('Senha', edtSenha.Text, [])) then
+  begin
+      MessageDlg('USUÁRIO ou SENHA inválido(s)!', mtError,[mbOk],0);
+      edtUsuario.SetFocus;
+      exit;
+  end
+  else begin
+    close;
+  end;
+end;
+
+procedure TfrmLogin.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+    Close;
+end;
+
+procedure TfrmLogin.btnConfirmClick(Sender: TObject);
+begin
+  inherited;
+  if dm.cdsUsuario.Locate('login', edtUsuario.Text, []) and
+    dm.cdsUsuario.Locate('Senha', edtSenha.Text, []) then
+  begin
+    MessageDlg('Bem Vindo ao Calsystem!', mtConfirmation,[mbOk],0);
+    dm.cdsUsuario.Close;
+    frmPrincipal.ShowModal;
+    exit;
+  end
+  else begin
+    MessageDlg('USUÁRIO ou SENHA inválido(s)!', mtError,[mbOk],0);
+    edtUsuario.Clear;
+    edtSenha.Clear;
+    edtUsuario.SetFocus;
+    exit;
+  end;
+end;
+
+procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  Action:= caNone;
+  if MessageDlg('Deseja Sair do Sistema?', mtInformation,[mbYes,mbNo],0)= mrYes then
+  begin
+  Application.Terminate;
+  Action:=caFree;
+  end;
+end;
+
+procedure TfrmLogin.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if (Key = VK_F3) then
+    begin
+      btnConfirm.Click;
+    end
+  else if(Key = VK_ESCAPE) then
+    begin
+      close;
+    end;
+end;
+
+procedure TfrmLogin.FormShow(Sender: TObject);
+begin
+  inherited;
+  dm.cdsUsuario.Open;
+end;
+
+end.

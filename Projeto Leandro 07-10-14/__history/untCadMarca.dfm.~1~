@@ -1,0 +1,49 @@
+inherited frmCadMarca: TfrmCadMarca
+  Caption = 'Cadastro de Marca'
+  ClientHeight = 130
+  ClientWidth = 397
+  ExplicitWidth = 413
+  ExplicitHeight = 164
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnConfirm: TSpeedButton
+    Left = 96
+    Top = 87
+    ExplicitLeft = 96
+    ExplicitTop = 87
+  end
+  inherited btnCancelar: TSpeedButton
+    Left = 216
+    Top = 87
+    ExplicitLeft = 216
+    ExplicitTop = 87
+  end
+  object Label1: TLabel
+    Left = 24
+    Top = 24
+    Width = 15
+    Height = 13
+    Caption = 'ID:'
+  end
+  object Label2: TLabel
+    Left = 24
+    Top = 56
+    Width = 50
+    Height = 13
+    Caption = 'Descri'#231#227'o:'
+  end
+  object edtId: TEdit
+    Left = 45
+    Top = 21
+    Width = 89
+    Height = 21
+    TabOrder = 0
+  end
+  object edtDesc: TEdit
+    Left = 80
+    Top = 53
+    Width = 304
+    Height = 21
+    TabOrder = 1
+  end
+end
